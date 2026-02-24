@@ -1,0 +1,95 @@
+---
+title: "Storage pipeline"
+description: "Implement a custom Grunt object storage pipeline backed by your API"
+---
+
+<Warning>
+  Do not use `LocalObjectStoragePipeline` in production.
+</Warning>
+
+Use a custom API-backed pipeline and register it through a CKEditor plugin.
+
+## Step 1: create a custom storage pipeline
+
+```ts
+import { GruntObjectStoragePipeline } from "@grunt/ckeditor5-grunt/grunt";
+
+export class CustomStoragePipeline extends GruntObjectStoragePipeline {
+  constructor(editor) {
+    super(editor);
+  }
+
+  async load(objectId) {
+    const response = await fetch(`/api/grunt/${objectId}`);
+    return await response.json();
+  }
+
+  async save(objectId, data) {
+    await fetch(`/api/grunt/${objectId}`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data)
+    });
+  }
+
+  async delete(objectId) {
+    await fetch(`/api/grunt/${objectId}`, {
+      method: "DELETE"
+    });
+  }
+}
+```
+
+You can add:
+
+- Authentication headers
+- JWT handling
+- Versioning
+- Multi-tenant routing
+- Signed URLs
+- Retry logic
+
+## Step 2: register the pipeline in a plugin
+
+```ts
+import { Plugin } from "ckeditor5";
+import Grunt from "@grunt/ckeditor5-grunt/grunt";
+import { CustomStoragePipeline } from "./CustomStoragePipeline";
+
+class CustomGruntPipelinePlugin extends Plugin {
+  static get pluginName() {
+    return "CustomGruntPipelinePlugin";
+  }
+
+  static get requires() {
+    return [Grunt];
+  }
+
+  init() {
+    const editor = this.editor;
+
+    editor.plugins.get("Grunt").setPipeline(new CustomStoragePipeline(editor));
+  }
+}
+```
+
+## Step 3: include the plugin in your editor config
+
+```ts
+ClassicEditor.create(document.querySelector("#editor"), {
+  plugins: [
+    Essentials,
+    Paragraph,
+    Bold,
+    Italic,
+    Grunt,
+    CustomGruntPipelinePlugin
+  ]
+});
+```
+
+Grunt now uses your API for object persistence.
+
+<Card title="Next: runtime assets" icon="arrow-right" href="/ckeditor-integration/runtime-assets">
+  Serve `grunt.js` and `_framework/*` correctly.
+</Card>

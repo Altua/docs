@@ -1,0 +1,48 @@
+---
+title: "Installation and setup"
+description: "Install Grunt for CKEditor 5 and configure the editor plugins and toolbar"
+---
+
+## Install packages
+
+Install the required dependencies:
+
+```bash
+npm install @grunt/ckeditor5-grunt ckeditor5 ckeditor5-premium-features
+```
+
+## Configure CKEditor
+
+Add `Grunt` to your plugin list and enable Grunt toolbar actions.
+
+```ts
+import {
+  ClassicEditor,
+  Essentials,
+  Paragraph,
+  Bold,
+  Italic
+} from "ckeditor5";
+
+import Grunt from "@grunt/ckeditor5-grunt/grunt";
+
+ClassicEditor.create(document.querySelector("#editor"), {
+  plugins: [Essentials, Paragraph, Bold, Italic, Grunt],
+  toolbar: [
+    "undo",
+    "redo",
+    "|",
+    "insert-grunt-chart",
+    "insert-grunt-gantt",
+    "insert-grunt-table",
+    "|",
+    "gruntEditor"
+  ]
+});
+```
+
+This setup enables Grunt UI actions in CKEditor. Persistence comes from your storage pipeline configuration.
+
+<Card title="Next: storage pipeline" icon="arrow-right" href="/ckeditor-integration/storage-pipeline">
+  Connect Grunt object persistence to your backend API.
+</Card>

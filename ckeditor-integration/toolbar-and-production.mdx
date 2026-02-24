@@ -1,0 +1,50 @@
+---
+title: "Toolbar and production checklist"
+description: "Use Grunt toolbar items and validate production readiness"
+---
+
+## Toolbar items
+
+Available Grunt toolbar items:
+
+- `insert-grunt-chart`
+- `insert-grunt-gantt`
+- `insert-grunt-table`
+- `gruntEditor`
+- `gruntWrap`
+- `gruntBreak`
+
+Example:
+
+```ts
+toolbar: [
+  "undo",
+  "redo",
+  "|",
+  "insert-grunt-chart",
+  "insert-grunt-gantt",
+  "insert-grunt-table",
+  "|",
+  "gruntEditor"
+];
+```
+
+## Production checklist
+
+- Install `@grunt/ckeditor5-grunt`
+- Register the `Grunt` plugin
+- Implement a custom `GruntObjectStoragePipeline`
+- Register pipeline configuration with a CKEditor plugin
+- Serve `grunt.js` and `_framework/*`
+- Add Grunt toolbar items
+- Verify runtime assets are publicly accessible
+
+## Summary
+
+This integration keeps:
+
+- CKEditor UI logic in the plugin layer
+- Rendering in the WebAssembly runtime
+- Persistence fully controlled by your backend
+
+This model scales to SaaS and enterprise deployments.

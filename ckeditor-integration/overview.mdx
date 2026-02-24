@@ -1,0 +1,64 @@
+---
+title: "Overview"
+description: "Integrate Grunt into CKEditor 5 to insert and edit charts, tables, and Gantt diagrams"
+---
+
+Integrate Grunt into CKEditor 5 to enable rich charts, tables, and Gantt diagrams powered by the Grunt WebAssembly runtime.
+
+The CKEditor integration provides:
+
+- Chart, table, and Gantt insertion
+- Inline editing UI
+- Layout controls like wrap, break, and alignment
+- A pluggable object storage pipeline
+- WebAssembly-based rendering
+
+## Integration architecture
+
+The integration has three layers.
+
+### 1. CKEditor plugin layer
+
+The `Grunt` CKEditor plugin:
+
+- Registers editing behavior
+- Adds toolbar buttons
+- Inserts and manages Grunt objects
+- Delegates persistence to your storage pipeline
+
+Use this API to configure storage:
+
+```ts
+editor.plugins.get("Grunt").setPipeline(pipeline);
+```
+
+### 2. WebAssembly runtime
+
+Grunt rendering runs inside a WebAssembly runtime built with Avalonia.
+
+The runtime:
+
+- Renders charts and diagrams
+- Handles resizing and editing
+- Is bundled as `grunt.js`
+- Requires `_framework/*` runtime assets
+
+Your app must serve these files over HTTP.
+
+### 3. Storage pipeline
+
+Grunt does not enforce a storage model.
+
+You implement a custom pipeline that talks to your backend API.
+
+This model fits:
+
+- SaaS platforms
+- Multi-tenant systems
+- Versioned documents
+- Authenticated APIs
+- Server-side persistence
+
+<Card title="Continue to installation" icon="arrow-right" href="/ckeditor-integration/installation">
+  Install packages and register the Grunt plugin in CKEditor.
+</Card>

@@ -1,0 +1,30 @@
+---
+title: "Runtime assets"
+description: "Serve Grunt WebAssembly runtime files correctly in production"
+---
+
+Your app must serve these runtime files:
+
+```text
+grunt.js
+_framework/*
+```
+
+If you use the npm package, these assets are in:
+
+```text
+node_modules/@grunt/ckeditor5-grunt/_framework
+```
+
+## Requirements
+
+- Copy runtime files into your build output
+- Serve files over HTTP
+- Avoid processing or rewriting runtime assets in bundling steps
+- Serve correct MIME types for JS, WASM, and static files
+
+If these files are missing or misconfigured, Grunt rendering and editing will fail at runtime.
+
+<Card title="Next: toolbar and production checklist" icon="arrow-right" href="/ckeditor-integration/toolbar-and-production">
+  Validate your toolbar config and production readiness.
+</Card>
