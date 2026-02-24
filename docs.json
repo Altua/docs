@@ -11,6 +11,22 @@
   "navigation": {
     "products": [
       {
+        "product": "Grunt",
+        "tabs": [
+          {
+            "tab": "Documentation",
+            "groups": [
+              {
+                "group": "Overview",
+                "pages": [
+                  "index"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
         "product": "CKEditor integration",
         "tabs": [
           {
