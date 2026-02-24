@@ -19,8 +19,8 @@
               {
                 "group": "Get started",
                 "pages": [
-                  "index",
-                  "quickstart"
+                  "ckeditor-integration/index",
+                  "ckeditor-integration/quickstart"
                 ]
               },
               {
