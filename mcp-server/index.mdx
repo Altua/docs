@@ -1,0 +1,55 @@
+---
+title: "MCP Server overview"
+description: "Connect AI clients to Grunt chart and asset tools over MCP"
+---
+
+The Grunt MCP Server exposes chart creation and asset editing tools over Model Context Protocol (MCP).
+
+You can use it to let an AI client:
+
+- Create charts from structured data
+- Update chart rules and annotations
+- Fetch latest asset state and project diffs
+- Return chart previews and export links
+
+## Endpoint and transport
+
+- Transport: streamable HTTP (stateless)
+- MCP endpoint path: `/mcp`
+- Local default URL: `http://localhost:5044/mcp`
+- Production example URL: `https://mcp.grunt.io/mcp`
+
+<Info>
+Use any MCP client that supports streamable HTTP + JSON-RPC tool calls.
+</Info>
+
+## Core capabilities
+
+<CardGroup cols={2}>
+  <Card title="Create charts" icon="diagram-project" href="/mcp-server/tools">
+    Create bar, line, area, waterfall, pie/donut, scatter/bubble, mekko, dumbbell, and combined charts.
+  </Card>
+  <Card title="Modify existing assets" icon="file-code" href="/mcp-server/tools">
+    Update chart rules and annotations on existing `assetId` values.
+  </Card>
+  <Card title="Track changes" icon="list-check" href="/mcp-server/tools">
+    Fetch latest project state and compare a commit to the newest commit.
+  </Card>
+  <Card title="Integrate securely" icon="asterisk" href="/mcp-server/connect-and-authenticate">
+    Use JWT auth in non-development environments with OAuth metadata discovery.
+  </Card>
+</CardGroup>
+
+## Next steps
+
+<CardGroup cols={3}>
+  <Card title="Connect and authenticate" icon="arrow-pointer" href="/mcp-server/connect-and-authenticate">
+    Configure your client, endpoint, and auth flow.
+  </Card>
+  <Card title="Tool reference" icon="file-code" href="/mcp-server/tools">
+    See public tools, private tools, and not-yet-implemented tools.
+  </Card>
+  <Card title="Development" icon="rocket" href="/mcp-server/development">
+    Run locally, configure environment values, and verify endpoints.
+  </Card>
+</CardGroup>

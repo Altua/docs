@@ -1,0 +1,74 @@
+---
+title: "Tool reference"
+description: "Public, private, and unavailable tools in the Grunt MCP Server"
+---
+
+Tool names are exposed as snake case (for example `bar_chart`).
+
+## Public chart tools
+
+| Tool | Purpose | Status |
+| --- | --- | --- |
+| `bar_chart` | Create or update bar/column charts | Available |
+| `line_chart` | Create or update line/index charts | Available |
+| `area_chart` | Create or update area/100% area charts | Available |
+| `waterfall_chart` | Create or update waterfall charts | Available |
+| `combined_chart` | Create or update combined bar/line charts | Available |
+| `pie_donut_chart` | Create or update pie/donut charts | Available |
+| `scatter_bubble_chart` | Create or update scatter/bubble charts | Available |
+| `mekko_chart` | Create or update mekko/marimekko charts | Available |
+| `dumbbell_chart` | Create or update dumbbell charts | Available |
+
+## Public modification and asset tools
+
+| Tool | Purpose | Status |
+| --- | --- | --- |
+| `change_active_chart_rules` | Replace all chart rules for an asset | Available |
+| `change_active_chart_annotations` | Replace all chart annotations for an asset | Available |
+| `fetch_latest_asset` | Fetch latest asset state from an `assetId` | Available |
+| `get_project_changes` | Get commit diff from `assetCommit` to latest | Available |
+| `submit_feedback` | Send tool/user feedback metadata | Available |
+
+## Public but not implemented
+
+| Tool | Purpose | Status |
+| --- | --- | --- |
+| `table` | Create table assets | Not implemented |
+| `gantt` | Create gantt assets | Not implemented |
+
+## Private tool
+
+| Tool | Purpose | Status |
+| --- | --- | --- |
+| `push_asset` | Internal fullscreen editor push/update flow | Private (not for normal agent usage) |
+
+## Not currently exposed
+
+These methods exist in code but are not registered as MCP tools:
+
+- `create_default_chart_with_data`
+- `update_sheet_data`
+- `update_chart_data`
+- `update_theme`
+- `get_chart_as_png`
+
+## Response pattern for chart tools
+
+Most chart creation/update tools return:
+
+- `structuredContent.assetId`
+- `structuredContent.assetCommit`
+- `structuredContent.exportGuideUrl`
+- `structuredContent.warnings` (when present)
+
+They also return a chart screenshot and chart project payload metadata.
+
+## Input validation rules
+
+- Tool schemas reject unknown properties
+- Discriminated unions must use valid type fields such as `annotationType`, `ruleType`, and chart-specific union type values
+- Invalid schemas return MCP tool errors
+
+<Warning>
+If you change core chart type families or orientation, create a new asset instead of reusing the same `assetId`.
+</Warning>

@@ -1,0 +1,77 @@
+---
+title: "Development"
+description: "Run, configure, and verify the MCP server locally"
+---
+
+Use this guide when developing the MCP server from source.
+
+## Prerequisites
+
+- .NET 9 SDK
+- `Grunt.WebServiceLayer` running and reachable
+
+## Run locally
+
+<Steps>
+<Step title="Start dependencies">
+Run your local service stack so `Grunt.WebServiceLayer` is available.
+</Step>
+
+<Step title="Run the MCP server project">
+```bash
+dotnet run --project Oak/apps/McpServer/Grunt.McpServer/Grunt.McpServer.csproj
+```
+</Step>
+
+<Step title="Verify health endpoint">
+```bash
+curl http://localhost:5044/
+```
+
+Expected response format:
+
+```text
+Hello from grunt-mcp @<version>
+```
+</Step>
+
+<Step title="Verify tool discovery">
+```bash
+curl -X POST "http://localhost:5044/mcp" \
+  -H "Content-Type: application/json" \
+  -H "Accept: application/json, text/event-stream" \
+  -d '{
+    "jsonrpc": "2.0",
+    "id": "1",
+    "method": "tools/list"
+  }'
+```
+</Step>
+</Steps>
+
+## Configuration reference
+
+| Key | Description |
+| --- | --- |
+| `GRUNT_WEB_SERVICE_LAYER_URL` | Overrides `WebServiceLayerUri` |
+| `WebServiceLayerUri` | Base URL for the web service layer client |
+| `AppConfigEndpoint` | Optional Azure App Configuration endpoint |
+| `Auth0:Audience` | JWT audience for production auth |
+| `Auth0:Domain` | Auth0 domain for JWT validation |
+| `Auth0:AzureClientId` | OAuth protected resource identifier |
+| `IncludeExperimentalTools` | Enables tools marked experimental |
+| `McpServerWidgetDomain` | Domain used for chart widget metadata |
+
+## Environment behavior
+
+- In `Development`, `/mcp` is open and a fake user service is used.
+- Outside `Development`, `/mcp` requires auth and uses JWT claim resolution.
+- HTTPS redirection is enabled outside `Development`.
+
+## Optional tunnel for local testing
+
+```bash
+ngrok http 5044
+```
+
+Use the generated HTTPS URL as your MCP base URL when testing remote clients.

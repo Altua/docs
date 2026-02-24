@@ -47,8 +47,26 @@
         "tabs": [
           {
             "tab": "Documentation",
-            "pages": [
-              "test"
+            "groups": [
+              {
+                "group": "Get started",
+                "pages": [
+                  "mcp-server/index",
+                  "mcp-server/connect-and-authenticate"
+                ]
+              },
+              {
+                "group": "Reference",
+                "pages": [
+                  "mcp-server/tools"
+                ]
+              },
+              {
+                "group": "Operations",
+                "pages": [
+                  "mcp-server/development"
+                ]
+              }
             ]
           }
         ]

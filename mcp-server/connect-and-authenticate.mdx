@@ -1,0 +1,63 @@
+---
+title: "Connect and authenticate"
+description: "Connect an MCP client to the Grunt MCP endpoint and configure auth"
+---
+
+Use the Grunt MCP endpoint at `/mcp` over streamable HTTP.
+
+## 1. Choose your base URL
+
+- Local development: `http://localhost:5044`
+- Production example: `https://mcp.grunt.io`
+
+Your MCP URL is always:
+
+```text
+{baseUrl}/mcp
+```
+
+## 2. Understand auth behavior
+
+| Environment | `/mcp` auth requirement |
+| --- | --- |
+| `Development` | No auth required |
+| Non-development | Bearer token required |
+
+In non-development environments, the server validates JWTs against Auth0 and resolves an internal user claim used by tool calls.
+
+## 3. Discover OAuth metadata
+
+The server exposes:
+
+```text
+/.well-known/oauth-protected-resource
+```
+
+It returns protected resource metadata including:
+
+- `resource` (configured client/resource ID)
+- `authorization_servers`
+- supported scopes
+
+## 4. Verify connectivity with `tools/list`
+
+```bash
+curl -X POST "http://localhost:5044/mcp" \
+  -H "Content-Type: application/json" \
+  -H "Accept: application/json, text/event-stream" \
+  -d '{
+    "jsonrpc": "2.0",
+    "id": "1",
+    "method": "tools/list"
+  }'
+```
+
+For non-development environments, add:
+
+```bash
+-H "Authorization: Bearer <token>"
+```
+
+<Info>
+Include both `application/json` and `text/event-stream` in the `Accept` header when calling the MCP endpoint directly.
+</Info>
