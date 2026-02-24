@@ -9,31 +9,44 @@
   },
   "favicon": "/favicon.svg",
   "navigation": {
-    "tabs": [
+    "products": [
       {
-        "tab": "Documentation",
-        "groups": [
+        "product": "CkEditor integration",
+        "tabs": [
           {
-            "group": "Get started",
-            "pages": [
-              "index"
+            "tab": "Documentation",
+            "groups": [
+              {
+                "group": "Get started",
+                "pages": [
+                  "index"
+                ]
+              },
+              {
+                "group": "CKEditor integration",
+                "pages": [
+                  "ckeditor-integration/overview",
+                  "ckeditor-integration/installation",
+                  "ckeditor-integration/storage-pipeline",
+                  "ckeditor-integration/runtime-assets",
+                  "ckeditor-integration/toolbar-and-production"
+                ]
+              },
+              {
+                "group": "MCP server",
+                "pages": [
+                  "mcp-server/overview"
+                ]
+              }
             ]
-          },
+          }
+        ]
+      },
+      {
+        "product": "MCP Server",
+        "tabs": [
           {
-            "group": "CKEditor integration",
-            "pages": [
-              "ckeditor-integration/overview",
-              "ckeditor-integration/installation",
-              "ckeditor-integration/storage-pipeline",
-              "ckeditor-integration/runtime-assets",
-              "ckeditor-integration/toolbar-and-production"
-            ]
-          },
-          {
-            "group": "MCP server",
-            "pages": [
-              "mcp-server/overview"
-            ]
+            "tab": "Documentation"
           }
         ]
       }
