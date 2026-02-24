@@ -27,6 +27,35 @@
         ]
       },
       {
+        "product": "PowerPoint add-in",
+        "tabs": [
+          {
+            "tab": "Documentation",
+            "groups": [
+              {
+                "group": "For users",
+                "pages": [
+                  "powerpoint-add-in/index",
+                  "powerpoint-add-in/user/get-started",
+                  "powerpoint-add-in/user/work-with-data",
+                  "powerpoint-add-in/user/export-and-sharing",
+                  "powerpoint-add-in/user/troubleshooting"
+                ]
+              },
+              {
+                "group": "For IT",
+                "pages": [
+                  "powerpoint-add-in/it/deployment-and-installation",
+                  "powerpoint-add-in/it/licensing-and-provisioning",
+                  "powerpoint-add-in/it/network-and-security",
+                  "powerpoint-add-in/it/update-management"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
         "product": "CKEditor integration",
         "tabs": [
           {

@@ -1,0 +1,28 @@
+---
+title: "Network and security"
+description: "Allow required endpoints and reduce false-positive security blocks"
+---
+
+## Firewall and proxy requirements
+
+Allow outbound HTTPS (`443`) access to required Grunt service endpoints.
+
+If users are behind a proxy, ensure proxy policy allows Grunt API communication.
+
+## Endpoint allowlisting
+
+Use your organization allowlist process for Grunt domains documented in support articles.
+
+When troubleshooting blocked license checks or sign-in, start by testing endpoint reachability from affected devices.
+
+## Endpoint protection considerations
+
+Some endpoint security tools may block Grunt files after install.
+
+If needed, add targeted exclusions for approved Grunt install paths and executables according to your internal security process.
+
+<Warning>
+Apply exclusions narrowly and only after internal security review.
+</Warning>
+
+For exact endpoint/path details, refer to the IT support articles on [support.grunt.pro](https://support.grunt.pro/).

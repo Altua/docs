@@ -1,0 +1,32 @@
+---
+title: "Licensing and provisioning"
+description: "Assign Grunt licenses and automate user provisioning"
+---
+
+## License assignment
+
+Assign licenses in the Grunt admin portal and confirm the user signs in with the expected identity.
+
+If a user reports activation issues, verify:
+
+- The user has an active license
+- The user is signing in with the licensed account
+- The user can reach Grunt endpoints from their network
+
+## Automated provisioning (SCIM)
+
+Grunt supports SCIM provisioning through Microsoft Entra ID.
+
+Typical flow:
+
+1. Configure the Grunt enterprise app in Entra.
+2. Configure provisioning credentials/token.
+3. Map users/groups for provisioning.
+4. Enable provisioning and monitor sync status.
+
+## Operational notes
+
+- Provisioning sync is not instant; allow propagation time.
+- Keep group-based licensing rules consistent across HR/IT identity systems.
+
+For detailed configuration steps, use the related support guides on [support.grunt.pro](https://support.grunt.pro/).

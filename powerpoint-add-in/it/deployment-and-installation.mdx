@@ -1,0 +1,33 @@
+---
+title: "Deployment and installation"
+description: "Deploy the Grunt PowerPoint add-in for individuals or across your organization"
+---
+
+Use this guide for managed deployment in enterprise environments.
+
+## Installation models
+
+Grunt supports:
+
+- Per-user installation (default)
+- Per-machine installation for shared devices
+
+## Command-line installation
+
+Use command-line flags when deploying via endpoint management tools.
+
+```bash
+Grunt.Installer.exe /machine /silent /verbose
+```
+
+## Managed deployment tools
+
+You can deploy with common software distribution platforms such as Intune, SCCM, or similar tooling.
+
+## Validate deployment
+
+After rollout:
+
+1. Open PowerPoint on a test machine.
+2. Confirm the **Grunt** tab appears.
+3. Confirm users can open **Grunt** > **Settings** > **License**.
