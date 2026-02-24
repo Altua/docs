@@ -46,7 +46,10 @@
         "product": "MCP Server",
         "tabs": [
           {
-            "tab": "Documentation"
+            "tab": "Documentation",
+            "pages": [
+              "test"
+            ]
           }
         ]
       }
