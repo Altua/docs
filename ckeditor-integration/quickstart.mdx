@@ -7,6 +7,25 @@ Set up Grunt for CKEditor 5, wire your API pipeline, and verify production runti
 
 ## Step 1: install and register Grunt
 
+The Grunt npm package is private and must be downloaded from the Azure Artifacts registry:
+
+```text
+https://pkgs.dev.azure.com/altua/Oak/_packaging/Integrations/npm/registry/
+```
+
+Configure `.npmrc`:
+
+```text
+@grunt:registry=https://pkgs.dev.azure.com/altua/Oak/_packaging/Integrations/npm/registry/
+always-auth=true
+```
+
+Authenticate with npm:
+
+```bash
+npm login --registry=https://pkgs.dev.azure.com/altua/Oak/_packaging/Integrations/npm/registry/ --scope=@grunt
+```
+
 Install dependencies:
 
 ```bash

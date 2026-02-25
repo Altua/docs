@@ -5,7 +5,22 @@ description: "Install Grunt for CKEditor 5 and configure the editor plugins and 
 
 ## Install packages
 
-Install the required dependencies:
+The Grunt package is hosted in a private Azure Artifacts feed and requires authentication.
+
+Create or update your project `.npmrc`:
+
+```text
+@grunt:registry=https://pkgs.dev.azure.com/altua/Oak/_packaging/Integrations/npm/registry/
+always-auth=true
+```
+
+Authenticate your npm client:
+
+```bash
+npm login --registry=https://pkgs.dev.azure.com/altua/Oak/_packaging/Integrations/npm/registry/ --scope=@grunt
+```
+
+Then install the required dependencies:
 
 ```bash
 npm install @grunt/ckeditor5-grunt ckeditor5 ckeditor5-premium-features
