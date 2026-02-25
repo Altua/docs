@@ -12,30 +12,38 @@ Use a custom API-backed pipeline and register it through a CKEditor plugin.
 ## Step 1: create a custom storage pipeline
 
 ```ts
-import { GruntObjectStoragePipeline } from "@grunt/ckeditor5-grunt/grunt";
+import type { GruntObjectStoragePipeline } from "@grunt/ckeditor5-grunt/grunt";
 
-export class CustomStoragePipeline extends GruntObjectStoragePipeline {
-  constructor(editor) {
-    super(editor);
-  }
-
-  async load(objectId) {
-    const response = await fetch(`/api/grunt/${objectId}`);
-    return await response.json();
-  }
-
-  async save(objectId, data) {
-    await fetch(`/api/grunt/${objectId}`, {
-      method: "POST",
+export class CustomStoragePipeline implements GruntObjectStoragePipeline {
+  async saveCommit(key: string, commit: string): Promise<void> {
+    await fetch(`/api/grunt/${key}/commit`, {
+      method: "PUT",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(data)
+      body: JSON.stringify({ commit })
     });
   }
 
-  async delete(objectId) {
-    await fetch(`/api/grunt/${objectId}`, {
-      method: "DELETE"
+  async saveSvg(key: string, svg: string): Promise<void> {
+    await fetch(`/api/grunt/${key}/svg`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ svg })
     });
+  }
+
+  async getCommit(key: string): Promise<string> {
+    const response = await fetch(`/api/grunt/${key}/commit`);
+    if (!response.ok) throw new Error("Failed to load commit");
+    const data = await response.json();
+    return data.commit;
+  }
+
+  async getSvg(key: string): Promise<string | null> {
+    const response = await fetch(`/api/grunt/${key}/svg`);
+    if (response.status === 404) return null;
+    if (!response.ok) throw new Error("Failed to load svg");
+    const data = await response.json();
+    return data.svg ?? null;
   }
 }
 ```

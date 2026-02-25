@@ -51,9 +51,10 @@ editor.plugins.get("Grunt").setPipeline(pipeline);
 
 Your custom pipeline should handle:
 
-- `load(objectId)`
-- `save(objectId, data)`
-- `delete(objectId)`
+- `saveCommit(key, commit)`
+- `saveSvg(key, svg)`
+- `getCommit(key)`
+- `getSvg(key)`
 
 Use your backend API for authentication, tenancy, and persistence rules.
 
