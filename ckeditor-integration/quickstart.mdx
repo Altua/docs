@@ -18,13 +18,17 @@ Configure `.npmrc`:
 ```text
 @grunt:registry=https://pkgs.dev.azure.com/altua/Oak/_packaging/Integrations/npm/registry/
 always-auth=true
+; begin auth token
+//pkgs.dev.azure.com/altua/Oak/_packaging/Integrations/npm/registry/:username=altua
+//pkgs.dev.azure.com/altua/Oak/_packaging/Integrations/npm/registry/:_password=[BASE64_ENCODED_GRUNT_PACKAGE_TOKEN]
+//pkgs.dev.azure.com/altua/Oak/_packaging/Integrations/npm/registry/:email=npm requires email to be set but doesn't use the value
+//pkgs.dev.azure.com/altua/Oak/_packaging/Integrations/npm/:username=altua
+//pkgs.dev.azure.com/altua/Oak/_packaging/Integrations/npm/:_password=[BASE64_ENCODED_GRUNT_PACKAGE_TOKEN]
+//pkgs.dev.azure.com/altua/Oak/_packaging/Integrations/npm/:email=npm requires email to be set but doesn't use the value
+; end auth token
 ```
 
-Authenticate with npm:
-
-```bash
-npm login --registry=https://pkgs.dev.azure.com/altua/Oak/_packaging/Integrations/npm/registry/ --scope=@grunt
-```
+`[BASE64_ENCODED_GRUNT_PACKAGE_TOKEN]` is the base64-encoded package access token provided by Grunt.
 
 Install dependencies:
 
