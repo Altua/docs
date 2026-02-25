@@ -7,6 +7,15 @@ Set up Grunt for CKEditor 5, wire your API pipeline, and verify production runti
 
 ## Step 1: install and register Grunt
 
+Start from the sample project:
+
+- [Altua CKEditor sample](https://github.com/Altua/Samples/tree/main/CKEditor)
+
+```bash
+git clone https://github.com/Altua/Samples.git
+cd Samples/CKEditor
+```
+
 The Grunt npm package is private and must be downloaded from the Azure Artifacts registry:
 
 ```text
@@ -20,15 +29,15 @@ Configure `.npmrc`:
 always-auth=true
 ; begin auth token
 //pkgs.dev.azure.com/altua/Oak/_packaging/Integrations/npm/registry/:username=altua
-//pkgs.dev.azure.com/altua/Oak/_packaging/Integrations/npm/registry/:_password=[BASE64_ENCODED_GRUNT_PACKAGE_TOKEN]
+//pkgs.dev.azure.com/altua/Oak/_packaging/Integrations/npm/registry/:_password=[GRUNT_PACKAGE_TOKEN]
 //pkgs.dev.azure.com/altua/Oak/_packaging/Integrations/npm/registry/:email=npm requires email to be set but doesn't use the value
 //pkgs.dev.azure.com/altua/Oak/_packaging/Integrations/npm/:username=altua
-//pkgs.dev.azure.com/altua/Oak/_packaging/Integrations/npm/:_password=[BASE64_ENCODED_GRUNT_PACKAGE_TOKEN]
+//pkgs.dev.azure.com/altua/Oak/_packaging/Integrations/npm/:_password=[GRUNT_PACKAGE_TOKEN]
 //pkgs.dev.azure.com/altua/Oak/_packaging/Integrations/npm/:email=npm requires email to be set but doesn't use the value
 ; end auth token
 ```
 
-`[BASE64_ENCODED_GRUNT_PACKAGE_TOKEN]` is the base64-encoded package access token provided by Grunt.
+`[GRUNT_PACKAGE_TOKEN]` is the package token value provided by Grunt.
 
 Install dependencies:
 
