@@ -1,0 +1,63 @@
+---
+title: "Theme configuration"
+description: "Apply a Grunt theme to chart objects in CKEditor"
+---
+
+Use `setTheme` on Grunt model elements to enforce your product theme.
+
+## 1. Define the theme object
+
+```ts
+const theme = {
+    font: "Helvetica Neue LT Pro",
+    backgroundColor: "#FFFFFF",
+    colorTheme: {
+        type: "ppt",
+        text1: "#000000",
+        background1: "#666666",
+        text2: "#ffffff",
+        background2: "#666666",
+        accent1: "#4472C4",
+        accent2: "#ED7D31",
+        accent3: "#A5A5A5",
+        accent4: "#FFC000",
+        accent5: "#5B9BD5",
+        accent6: "#70AD47"
+    }
+};
+```
+
+<Warning>
+For now, the only supported `font` value is `"Helvetica Neue LT Pro"`.
+</Warning>
+
+## 2. Apply theme to a Grunt element
+
+```ts
+editor.plugins.get('Grunt').setTheme(modelElement, theme);
+```
+
+`modelElement` must be the inserted `grunt` model element.
+
+## 3. Auto-apply theme when Grunt elements are inserted
+
+```ts
+editor.model.document.on('change:data', () => {
+    const differ = editor.model.document.differ;
+    const changes = differ.getChanges();
+
+    for (const change of changes) {
+        if (change.type === 'insert') {
+            const node = change.position.nodeAfter;
+
+            if (!node) continue;
+
+            if (node.is('element', 'grunt')) {
+                editor.plugins.get('Grunt').setTheme(node, theme);
+            }
+        }
+    }
+});
+```
+
+Use this pattern to keep all newly inserted Grunt objects visually consistent with your brand theme.
