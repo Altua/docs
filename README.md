@@ -40,6 +40,24 @@ mint dev
 
 View your local preview at `http://localhost:3000`.
 
+## Policies
+
+The `policies/` folder is separate from the Mintlify site. Use it for standalone Markdown policy documents that you want to export to PDF.
+
+Install the local tooling:
+
+```bash
+npm install
+```
+
+Export a Markdown file to PDF:
+
+```bash
+npm run md-to-pdf -- policies/test-policy.md
+```
+
+This writes the PDF next to the source file, using the same name with a `.pdf` extension. The export uses A4 page size and the styling defined in `scripts/md-to-pdf.config.js` and `scripts/md-to-pdf.css`.
+
 ## Publishing changes
 
 Install our GitHub app from your [dashboard](https://dashboard.mintlify.com/settings/organization/github-app) to propagate changes from your repo to your deployment. Changes are deployed to production automatically after pushing to the default branch.

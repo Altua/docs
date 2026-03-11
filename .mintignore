@@ -5,3 +5,8 @@
 # Draft content
 drafts/
 *.draft.mdx
+
+# Standalone policy content and tooling
+policies/
+scripts/
+package.json

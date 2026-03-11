@@ -1,0 +1,12 @@
+{
+  "name": "docs-policy-tools",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Standalone Markdown tooling for policy documents",
+  "scripts": {
+    "md-to-pdf": "md-to-pdf --config-file ./scripts/md-to-pdf.config.js"
+  },
+  "devDependencies": {
+    "md-to-pdf": "^5.2.5"
+  }
+}
