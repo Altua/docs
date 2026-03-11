@@ -1,5 +1,11 @@
 # System Configuration Baseline – Grunt
 
+## Version history
+
+| Version | Effective date | Owner | Summary |
+|---------|----------------|-------|---------|
+| 1.0 | March 11, 2026 | Jan Kristian Bjerke | Initial documented baseline configuration. |
+
 ## Standards Referenced
 
 Grunt aligns its system configuration baselines with widely recognized security standards:
