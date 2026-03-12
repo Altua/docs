@@ -1,4 +1,4 @@
-# Data Retention Policy
+# Data retention policy
 
 ## Version history
 
@@ -15,7 +15,7 @@ This policy applies to:
 
 - All Grunt AS information systems
 - All data stored or processed by Grunt AS
-- All employees, contractors, and third-party service providers handling company data
+- All employees, contractors, and third-party service providers handling Grunt AS data
 
 ## Guiding Principles
 
@@ -32,7 +32,7 @@ Personally Identifiable Information (PII) must be deleted or de-identified as so
 
 Legal holds override retention schedules until the hold is lifted by legal counsel.
 
-## Data Classification
+## Data classification
 
 Retention requirements are applied according to the classification defined in the Data Management Policy:
 
@@ -42,7 +42,7 @@ Retention requirements are applied according to the classification defined in th
 | Restricted | Proprietary internal data requiring protection |
 | Public | Data intended for public distribution |
 
-## Data Retention Matrix
+## Data retention matrix
 
 The following table defines default retention periods. Data owners may adjust retention periods where required by law, contract, or operational needs.
 
@@ -57,7 +57,7 @@ The following table defines default retention periods. Data owners may adjust re
 | Financial Records | Confidential | 7 years | Secure deletion |
 | Internal Chat Messages (Slack or similar) | Restricted | 5 years | Automated deletion |
 | Business Email | Restricted | 5 years | Automated deletion |
-| Internal Reports & Presentations | Restricted | 3 years | Secure deletion |
+| Internal Reports & Presentations | Restricted | Indefinite | Secure archival or deletion |
 | Source Code | Confidential | Indefinite while product maintained | Secure archival or deletion |
 | Marketing Materials | Public | Indefinite | No deletion requirement |
 
@@ -65,7 +65,7 @@ If chat messages or email contain records that fall into another category, such 
 
 Data owners may define additional retention rules specific to their systems.
 
-## Automated Data Deletion
+## Automated data deletion
 
 Grunt AS implements automated processes to ensure data is deleted when its retention period expires.
 
@@ -83,7 +83,7 @@ Automated processes must:
 - Remove or anonymize expired records
 - Generate system logs documenting deletion activities
 
-## Monitoring and Validation
+## Monitoring and validation
 
 To ensure compliance with this policy:
 
@@ -94,7 +94,7 @@ To ensure compliance with this policy:
 
 The Security or Engineering team is responsible for validating that retention enforcement operates correctly.
 
-## Evidence and Auditability
+## Evidence and auditability
 
 To demonstrate compliance with this policy, Grunt AS maintains evidence including:
 
@@ -104,9 +104,9 @@ To demonstrate compliance with this policy, Grunt AS maintains evidence includin
 - Documentation of automated deletion scripts or lifecycle rules
 - Periodic audit records validating retention enforcement
 
-These records may be used for internal reviews, audits, and compliance verification (e.g., SOC 2).
+These records may be used for internal reviews, audits, and compliance verification.
 
-## Legal Holds
+## Legal holds
 
 When Grunt AS becomes subject to legal proceedings, investigations, or regulatory requests:
 
@@ -114,7 +114,7 @@ When Grunt AS becomes subject to legal proceedings, investigations, or regulator
 - Data retention automation must exclude records under legal hold
 - Legal counsel will determine the duration of the hold
 
-## Roles and Responsibilities
+## Roles and responsibilities
 
 ### Data Owners
 - Define retention requirements for their data
@@ -130,7 +130,7 @@ When Grunt AS becomes subject to legal proceedings, investigations, or regulator
 - Maintain policy documentation
 - Provide evidence for audits
 
-## Policy Review
+## Policy review
 
 This policy is reviewed annually as part of the Data Management Policy review process to ensure alignment with:
 

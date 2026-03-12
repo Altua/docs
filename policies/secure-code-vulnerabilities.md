@@ -1,4 +1,4 @@
-# Secure Code Vulnerability Scanning
+# Secure code vulnerability scanning
 
 ## Version history
 
@@ -10,9 +10,9 @@
 This document describes the process used by the engineering team to identify and remediate security vulnerabilities in application code and dependencies before deployment. The process ensures that code changes are automatically scanned and reviewed as part of the development workflow.
 
 ## Scope
-This process applies to all application source code maintained in the organization's GitHub repositories.
+This process applies to all application source code maintained in Grunt AS GitHub repositories.
 
-## Tools Used
+## Tools used
 The following tools are used to detect vulnerabilities in source code and dependencies:
 
 - **SonarCloud** – Static Application Security Testing (SAST) and code quality analysis
@@ -20,9 +20,9 @@ The following tools are used to detect vulnerabilities in source code and depend
 - **GitHub Actions** – CI/CD pipeline used to run automated scans
 - **Vanta** – Security monitoring and compliance reporting
 
-## Vulnerability Scanning Process
+## Vulnerability scanning process
 
-### Static Code Analysis
+### Static code analysis
 All code changes are scanned using **SonarCloud**.
 
 - SonarCloud scans are automatically triggered via **GitHub Actions**.
@@ -32,7 +32,7 @@ All code changes are scanned using **SonarCloud**.
 - The CI/CD pipeline blocks merges if the SonarCloud quality gate fails or if critical security issues are detected.
 - Scan results include timestamps, vulnerability details, and remediation guidance.
 
-### Dependency Vulnerability Monitoring
+### Dependency vulnerability monitoring
 All repositories have **Dependabot security alerts** enabled.
 
 Dependabot continuously monitors project dependencies against known vulnerability databases. When a vulnerable dependency is detected:
@@ -42,7 +42,7 @@ Dependabot continuously monitors project dependencies against known vulnerabilit
 3. Vanta monitors Dependabot alerts and surfaces them as compliance notifications.
 4. The engineering team reviews the alert and upgrades the dependency to a secure version.
 
-### Vulnerability Remediation
+### Vulnerability remediation
 When vulnerabilities are identified:
 
 - The engineering team reviews the issue and determines remediation steps.
@@ -50,12 +50,12 @@ When vulnerabilities are identified:
 - Updated code is rescanned by SonarCloud as part of the pull request workflow.
 - The issue is considered resolved once the vulnerability is remediated and the scan passes.
 
-## Responsibility
+## Roles and responsibilities
 The **CTO** is responsible for overseeing the vulnerability scanning configuration and ensuring that identified vulnerabilities are reviewed and remediated.
 
 All engineers are responsible for addressing vulnerabilities identified in their code during the pull request review process.
 
-## Evidence and Records
+## Evidence and records
 Evidence demonstrating the operation of this control may include:
 
 - SonarCloud scan reports and dashboards
@@ -67,4 +67,4 @@ Evidence demonstrating the operation of this control may include:
 These records include timestamps and responsible personnel and can be retrieved from GitHub, SonarCloud, and Vanta for audit purposes.
 
 ## Review
-This process is reviewed periodically as part of the organization's information security management system (ISMS) to ensure continued effectiveness.
+This process is reviewed annually by Grunt AS to ensure continued effectiveness.

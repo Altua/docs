@@ -1,5 +1,4 @@
-# QA and Acceptance Testing Plan
-ISO 27001 – Acceptance Testing Control
+# QA and acceptance testing plan
 
 ## Version history
 
@@ -14,11 +13,9 @@ This document defines the quality assurance and acceptance testing process used 
 
 The process integrates automated testing, static analysis, and manual verification before deployment.
 
----
+## Scope
 
-# Scope
-
-This process applies to all production releases and significant changes to the software systems developed by the organization.
+This process applies to all production releases and significant changes to the software systems developed by Grunt AS.
 
 Systems in scope include:
 
@@ -26,13 +23,11 @@ Systems in scope include:
 - Web services and APIs
 - Supporting backend services
 
----
-
-# Quality Assurance Process
+## Quality assurance process
 
 Quality assurance is performed throughout the development lifecycle using automated testing and code quality analysis.
 
-## Unit Testing
+### Unit testing
 
 Unit tests verify that individual components behave correctly.
 
@@ -49,9 +44,7 @@ Evidence:
 - CI pipeline test results
 - Test coverage reports
 
----
-
-## Integration Testing
+### Integration testing
 
 Integration tests verify that multiple components interact correctly.
 
@@ -68,9 +61,7 @@ Evidence:
 - CI test execution logs
 - Integration test reports
 
----
-
-## Static Code Analysis and Security Scanning
+### Static code analysis and security scanning
 
 All pull requests are scanned using **SonarCloud** to identify:
 
@@ -93,9 +84,7 @@ Evidence:
 - SonarCloud scan reports
 - Pull request quality gate status
 
----
-
-# Pull Request Review Process
+## Pull request review process
 
 All code changes must be submitted via a pull request.
 
@@ -112,9 +101,7 @@ Evidence:
 - Code review approvals
 - CI pipeline logs
 
----
-
-# Acceptance Testing
+## Acceptance testing
 
 After a pull request is merged, the changes are deployed to a test environment where acceptance testing is performed.
 
@@ -138,9 +125,7 @@ Evidence:
 - Test logs
 - CI test reports (when automated tests are used)
 
----
-
-# Security Considerations
+## Security considerations
 
 Security is addressed throughout the development and testing process.
 
@@ -153,9 +138,7 @@ Security controls include:
 
 These practices help identify and mitigate vulnerabilities described in the **OWASP Top 10**.
 
----
-
-# Evidence Collection
+## Evidence collection
 
 Evidence supporting acceptance testing is maintained through the development and CI/CD tooling.
 
@@ -169,9 +152,7 @@ Examples of evidence include:
 
 These artifacts demonstrate that required functional, performance, and security checks were completed before deployment.
 
----
-
-# Final Approval and Deployment
+## Final approval and deployment
 
 Before deployment to production:
 

@@ -1,4 +1,4 @@
-# System Configuration Baseline – Grunt
+# System configuration baseline
 
 ## Version history
 
@@ -6,19 +6,17 @@
 |---------|----------------|-------|---------|
 | 1.0 | March 11, 2026 | Jan Kristian Bjerke | Initial documented baseline configuration. |
 
-## Standards Referenced
+## Standards referenced
 
-Grunt aligns its system configuration baselines with widely recognized security standards:
+Grunt AS aligns its system configuration baselines with widely recognized security standards:
 
 - CIS Benchmarks
 - NIST SP 800-53
 - Cloud provider security best practices (e.g., Azure Security Baseline / AWS Well-Architected Security Pillar)
 
-These baselines define minimum security settings for systems in scope for the company’s SOC 2 program.
+These baselines define minimum security settings for systems supporting Grunt AS production services.
 
----
-
-# 1. Operating Systems
+## Operating systems
 
 | Control | Baseline Configuration | Standard Reference |
 |-------|------------------------|-------------------|
@@ -28,9 +26,7 @@ These baselines define minimum security settings for systems in scope for the co
 | Logging | System logs enabled | NIST AU |
 | SSH | Key-based authentication only, password login disabled | CIS |
 
----
-
-# 2. Cloud Infrastructure
+## Cloud infrastructure
 
 | Control | Baseline |
 |-------|----------|
@@ -42,9 +38,7 @@ These baselines define minimum security settings for systems in scope for the co
 | Encryption at rest | Enabled for storage and databases |
 | Encryption in transit | TLS required for all services |
 
----
-
-# 3. Servers / Compute Instances
+## Servers / compute instances
 
 | Control | Baseline |
 |-------|----------|
@@ -53,20 +47,16 @@ These baselines define minimum security settings for systems in scope for the co
 | Admin access | Restricted through identity provider roles |
 | Monitoring | Infrastructure metrics and logs enabled |
 
----
-
-# 4. Endpoint Software
+## Endpoint software
 
 | Control | Baseline |
 |-------|----------|
-| Disk encryption | Enabled on all company devices |
+| Disk encryption | Enabled on all Grunt AS-managed devices |
 | Endpoint protection | Installed and active |
 | Automatic updates | Enabled for operating system and applications |
 | Screen lock | Automatic lock after inactivity |
 
----
-
-# 5. Network Infrastructure
+## Network infrastructure
 
 | Control | Baseline |
 |-------|----------|
@@ -75,9 +65,7 @@ These baselines define minimum security settings for systems in scope for the co
 | Network segmentation | Public and private network segments separated |
 | Network logging | Flow logs enabled where available |
 
----
-
-# 6. Databases
+## Databases
 
 | Control | Baseline |
 |-------|----------|
@@ -87,9 +75,7 @@ These baselines define minimum security settings for systems in scope for the co
 | Backups | Automated backups enabled |
 | Access control | Role-based access controls enforced |
 
----
-
-# 7. Monitoring and Logging
+## Monitoring and logging
 
 Logging and monitoring are configured to detect suspicious activity and support security investigations.
 
@@ -98,11 +84,9 @@ Logging and monitoring are configured to detect suspicious activity and support 
 | Infrastructure logs | Enabled |
 | Authentication logs | Captured |
 | Security alerts | Generated through cloud monitoring tools |
-| Log retention | Maintained according to company security policies |
+| Log retention | Maintained according to Grunt AS security policies |
 
----
-
-# 8. Review Process
+## Review process
 
 Configuration baselines are reviewed:
 
@@ -113,9 +97,7 @@ Ownership of baseline maintenance: **Engineering**
 
 Changes to configuration baselines require review through the engineering change management process.
 
----
-
-# 9. Scope
+## Scope
 
 This baseline applies to:
 
@@ -126,6 +108,4 @@ This baseline applies to:
 - Network infrastructure
 - Databases
 
-All systems supporting Grunt production services must adhere to these baseline configurations.
-
----
+All systems supporting Grunt AS production services must adhere to these baseline configurations.
