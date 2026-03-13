@@ -51,7 +51,7 @@ The following table defines default retention periods. Data owners may adjust re
 | Customer Data | Confidential | Duration of customer relationship + 30 days | Secure deletion |
 | Personally Identifiable Information (PII) | Confidential | As long as business purpose exists | Deletion or anonymization |
 | Authentication Logs | Confidential | 1 year | Automated deletion |
-| Security & Audit Logs | Confidential | 2 years | Automated deletion |
+| Security & Audit Logs | Confidential | 3 years | Automated deletion |
 | Incident Reports | Confidential | 3 years | Secure deletion |
 | Contracts & Legal Documents | Restricted | 7 years | Secure deletion |
 | Financial Records | Confidential | 7 years | Secure deletion |
