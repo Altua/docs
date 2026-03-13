@@ -1,0 +1,401 @@
+---
+title: "Grunt Pro API"
+description: "Internal reference for the api.grunt.pro endpoints implemented by Grunt.Api."
+hidden: true
+---
+
+## Overview
+
+This page documents the `https://api.grunt.pro` API implemented in `AltuaWebsite/Source/Grunt.Api`.
+
+- Default API version: `1.0`
+- Version override header: `X-API-Version`
+- Response JSON: camelCase
+- Enum JSON values: numeric unless the value is provided through route or query binding
+- Default authentication: fingerprint headers unless an endpoint is marked anonymous or explicitly requires bearer auth
+
+The checked-in file at `docs/api-reference/openapi.json` is still Mintlify sample content, so this page is based on the live ASP.NET controllers and request models.
+
+## Authentication
+
+The API uses a policy auth scheme that selects one of three modes per request:
+
+1. Fingerprint authentication if no `Authorization: Bearer ...` header is present
+2. Internal JWT bearer auth for non-Microsoft bearer tokens
+3. Entra ID bearer auth for bearer tokens issued by `login.microsoftonline.com`
+
+Unless a controller action has `[AllowAnonymous]`, authentication is required.
+
+### Fingerprint authentication
+
+Most app-facing endpoints use these headers:
+
+```http
+X-Auth-Email: user@example.com
+X-Auth-Fingerprint: machine-fingerprint
+```
+
+If either header is missing, or the machine grant is missing, revoked, or invalid, authentication fails.
+
+### Bearer authentication
+
+Use bearer tokens for:
+
+- `POST /authentication/persistent-grant` with an internal JWT or Entra ID token
+- Any other authenticated route when you already have a valid access token
+
+## Route summary
+
+### Public endpoints
+
+| Method | Path | Notes |
+| --- | --- | --- |
+| `GET` | `/api/ping` | Health check. Returns `statusCode` and current UTC `time`. |
+| `GET` | `/api/ping/warmup` | Lightweight readiness check. |
+| `GET` | `/version/latest` | Latest desktop release metadata and download URLs. |
+| `GET` | `/authentication/check-auto-login?partialToken=...` | Resolves a partial login token into `NotValidated` or `Validated`. |
+| `GET` | `/authentication/is-domain-registered?email=...` | Returns whether the email domain is registered in an organization. |
+| `POST` | `/authentication/exchange-token` | Exchanges a validated login token for an access token. |
+| `POST` | `/authentication/request-email-login` | Starts passwordless email login. |
+| `POST` | `/license` | Creates a personal trial or reader license for a new user. |
+| `POST` | `/support/submit-feedback` | Accepts multipart form feedback, optionally with a screenshot upload. |
+
+### Authenticated endpoints
+
+| Method | Path | Auth | Notes |
+| --- | --- | --- | --- |
+| `POST` | `/authentication/persistent-grant` | Internal JWT or Entra ID | Creates or reuses a machine grant for a fingerprint and client id. |
+| `POST` | `/authentication/request-token-login` | Fingerprint or bearer | Generates a password token for the authenticated user. |
+| `GET` | `/authentication/get-web-user` | Fingerprint or bearer | Returns the linked web user id and email verification state. |
+| `POST` | `/license/switch` | Fingerprint or bearer | Switches the current user to a trial or reader license. |
+| `POST` | `/ai/generate-slide` | Fingerprint or bearer | AI slide generation endpoint. |
+| `POST` | `/ai/slide-review` | Fingerprint or bearer | Returns review feedback for a slide image and JSON model. |
+| `POST` | `/ai/slide-solutions` | Fingerprint or bearer | Fetches solution output for a prior AI result id. |
+| `POST` | `/ai/slide-suggestions` | Fingerprint or bearer | Legacy slide suggestions endpoint. |
+| `GET` | `/template/collection` | Fingerprint or bearer | Lists template owners and collections visible to the user. |
+| `POST` | `/template/collection` | Fingerprint or bearer | Creates a collection under `ownerId`. |
+| `PUT` | `/template/collection/{id}` | Fingerprint or bearer | Renames a collection. Body is a raw JSON string. |
+| `DELETE` | `/template/collection/{id}` | Fingerprint or bearer | Deletes a collection. |
+| `GET` | `/template/collection/{id}/templates` | Fingerprint or bearer | Lists templates in a collection, optionally paged. |
+| `GET` | `/template/collection/{id}/users` | Fingerprint or bearer | Lists owners and shared users for a collection. |
+| `GET` | `/template/{collectionId}/{id}` | Fingerprint or bearer | Fetches template metadata. |
+| `GET` | `/template/{collectionId}/{id}/version` | Fingerprint or bearer | Returns the latest blob id. |
+| `GET` | `/template/{collectionId}/{id}/versions` | Fingerprint or bearer | Returns historic blob ids, optionally paged. |
+| `GET` | `/template/{collectionId}/{id}/download` | Fingerprint or bearer | Returns the current download SAS URL. |
+| `GET` | `/template/{collectionId}/{id}/downloadthumbnail` | Fingerprint or bearer | Returns the thumbnail SAS URL. |
+| `POST` | `/template/{collectionId}/{id}/draft` | Fingerprint or bearer | Creates a draft blob and upload URLs. |
+| `POST` | `/template/{collectionId}` | Fingerprint or bearer | Creates a template in a collection. |
+| `PUT` | `/template/{collectionId}/{id}/publish` | Fingerprint or bearer | Publishes a draft blob and reindexes the template. |
+| `PUT` | `/template/{collectionId}/{templateId}` | Fingerprint or bearer | Renames a template. Body is a raw JSON string. |
+| `PUT` | `/template/{collectionId}/{id}/move/` | Fingerprint or bearer | Moves a template into another collection. Body is the destination collection id as a raw JSON string. |
+| `DELETE` | `/template/{collectionId}/{id}` | Fingerprint or bearer | Deletes a template. |
+| `GET` | `/template/search` | Fingerprint or bearer | Searches listed templates across authorized collections. |
+| `PUT` | `/access-control/{entityOwnerId}/{entityId}/assign` | Fingerprint or bearer | Assigns a collection access role to an account or organization. |
+| `DELETE` | `/access-control/{ownerId}/{context}/{entityId}` | Fingerprint or bearer | Removes an assigned access role. |
+
+## Request details
+
+### Authentication
+
+`POST /authentication/exchange-token`
+
+```json
+{
+  "token": "full-login-token"
+}
+```
+
+Returns:
+
+```json
+{
+  "accessToken": "jwt-or-session-token"
+}
+```
+
+`POST /authentication/request-email-login`
+
+```json
+{
+  "email": "user@example.com",
+  "context": 0
+}
+```
+
+`context` is an enum:
+
+- `0` = `ExistingUser`
+- `1` = `TrialSignup`
+- `2` = `ToolsSignup`
+
+`GET /authentication/check-auto-login` returns:
+
+- `404` if the partial token cannot be found
+- `200` with `status = 0` while the login is still pending validation
+- `200` with `status = 1` and `token` once validation is complete
+
+`POST /authentication/persistent-grant`
+
+```json
+{
+  "fingerprint": "machine-fingerprint",
+  "clientId": "grunt-desktop"
+}
+```
+
+Returns the granted fingerprint together with the authenticated user's email and name.
+
+`POST /authentication/request-email-login` intentionally returns `200 OK` even when the email does not map to a known user. In that case `partialToken` is omitted.
+
+### Licensing
+
+`POST /license`
+
+```json
+{
+  "email": "user@example.com",
+  "licenseType": 1,
+  "firstName": "Ada",
+  "lastName": "Lovelace"
+}
+```
+
+`licenseType` is defined as:
+
+- `0` = `Standard`
+- `1` = `Trial`
+- `2` = `Reader`
+
+The controller only handles `Trial` and `Reader`.
+
+`POST /license/switch`
+
+```json
+{
+  "licenseType": 2
+}
+```
+
+Trial upgrades return `409 Conflict` if the user has already used a trial.
+
+### Support
+
+`POST /support/submit-feedback` expects `multipart/form-data` fields:
+
+- `type`
+- `comment`
+- `email`
+- `version`
+- `screenshot` optional file upload
+- `fileName` optional original file name
+
+### AI
+
+`POST /ai/generate-slide`
+
+```json
+{
+  "version": {
+    "versionNumber": {
+      "year": 2025,
+      "release": 3,
+      "type": "r",
+      "revision": 0
+    },
+    "buildIdentifier": {
+      "buildNumber": 1234
+    }
+  },
+  "model": {
+    "format": "grunt-gen-v1"
+  },
+  "state": {},
+  "data": {}
+}
+```
+
+Known model formats:
+
+- `grunt-gen-v1`
+- `grunt-gen-text-v1`
+
+`POST /ai/slide-review` and `POST /ai/slide-suggestions` both accept:
+
+```json
+{
+  "slideJson": {},
+  "imageBase64": "base64-encoded-image"
+}
+```
+
+`POST /ai/slide-solutions` accepts:
+
+```json
+{
+  "id": "ai-result-id"
+}
+```
+
+### Template collections
+
+`POST /template/collection`
+
+```json
+{
+  "ownerId": "owner-id",
+  "name": "My team templates"
+}
+```
+
+`GET /template/collection`
+
+Returns `TemplateOwnerResponse[]`. Each owner contains:
+
+- `id`
+- `name`
+- `canCreateCollection`
+- `ownerType`
+- `collections[]`
+
+`ownerType` values are:
+
+- `0` = `Personal`
+- `1` = `Organization`
+- `2` = `Library`
+- `11` = `You`
+- `15` = `WebAsset`
+
+`GET /template/collection/{id}/templates`
+
+Query params:
+
+- `limit` optional page size
+- `continuationToken` optional paging token
+
+If `limit` is omitted, the controller returns the full collection.
+
+Passing the optional `version` query parameter also makes the API append a synthetic `WebAsset` collection when one exists for the user.
+
+### Templates
+
+`POST /template/{collectionId}`
+
+```json
+{
+  "name": "Quarterly update"
+}
+```
+
+`POST /template/{collectionId}/{id}/draft`
+
+```json
+{
+  "templateType": 1
+}
+```
+
+`PUT /template/{collectionId}/{id}/publish`
+
+```json
+{
+  "blobId": "blob-id",
+  "type": 1,
+  "listed": true,
+  "width": 1920,
+  "height": 1080
+}
+```
+
+`templateType` and `type` use these numeric values:
+
+- `0` = `Unpublished`
+- `1` = `Presentation`
+- `2` = `Slide`
+- `3` = `SlidePointer`
+- `11` = `Object`
+- `13` = `Image`
+- `14` = `WebAsset`
+- `121` = `PresentationRawFile`
+
+`GET /template/search`
+
+Query params:
+
+- `collectionIds` required comma-separated ids
+- `query` optional search text
+- `sortField` optional enum: `Name`, `UpdatedAt`, `CreatedAt`, `Relevance`
+- `sortOrder` optional enum: `Ascending`, `Descending`
+- `limit` optional, default `10`
+- `continuationToken` optional
+
+On the first page only, the API also runs a thumbnail similarity search and prepends those matches to the result set.
+
+### Raw string request bodies
+
+Several endpoints expect a JSON string literal rather than an object.
+
+Rename a collection:
+
+```json
+"Renamed collection"
+```
+
+Rename a template:
+
+```json
+"Renamed template"
+```
+
+Move a template to another collection:
+
+```json
+"destination-collection-id"
+```
+
+### Access control
+
+`PUT /access-control/{entityOwnerId}/{entityId}/assign` supports two request shapes.
+
+Assign an account:
+
+```json
+{
+  "email": "user@example.com",
+  "accessContext": 0,
+  "accessRole": 5
+}
+```
+
+Assign an organization:
+
+```json
+{
+  "organizationId": "org-id",
+  "accessContext": 0,
+  "accessRole": 10
+}
+```
+
+Enums:
+
+- `accessContext`: `0` = `TemplateCollection`
+- `accessRole`: `0` = `Viewer`, `5` = `Editor`, `10` = `Admin`
+
+`DELETE /access-control/{ownerId}/{context}/{entityId}` removes an existing assignment.
+
+## Status code notes
+
+- `401 Unauthorized`: invalid exchanged login token
+- `403 Forbidden`: failed access-control check or unsupported auth for the route
+- `404 Not Found`: missing token, collection, template, version, or assignment target
+- `409 Conflict`: duplicate user on license creation or repeat trial upgrade
+- `429 Too Many Requests`: AI generation rate limit
+- `500 Internal Server Error`: unhandled service failure, usually returned as `Problem(...)`
+
+## Implementation source
+
+This reference was derived from:
+
+- `AltuaWebsite/Source/Grunt.Api/Program.cs`
+- `AltuaWebsite/Source/Grunt.Api/Controllers/v1/*.cs`
+- `AltuaWebsite/Source/Grunt.Api.Models/**/*.cs`

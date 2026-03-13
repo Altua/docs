@@ -1,0 +1,503 @@
+---
+title: "Altua legacy API"
+description: "Internal reference for the legacy api.altua.no endpoints implemented by AltuaWebsite."
+hidden: true
+---
+
+## Overview
+
+This page documents the legacy API hosted at `https://api.altua.no`.
+
+It is implemented by `AltuaWebsite/Source/AltuaWebsite/Controllers/Api` and is the older API surface being phased out in favor of `https://api.grunt.pro`.
+
+- Base host: `api.altua.no`
+- Framework: ASP.NET Web API on the legacy website application
+- New work should prefer `api.grunt.pro`
+
+## Route conventions
+
+The API is bound to the `api` subdomain through Web API route constraints.
+
+Routes resolve as:
+
+- V1: `/{controller}/{action}`
+- V2+: `/{namespace}/{controller}/{action}`
+
+Controller naming rules:
+
+- `V1` controller names keep their original casing in code, but clients use lowercase paths such as `/availability/check`
+- `V2+` controller names are rewritten to lowercase kebab-case, for example `FeatureFlagController` becomes `/v3/feature-flag`
+- Actions are also consumed in lowercase with optional hyphens, for example `CheckAutoLogin` becomes `/check-auto-login`
+
+Examples:
+
+- `GET /availability/check`
+- `GET /v2/account/request-email-login`
+- `GET /v3/version/check`
+- `POST /v4/generate/slide`
+
+## Authentication
+
+The legacy API uses two different patterns.
+
+### Bearer auth on the host
+
+The Web API pipeline is configured with OAuth bearer authentication. Tokens are issued from:
+
+`POST /Token`
+
+Supported token flows in the provider:
+
+- `grant_type=token` with a full password token from the email-login flow
+- standard resource-owner username/password auth
+
+The official client uses the custom token flow:
+
+```http
+POST /Token
+Content-Type: application/x-www-form-urlencoded
+
+grant_type=token&token={full-password-token}
+```
+
+### Email plus fingerprint validation
+
+Most business endpoints do not rely only on bearer auth. Instead, they accept:
+
+- `email`
+- `fingerprint`
+
+The controller then validates the machine grant directly in application code. Invalid grants typically return `401 Unauthorized`.
+
+### Persistent grant
+
+`GET /v2/license/persistent-grant` is the main endpoint that does rely on the current bearer-authenticated user. The official client calls it with:
+
+```http
+Authorization: Bearer {access-token}
+```
+
+## Content type quirks
+
+This API is inconsistent by modern standards.
+
+- Some `POST` endpoints are consumed as `application/x-www-form-urlencoded`
+- `v2/feedback/add` uses `multipart/form-data`
+- `v4/generate/slide` uses JSON
+- A few state-changing endpoints are still `GET`
+
+The checked-in `Altua.WebApi` and `Altua.WebApi.Legacy` clients are the best reference for what callers actually send.
+
+## Route summary
+
+### V1
+
+| Method | Path | Notes |
+| --- | --- | --- |
+| `GET` | `/availability/check` | Returns the current UTC time as a JSON string. Optional `clientId` and `version` query params are logged. |
+
+### V2 account
+
+| Method | Path | Notes |
+| --- | --- | --- |
+| `GET` | `/v2/account/check-auto-login` | Query: `token`. Returns `status = "not-validated"` or `status = "validated"` with the full token. |
+| `GET` | `/v2/account/request-email-login` | Query: `email`. Creates a password token, possibly auto-validates whitelisted users, and may send a login email. |
+| `POST` | `/v2/account/request-token-login` | Body: `email`, `fingerprint`. Returns a full password token when the machine grant is valid. |
+| `GET` | `/v2/account/set-release-track` | Query: `email`, `fingerprint`, `releaseTrack`. Updates the account release track. |
+
+### V2 license
+
+| Method | Path | Notes |
+| --- | --- | --- |
+| `GET` | `/v2/license/create-trial-license` | Query: `email`, `firstName`, `lastName`. Creates a user and personal trial license, sends email login, returns a partial token. |
+| `GET` | `/v2/license/persistent-grant` | Bearer auth plus query `fingerprint`. Creates or restores a machine grant and returns `key`, `email`, and `name`. |
+| `GET` | `/v2/license/validate` | Query: `softwareId`, `email`, `versionId`, `fingerprint`. Returns either `status = "no-valid-license"` or a signed license payload. |
+
+### V2 telemetry and support
+
+| Method | Path | Notes |
+| --- | --- | --- |
+| `POST` | `/v2/feedback/add` | Multipart feedback submission with optional screenshot upload. |
+| `POST` | `/v2/log/add` | Client log ingestion. Returns `503` when transfer is suspended. |
+| `POST` | `/v2/grunt-metric/actionmetric` | Queues action metrics. |
+| `POST` | `/v2/grunt-metric/gruntmetric` | Queues Grunt metrics. |
+| `POST` | `/v2/grunt-metric/powerpointmetric` | Queues PowerPoint metrics. |
+| `GET` | `/v2/version/check` | Legacy version check using `softwareId`, `versionId`, and optional `email`. |
+
+### V3 account, license, and versioning
+
+| Method | Path | Notes |
+| --- | --- | --- |
+| `POST` | `/v3/account/set-release-track` | Body: `softwareId`, `email`, `fingerprint`, `releaseTrack`. |
+| `POST` | `/v3/license/create-reader-license` | Body: `email`, `fingerprint`. Requires a valid machine grant. |
+| `POST` | `/v3/license/create-tools-license` | Body: `email`. Creates a new reader/tools user and returns a partial token. |
+| `GET` | `/v3/license/get-active` | Query: `softwareId`, `email`, `versionId`, `fingerprint`. Returns the active license result or empty success when none exists. |
+| `POST` | `/v3/license/start-trial` | Body: `email`, `fingerprint`. Upgrades an existing user to a trial unless they already had one. |
+| `GET` | `/v3/version/check` | Query: `softwareId`, `fingerprint`, `version`, `architecture`, optional `email`. Supports both legacy and release-version formats. |
+
+### V3 configuration and client state
+
+| Method | Path | Notes |
+| --- | --- | --- |
+| `GET` | `/v3/configuration/get` | Returns feature flags and style preferences for a validated machine grant. |
+| `GET` | `/v3/feature-flag/get` | Returns just the feature-flag portion of the configuration result. |
+| `GET` | `/v3/user-guide/get` | Returns applicable user-guide items that the user has not consumed yet. |
+| `POST` | `/v3/user-guide/report` | Body: `email`, `fingerprint`, `consumed`, `softwareId`. Marks comma-separated guide ids as consumed. |
+| `POST` | `/v3/software-metric/track` | Publishes a software metric event. The controller explicitly notes auth is still missing here. |
+
+### V4 AI and remote resources
+
+| Method | Path | Notes |
+| --- | --- | --- |
+| `POST` | `/v4/generate/slide` | JSON body for AI slide generation. Validates `emailAddress` plus `fingerprint`. |
+| `GET` | `/v4/remote-resource/find` | Query: `softwareId`, `email`, `versionId`, `fingerprint`, `searchTerm`, `resourceType`. |
+| `GET` | `/v4/remote-resource/get` | Query: `softwareId`, `email`, `versionId`, `fingerprint`, `identifier`. |
+| `POST` | `/v4/remote-resource/score` | Body: `email`, `fingerprint`, `softwareId`, `versionId`, `identifier`, `metadata`. |
+
+## Request details
+
+### Email login and token exchange
+
+Request a login email:
+
+```http
+GET /v2/account/request-email-login?email=user@example.com
+```
+
+Possible success response:
+
+```json
+{
+  "token": "partial-password-token"
+}
+```
+
+Check whether the partial token has been validated:
+
+```http
+GET /v2/account/check-auto-login?token=partial-password-token
+```
+
+Pending:
+
+```json
+{
+  "status": "not-validated"
+}
+```
+
+Validated:
+
+```json
+{
+  "status": "validated",
+  "token": "full-password-token"
+}
+```
+
+Exchange the full token for bearer auth:
+
+```http
+POST /Token
+Content-Type: application/x-www-form-urlencoded
+
+grant_type=token&token=full-password-token
+```
+
+### V2 and V3 form-style POST bodies
+
+Although some controller actions use `[FromBody]` request models, the official clients typically send form-encoded payloads.
+
+`POST /v2/account/request-token-login`
+
+```http
+Content-Type: application/x-www-form-urlencoded
+
+email=user@example.com&fingerprint=machine-fingerprint
+```
+
+`POST /v3/license/create-reader-license`
+
+```http
+Content-Type: application/x-www-form-urlencoded
+
+email=user@example.com&fingerprint=machine-fingerprint
+```
+
+`POST /v3/license/create-tools-license`
+
+```http
+Content-Type: application/x-www-form-urlencoded
+
+email=user@example.com
+```
+
+`POST /v3/license/start-trial`
+
+```http
+Content-Type: application/x-www-form-urlencoded
+
+email=user@example.com&fingerprint=machine-fingerprint
+```
+
+`POST /v3/account/set-release-track`
+
+```http
+Content-Type: application/x-www-form-urlencoded
+
+softwareId=grunt&email=user@example.com&fingerprint=machine-fingerprint&releaseTrack=Stable
+```
+
+### Feedback
+
+`POST /v2/feedback/add` expects multipart form-data.
+
+Fields:
+
+- `comment`
+- `type`
+- `version`
+- `email` optional, defaults to `unknown@example.com`
+- `screenshot` optional file upload
+
+The server normalizes the `version` field differently for legacy numeric versions versus newer release-version strings.
+
+### Logging
+
+`POST /v2/log/add` is consumed as form data. Required fields:
+
+- `softwareId`
+- `versionId`
+- `body`
+- `stacktrace`
+
+Optional fields seen in the client:
+
+- `architecture`
+- `summary`
+- `user`
+- `sessionId`
+- `logType`
+- `clientId`
+
+### Metrics
+
+`POST /v2/grunt-metric/actionmetric`
+
+Form fields:
+
+- `softwareId`
+- `action`
+- `eventTime`
+- `sessionId`
+- `user`
+
+`POST /v2/grunt-metric/gruntmetric` and `POST /v2/grunt-metric/powerpointmetric`
+
+Observed fields:
+
+- `date`
+- `user`
+- `gruntVersion`
+- `powerPointVersion`
+- `windowsVersionNumber`
+- `locale`
+- `decimalSeparator`
+- `groupSeparator`
+- `fingerPrint`
+- `fingerPrintData`
+
+### Version checks
+
+`GET /v2/version/check`
+
+Query params:
+
+- `softwareId` required
+- `versionId` required
+- `email` optional
+
+Response shape:
+
+- `isUpToDate`
+- `releaseTrack`
+- `linkX86` and `linkX64` when an update is available
+- `newVersion` when an update is available
+
+`GET /v3/version/check`
+
+Query params:
+
+- `softwareId` required
+- `version` required
+- `architecture` optional but expected by clients
+- `email` optional
+- `fingerprint` required when `email` is supplied
+
+Important behavior:
+
+- If `email` is provided, the machine grant must validate or the call returns `401`
+- Legacy version strings trigger the legacy update algorithm
+- Release-version strings use the newer release-track-aware flow
+- Windows architectures can switch updater URLs based on whether the updater is the .NET 9 build
+
+### License validation and lookup
+
+`GET /v2/license/validate`
+
+Successful licensed response includes:
+
+- `status = "license"`
+- `license`
+- `validUntil`
+- `renewBefore`
+- `suspended`
+- `signature`
+
+If the user has no valid license:
+
+```json
+{
+  "status": "no-valid-license"
+}
+```
+
+`GET /v3/license/get-active` returns a richer license result object from the newer shared Web API model, or an empty `200 OK` when no license exists.
+
+### Configuration, feature flags, and user guide
+
+`GET /v3/configuration/get`
+
+Returns:
+
+- `featureFlagStates[]`
+- `stylePreferences[]`
+
+`GET /v3/feature-flag/get`
+
+Returns:
+
+- `featureFlagStates[]`
+
+`GET /v3/user-guide/get`
+
+Returns:
+
+- `items[]`
+
+Each item includes:
+
+- `id`
+- `trigger`
+- `conditions`
+- `content`
+
+`POST /v3/user-guide/report`
+
+The `consumed` field is a comma-separated list of user-guide ids.
+
+### Remote resources
+
+`GET /v4/remote-resource/find`
+
+Typical request:
+
+```http
+GET /v4/remote-resource/find?softwareId=grunt&email=user@example.com&versionId=2024.1-r0-4023&fingerprint=machine-fingerprint&searchTerm=logo&resourceType=Logo
+```
+
+Important behavior:
+
+- Legacy versions call a separate legacy request path internally
+- Missing upstream dependencies return `424 Failed Dependency`
+- Invalid credentials return `401`
+
+`POST /v4/remote-resource/score`
+
+The request object must contain:
+
+- `email`
+- `fingerprint`
+- `softwareId`
+- `versionId`
+- `identifier`
+- `metadata`
+
+`metadata` is a JSON string, not a nested object, in the request model consumed by the controller.
+
+Example:
+
+```http
+Content-Type: application/x-www-form-urlencoded
+
+email=user@example.com&fingerprint=machine-fingerprint&softwareId=grunt&versionId=2024.1-r0-4023&identifier=resource-id&metadata=%7B%22source%22%3A%22logo-search%22%7D
+```
+
+### AI generation
+
+`POST /v4/generate/slide`
+
+This endpoint expects JSON.
+
+The request contains these logical fields:
+
+- `emailAddress`
+- `fingerprint`
+- `releaseVersion`
+- `model`
+- `state`
+- `data`
+
+Schematic example:
+
+```json
+{
+  "emailAddress": "user@example.com",
+  "fingerprint": "machine-fingerprint",
+  "releaseVersion": "...",
+  "model": "...",
+  "state": "...",
+  "data": "..."
+}
+```
+
+Observed behavior:
+
+- invalid machine grant returns `401`
+- rate limiting returns `429`
+- other failures return `400` with `"Failed to generate slide"`
+
+## Status code notes
+
+- `200 OK`: success, and some endpoints also use it for "no record" cases
+- `400 Bad Request`: malformed inputs or many caught application failures
+- `401 Unauthorized`: invalid or missing machine grant, or invalid bearer-authenticated user
+- `404 Not Found`: remote resource lookup miss
+- `424 Failed Dependency`: remote-resource search dependency failure
+- `429 Too Many Requests`: AI slide generation rate limit
+- `503 Service Unavailable`: data transfer suspended for logs and some metric endpoints
+
+## Migration note
+
+This API is still active for legacy desktop clients, but its design is inconsistent:
+
+- mixed auth models
+- mixed content types
+- state-changing `GET` endpoints
+- version-specific route conventions
+
+For new product work, prefer `api.grunt.pro` and treat `api.altua.no` as maintenance-only.
+
+## Implementation source
+
+This reference was derived from:
+
+- `AltuaWebsite/Source/AltuaWebsite/App_Start/WebApiConfig.cs`
+- `AltuaWebsite/Source/AltuaWebsite/App_Start/Startup.Auth.cs`
+- `AltuaWebsite/Source/AltuaWebsite/Providers/ApplicationOAuthProvider.cs`
+- `AltuaWebsite/Source/AltuaWebsite/Controllers/Api/V1/*.cs`
+- `AltuaWebsite/Source/AltuaWebsite/Controllers/Api/V2/*.cs`
+- `AltuaWebsite/Source/AltuaWebsite/Controllers/Api/V3/*.cs`
+- `AltuaWebsite/Source/AltuaWebsite/Controllers/Api/V4/*.cs`
+- `AltuaWebsite/Source/Altua.WebApi/WebApiClient.cs`
+- `AltuaWebsite/Source/Altua.WebApi.Legacy/LegacyWebApiClient.cs`
