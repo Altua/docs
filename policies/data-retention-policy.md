@@ -53,7 +53,7 @@ The following table defines default retention periods. Data owners may adjust re
 | Authentication Logs | Confidential | 1 year | Automated deletion |
 | Security & Audit Logs | Confidential | 3 years | Automated deletion |
 | Incident Reports | Confidential | 3 years | Secure deletion |
-| Contracts & Legal Documents | Restricted | 7 years | Secure deletion |
+| Contracts & Legal Documents | Restricted | Indefinite | Secure archival or deletion |
 | Financial Records | Confidential | 7 years | Secure deletion |
 | Internal Chat Messages (Slack or similar) | Restricted | 5 years | Automated deletion |
 | Business Email | Restricted | 5 years | Automated deletion |
