@@ -50,8 +50,6 @@ The following data must be treated as prohibited in non-production environments 
 
 Data masking or anonymization must remove or replace values that could identify a customer, user, device, account, or business record.
 
-Masked or anonymized datasets must be reviewed to confirm that re-identification risk is not reasonably possible in the intended non-production environment.
-
 ## Approved testing data sources
 
 Non-production environments must use data from approved sources such as:
@@ -65,7 +63,7 @@ Production backups, production database snapshots, and raw production exports mu
 
 ## Environment separation and technical controls
 
-Grunt AS maintains separation between production and non-production environments through technical and administrative controls.
+Grunt AS maintains separation between production and non-production environments through technical and administrative controls appropriate to the systems in scope.
 
 These controls include:
 
@@ -73,8 +71,6 @@ These controls include:
 - Access controls that limit who can retrieve or transfer production data
 - Data masking or anonymization before approved use outside production
 - Use of synthetic data where possible instead of transformed production data
-- Audit logging for access to production data and any approved transformation or transfer process
-- Review of automation and scripts that move or prepare data between environments
 
 Non-production systems must not be configured to pull live production data for routine development, testing, QA, or training use.
 
@@ -91,49 +87,29 @@ When a lower-risk representation of production behavior is needed for debugging,
 | Role | Responsibilities |
 |------|------------------|
 | Engineering | Build and maintain non-production environments that do not rely on raw production data, and implement masking, anonymization, or synthetic data generation where needed. |
-| Data owners | Classify data, approve any sanctioned transformed datasets, and confirm that non-production use does not expose sensitive production information. |
-| Security or compliance | Review compliance with this policy, review audit evidence, and support investigations of potential violations. |
+| Data owners | Classify data and support decisions about whether data may be used outside production after appropriate transformation. |
+| Security or compliance | Support policy review and follow up on potential violations where appropriate. |
 | Employees and contractors | Follow this policy, use approved test data sources, and report any suspected misuse of production data. |
 
-## Monitoring and review
+## Compliance
 
-Grunt AS reviews relevant audit logs, environment configurations, and data handling practices on a periodic basis to verify compliance with this policy.
+Compliance with this policy is supported through environment separation, access controls, change management, and related data handling controls.
 
-Reviews may include:
-
-- Access logs for production systems
-- Export or backup activity logs
-- Records of masking or anonymization jobs
-- Environment configuration reviews
-- Investigation of unusual transfers or data access patterns
-
-Potential violations must be investigated and remediated promptly.
-
-## Training and awareness
-
-Personnel involved in engineering, QA, support, and system administration must be informed of this policy and trained on the correct handling of production and non-production data.
-
-Training and awareness materials should cover:
-
-- The prohibition on using production data in non-production environments
-- Approved alternatives such as synthetic, masked, or anonymized data
-- Secure handling of logs, exports, and support artifacts
-- How to report suspected violations or control gaps
+Potential violations should be reviewed and addressed through normal engineering, management, or security processes.
 
 ## Evidence and records
 
 Evidence supporting this policy may include:
 
 - This policy document in the version-controlled documentation repository
-- Screenshots or records from masking, anonymization, or synthetic data tooling
-- Audit logs showing access and transfer activity
 - Environment configuration records showing production and non-production separation
-- Training materials or acknowledgments
-- Investigation records for suspected policy violations
+- Access control records
+- Screenshots or records from masking, anonymization, or synthetic data tooling when such controls are used
+- Change records or engineering documentation showing how non-production data is prepared
 
 ## Exceptions
 
-Exceptions to this policy require documented approval from management and the data owner, with security review where appropriate.
+Exceptions to this policy require documented approval from management and the data owner.
 
 Any approved exception must define scope, duration, compensating controls, and evidence of review.
 
