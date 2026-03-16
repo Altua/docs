@@ -1,4 +1,10 @@
-# Network Segregation – Azure Infrastructure
+# Network segregation
+
+## Version history
+
+| Version | Effective date | Owner | Summary |
+|---------|----------------|-------|---------|
+| 1.0 | March 16, 2026 | Engineering | Initial documented network segregation policy for Azure infrastructure. |
 
 ## Overview
 
@@ -13,9 +19,7 @@ Azure enforces **tenant-level isolation between customers and services by defaul
 
 This architecture follows the **Azure shared responsibility model**, where Microsoft secures the underlying cloud platform and Grunt configures network access controls, identity, and resource-level isolation.
 
----
-
-# Environment Segregation Model
+## Environment segregation model
 
 Infrastructure resources are logically separated using:
 
@@ -27,15 +31,13 @@ For services that run inside VNets (e.g., VMs or Kubernetes nodes), traffic is r
 
 For Azure-managed services (e.g., storage, databases, application services), Azure provides **tenant isolation** and service-level access controls such as IP restrictions and private endpoints.
 
----
+## Network controls
 
-# Network Controls
-
-## Virtual Network Segmentation
+### Virtual network segmentation
 
 Virtual Networks provide logical network boundaries between infrastructure components. Subnets and routing rules further control communication within each network.
 
-## Network Security Groups
+### Network Security Groups
 
 Network Security Groups enforce traffic filtering rules at the subnet or network interface level.
 
@@ -45,9 +47,7 @@ Typical controls include:
 - restricting administrative access to approved IP ranges
 - default deny behavior for other traffic
 
----
-
-# Azure Platform-Level Segregation
+## Azure platform-level segregation
 
 Many systems run on **Azure-managed services** that do not reside inside customer VNets. These services operate in Microsoft-managed networks and are segregated through:
 
@@ -58,9 +58,7 @@ Many systems run on **Azure-managed services** that do not reside inside custome
 
 This model ensures that workloads remain logically isolated even when not directly connected to customer-managed networks.
 
----
-
-# Logging and Monitoring
+## Logging and monitoring
 
 Network configurations and security rules are periodically reviewed as part of infrastructure management and security monitoring processes.
 
@@ -71,64 +69,106 @@ Evidence artifacts may include:
 - VNet peering configurations
 - network topology documentation
 
----
+## Evidence collection
 
-# Evidence Collection
-
-The following command exports network configuration evidence from Azure.  
+The following command exports network configuration evidence from Azure into a single Markdown document.  
 Resources tagged with `environment=development` are excluded.
 
 ```bash
 #!/usr/bin/env bash
 
-set -e
+set -euo pipefail
 
 TIMESTAMP=$(date +%Y-%m-%d)
 DIR="azure-network-evidence-$TIMESTAMP"
+OUTPUT_FILE="$DIR/network-segregation-evidence.md"
 
 mkdir -p "$DIR"
 
-echo "Collecting Azure network segregation evidence into $DIR"
+echo "Collecting Azure network segregation evidence into $OUTPUT_FILE"
+
+append_json_section() {
+  local title="$1"
+  local json_payload="$2"
+
+  {
+    echo "## $title"
+    echo
+    echo '```json'
+    printf '%s\n' "$json_payload"
+    echo '```'
+    echo
+  } >> "$OUTPUT_FILE"
+}
 
 echo "Exporting VNets..."
-az network vnet list \
-  --query "[?tags.environment!='development']" \
-  -o json > "$DIR/vnets.json"
+vnets_json=$(
+  az network vnet list \
+    --query "[?tags.environment!='development']" \
+    -o json
+)
 
 echo "Exporting NSGs..."
-az network nsg list \
-  --query "[?tags.environment!='development']" \
-  -o json > "$DIR/nsgs.json"
+nsgs_json=$(
+  az network nsg list \
+    --query "[?tags.environment!='development']" \
+    -o json
+)
+
+echo "Preparing evidence document..."
+cat > "$OUTPUT_FILE" <<EOF
+# Azure network segregation evidence
+
+Generated: $TIMESTAMP
+
+This document contains Azure network configuration evidence for non-development environments.
+
+EOF
+
+append_json_section "Virtual networks" "$vnets_json"
+append_json_section "Network security groups" "$nsgs_json"
 
 echo "Exporting NSG rules..."
-az network nsg list \
-  --query "[?tags.environment!='development'].{name:name,rg:resourceGroup}" \
-  -o tsv | while read name rg
-do
-  az network nsg rule list \
-    --resource-group "$rg" \
-    --nsg-name "$name" \
-    -o json > "$DIR/nsg-rules-$name.json"
-done
+while IFS=$'\t' read -r name rg; do
+  [[ -n "${name:-}" && -n "${rg:-}" ]] || continue
+
+  rules_json=$(
+    az network nsg rule list \
+      --resource-group "$rg" \
+      --nsg-name "$name" \
+      -o json
+  )
+
+  append_json_section "NSG rules: $name ($rg)" "$rules_json"
+done < <(
+  az network nsg list \
+    --query "[?tags.environment!='development'].{name:name,rg:resourceGroup}" \
+    -o tsv
+)
 
 echo "Exporting VNet peerings..."
-az network vnet list \
-  --query "[?tags.environment!='development'].{name:name,rg:resourceGroup}" \
-  -o tsv | while read name rg
-do
-  az network vnet peering list \
-    --resource-group "$rg" \
-    --vnet-name "$name" \
-    -o json > "$DIR/vnet-peerings-$name.json"
-done
+while IFS=$'\t' read -r name rg; do
+  [[ -n "${name:-}" && -n "${rg:-}" ]] || continue
+
+  peerings_json=$(
+    az network vnet peering list \
+      --resource-group "$rg" \
+      --vnet-name "$name" \
+      -o json
+  )
+
+  append_json_section "VNet peerings: $name ($rg)" "$peerings_json"
+done < <(
+  az network vnet list \
+    --query "[?tags.environment!='development'].{name:name,rg:resourceGroup}" \
+    -o tsv
+)
 
 echo "Evidence collection complete."
-echo "Files stored in: $DIR"
+echo "Markdown file stored in: $OUTPUT_FILE"
 ```
 
----
-
-# Summary
+## Summary
 
 Network segregation within the Azure environment is achieved through:
 

@@ -5,6 +5,16 @@ body {
   color: #111827;
 }
 
+code,
+pre {
+  font-family: "SFMono-Regular", Menlo, Consolas, "Liberation Mono", monospace;
+  font-size: 8.25pt;
+}
+
+pre {
+  line-height: 1.25;
+}
+
 p,
 li {
   orphans: 3;
