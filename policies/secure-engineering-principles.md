@@ -160,10 +160,10 @@ Training or awareness activities should cover:
 
 This policy should be read together with:
 
-- `policies/qa-process.md`
-- `policies/secure-code-vulnerabilities.md`
-- `policies/production-data-in-non-production.md`
-- `policies/data-management-policy.md`
+- QA Process
+- Secure Code Vulnerability Scanning
+- Production Data in Non-Production Environments Policy
+- Data Management Policy
 
 ## Exceptions
 

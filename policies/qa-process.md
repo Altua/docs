@@ -6,7 +6,7 @@ Owner: Engineering
 
 Review cadence: Annual, and after material changes to the development lifecycle
 
-Source of record: `policies/qa-process.md` in the company version-controlled documentation repository
+Source of record: This policy is maintained in the company version-controlled documentation repository.
 
 ## Purpose
 
