@@ -48,7 +48,7 @@ The following table defines default retention periods. Data owners may adjust re
 
 | Data Type | Classification | Retention Period | Disposal Method |
 |---|---|---|---|
-| Customer Data | Confidential | Duration of customer relationship + 30 days | Secure deletion |
+| Customer uploaded data | Confidential | Duration of customer relationship + 1 year | Secure deletion |
 | Personally Identifiable Information (PII) | Confidential | As long as business purpose exists | Deletion or anonymization |
 | Authentication Logs | Confidential | 1 year | Automated deletion |
 | Security & Audit Logs | Confidential | 3 years | Automated deletion |

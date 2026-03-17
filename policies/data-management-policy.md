@@ -4,6 +4,7 @@
 
 | Version | Effective date | Owner | Summary |
 |---------|----------------|-------|---------|
+| 3.0 | March 17, 2026 | Jan Kristian Bjerke | Updated data retention. Approved by Einar Bjering. |
 | 2.0 | February 9, 2026 | Mads Gedde | Updated data management policy. Approved by Einar Bjering. |
 | 1.0 | December 10, 2025 | Mads Gedde | Initial documented policy. Approved by Einar Bjering. |
 
@@ -184,7 +185,7 @@ Grunt AS's Technology Team is responsible for setting and enforcing data retenti
 ### Customer accounts
 
 1. Customer accounts must be scrubbed and PII data must be deleted within one year of contract termination through manual or automated deletion processes.
-2. Primary data, including customer-uploaded data, is retained during the contract period and deleted within 30 to 90 days after contract termination or upon customer request.
+2. Primary data, including customer-uploaded data, is retained during the contract period and deleted within one year after contract termination or upon customer request.
 
 ### Devices
 
