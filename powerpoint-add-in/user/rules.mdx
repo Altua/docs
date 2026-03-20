@@ -1,0 +1,73 @@
+---
+title: "Rules"
+description: "Use Grunt rules to apply reusable formatting and data-driven behavior"
+---
+
+Rules are the core formatting and visualization system in Grunt.
+
+## What rules do
+
+Rules let you define behavior instead of formatting each value manually.
+
+Examples from the legacy support guidance:
+
+- Change the font, border, fill, or size of selected content
+- Show icons or graphics based on values
+- Turn values into bars, gauges, or other visual elements
+- Reuse the same formatting logic across multiple rows, columns, or objects
+
+This is why rules save time when your data changes.
+
+## Add a rule
+
+1. Select the part of the object you want to change.
+2. Right-click and choose **Add rule**, or press `Ctrl` + `Enter`.
+3. Choose the rule from the dialog.
+4. Enable the properties you want to control.
+
+Most properties start in a default state and do nothing until you activate them.
+
+## Understand the rule dialog
+
+The legacy articles split the rule dialog into two main areas:
+
+- **Property section** at the top, where you turn individual settings on or off
+- **Target section** at the bottom, where you define where the rule applies
+
+If a rule supports different content types, you can often target:
+
+- The cell itself
+- Text inside the object
+- Graphics created by rules
+
+## Understand the rule stack
+
+Every rule appears in the rule stack on the edge of the PowerPoint window.
+
+- Rules are applied from the bottom up.
+- A rule higher in the stack wins if two rules control the same setting on the same target.
+- You can drag rules up or down to change precedence.
+
+If nothing changes after you edit a rule, another rule higher in the stack may be overriding it.
+
+## Common rule families
+
+The legacy support portal documents these rule families:
+
+- Text and formatting rules such as **Font**, **Paragraph style**, **Fill**, **Border**, and **Size**
+- Structural rules such as **Alignment**, **Margin**, **Merge**, and **Clear**
+- Data-display rules such as **Number format**, **Text rotation**, **Donut (gauge)**, and **Bar (gauge)**
+- Visual rules such as **Icon**, **Icon conditional**, **Chevron**, **Header underline**, and **Logo**
+
+## Target the right areas
+
+Good targeting is what makes rules reusable.
+
+Use these targeting patterns:
+
+- Select the target area before adding the rule when the target is obvious.
+- Use include and exclude lists when the target should stay dynamic as the grid changes.
+- Use row and column types when the structure matters.
+- Use tags when the target spans custom cells or logic-based groups.
+
+Continue to [Visual Grids](/powerpoint-add-in/user/visual-grids) for row types and tags, or to [FAQ and tips](/powerpoint-add-in/user/faq-and-tips) for common targeting edge cases.

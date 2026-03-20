@@ -1,0 +1,78 @@
+---
+title: "Visual Grids"
+description: "Build Visual Grids with sizing modes, row and column types, tags, and chart-style layouts"
+---
+
+Visual Grid is the main layout surface in Grunt. You can use it for tables, charts, mixed text-and-graphic layouts, and other structured slide content.
+
+## Choose a data mode
+
+You can build a Visual Grid in two ways:
+
+- Use embedded data stored in the presentation
+- Link the grid to Excel data
+
+Both modes use the same structure and rule system. The difference is where the data lives and how you update it later.
+
+## Use sizing modes on rows and columns
+
+Legacy support guidance describes three main sizing modes for Visual Grid rows and columns:
+
+- **Relative** keeps the row or column sized relative to the others
+- **Fixed** locks the row or column to a fixed size
+- **Autofit** resizes the row or column based on its content
+
+Use `Relative` when the grid should rebalance as content grows. Use `Fixed` when exact layout stability matters. Use `Autofit` when text length is hard to predict.
+
+## Set row and column types
+
+You can label rows and columns with these built-in types:
+
+- `Content`
+- `Header`
+- `Sub-header`
+- `Footer`
+
+These types help Grunt:
+
+- Build cleaner targets when you add rules
+- Keep formatting more maintainable over time
+- Sort content rows while leaving headers and footers in place
+
+The legacy support guidance recommends types over explicit row IDs when the grid will grow or change.
+
+## Use tags for advanced targeting
+
+Tags extend the targeting model beyond full rows and columns.
+
+Use tags when you need to:
+
+- Target a custom set of cells
+- Reuse the same custom target across several rules
+- Drive formatting from smart definitions, such as values above a threshold or rows containing a specific word
+
+You can manage tags from the Tag Manager in the edge menu.
+
+## Understand include and exclude logic
+
+Rules target everything in the include list, minus anything in the exclude list.
+
+Legacy FAQ guidance notes that Grunt may prefer `Exclude` over `Include` when that creates a more durable target. For example, if you format everything except a header row, Grunt can exclude the header so newly added content rows are automatically covered.
+
+## Build chart-like layouts inside a grid
+
+A Visual Grid can also host chart-style visuals.
+
+For example, the legacy stacked-bar article recommends this workflow:
+
+1. Paste the data into the grid.
+2. Insert a new display column for the chart output.
+3. Apply the **Stacked bar** rule to that display column.
+4. Point the rule's data target to the numeric columns.
+5. Add the remaining series and hide the raw numeric columns if needed.
+
+This gives you more freedom over label placement and surrounding layout than a stand-alone chart.
+
+## Continue
+
+Use [Charts](/powerpoint-add-in/user/charts) for chart-specific guidance, or [Excel connections](/powerpoint-add-in/user/excel-connections) when your grid should stay linked to a workbook.

@@ -1,0 +1,76 @@
+---
+title: "FAQ and tips"
+description: "Resolve common Grunt questions about shapes, fonts, targeting, and overrides"
+---
+
+This page consolidates the most useful legacy FAQ guidance for day-to-day Grunt work.
+
+## How do you resize shapes?
+
+Open the shape directly or open its **Shape** rule, then adjust the size settings.
+
+Legacy support guidance lists these size modes:
+
+- `Automatic`
+- `Inherit`
+- `Relative`
+- `Absolute`
+- `Fit to content`
+- `Fit to size`
+
+Use `Relative` when the object should size itself against its container. Use `Absolute` when it must stay at a fixed pixel value.
+
+## How do you remove overridden data?
+
+If linked data was changed directly in PowerPoint, Grunt marks the cell as overridden.
+
+To remove the override:
+
+1. Open the data editor.
+2. Find the marked cell.
+3. Right-click it.
+4. Reset it to the original value.
+
+You can also clear all overrides from the warning control in the edge menu.
+
+## How do you remove a shape?
+
+You do not usually delete an individual Grunt shape the same way you would delete a native PowerPoint shape.
+
+Instead, adjust the rule target:
+
+- Add the cell to the rule's **Exclude** list
+- Exclude empty cells when the shape is created only for empty cells
+
+## Why does Grunt exclude instead of include?
+
+Grunt prefers the target model that is most durable when the grid changes later.
+
+For example, if you select all content rows except a header and add a rule, Grunt may exclude the header instead of explicitly including every current content row. That way, new content rows are automatically included.
+
+## Why is a font missing?
+
+When Grunt cannot access a font, the legacy support guidance says the usual causes are:
+
+- The font is embedded in the PowerPoint theme and unavailable through the Office API
+- The font is custom and not installed on your machine
+
+Fix path:
+
+1. Get the correct font files from IT or the font owner.
+2. Install the font locally.
+3. Restart PowerPoint.
+
+If you cannot install the font, switch the object to another available font.
+
+## Why can a logo be missing in the logo rule?
+
+The legacy FAQ guidance points to local-folder sourcing for logos when the built-in source cannot find a specific logo.
+
+If a needed logo is not available, ask your team to configure a local logo folder for the logo rule workflow.
+
+## Related pages
+
+- Use [Rules](/powerpoint-add-in/user/rules) for rule behavior and targeting fundamentals.
+- Use [Excel connections](/powerpoint-add-in/user/excel-connections) for linked data and overrides.
+- Use [Troubleshooting](/powerpoint-add-in/user/troubleshooting) for install, license, Teams, and workbook-path issues.

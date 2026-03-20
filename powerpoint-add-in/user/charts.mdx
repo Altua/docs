@@ -1,0 +1,67 @@
+---
+title: "Charts"
+description: "Connect charts to Excel, keep them updated, and handle version-specific chart behavior"
+---
+
+Grunt supports chart workflows both through the chart tools in the ribbon and through rules applied inside a Visual Grid.
+
+## Connect a chart to Excel
+
+Legacy support guidance describes two main ways to connect a chart to workbook data.
+
+### Method 1: Use clipboard data
+
+1. Copy the source range in Excel.
+2. In PowerPoint, choose the chart type from the **Grunt** ribbon.
+3. Let Grunt use the copied range as the chart source.
+
+Grunt stores the cell reference and prompts you to update when the workbook changes later.
+
+### Method 2: Replace chart data
+
+1. Select the chart in PowerPoint.
+2. Open **Excel Connection**.
+3. Use the range picker to select a new Excel range.
+4. Confirm and update the chart.
+
+## Update linked charts
+
+When the workbook changes:
+
+1. Save the workbook in Excel.
+2. Return to PowerPoint.
+3. Use the Grunt update prompt or **Update** control to refresh the chart.
+
+If your dataset keeps expanding, consider using Greedy rows or columns in the Excel connection advanced settings.
+
+## When a chart turns into an image
+
+If a chart opens as an image instead of a live Grunt object, the legacy support guidance says the most common cause is a version mismatch.
+
+That usually means:
+
+- Someone updated or created the chart in a newer Grunt version
+- Your installation is older and cannot edit that chart format yet
+
+The recommended fix is to update Grunt from [app.grunt.pro/download](https://app.grunt.pro/download) and reopen the presentation.
+
+## Upgrade classic waterfall charts
+
+Legacy support guidance for Grunt `2025.2+` explains that classic waterfall charts can be upgraded to Advanced Waterfall from the edge menu.
+
+Recommended workflow:
+
+1. Select the existing waterfall chart.
+2. Use the upgrade button in the edge menu.
+3. Upgrade one chart first before upgrading all charts in the deck.
+4. Review connectors, totals, and excluded series after the upgrade.
+
+Important migration note:
+
+- Old force-to-baseline behavior is replaced by movable connectors.
+- Old exclude-from-sum behavior is also handled through connector movement.
+- Some border and connector dash styling can change during upgrade.
+
+## Use a Visual Grid when you need more layout control
+
+If you need tighter control over labels, surrounding text, or mixed content on the same slide, build the chart inside a [Visual Grid](/powerpoint-add-in/user/visual-grids) instead of using a stand-alone chart tool.

@@ -1,0 +1,85 @@
+---
+title: "Excel connections"
+description: "Connect Grunt objects to Excel, manage updates, and avoid broken workbook paths"
+---
+
+Use Excel connections when your data should keep updating after the slide is created.
+
+## Connect a Visual Grid to Excel
+
+To create a linked Visual Grid:
+
+1. Open the workbook in Excel.
+2. Copy the range you want to use.
+3. Go to the target slide in PowerPoint.
+4. Paste the data through Grunt.
+5. Size the Visual Grid on the slide.
+
+Grunt links the grid back to the workbook and keeps the original workbook path with the object.
+
+## Connect any chart to Excel
+
+For chart objects, you can either:
+
+- Insert the chart while the Excel range is already on the clipboard
+- Replace the chart's source range later from **Excel Connection**
+
+This is covered in more detail on [Charts](/powerpoint-add-in/user/charts).
+
+## Use the Data Editor
+
+The Data Editor is the main place to inspect or change several values at once.
+
+You can open it by:
+
+- Clicking the pencil icon in the edge menu
+- Pressing `Ctrl` + `Shift` + `E`
+- Right-clicking a Grunt object and choosing **Edit data**
+
+The editor supports:
+
+- Direct cell edits
+- Multi-line edits through the formula bar
+- Hidden columns or rows that still drive formatting
+- Override visibility for cells that no longer match the workbook
+
+## Understand overrides
+
+When you change linked values directly in PowerPoint, you do not update Excel. You create an override instead.
+
+Legacy support guidance notes:
+
+- Overridden cells are marked in the edge menu or data editor
+- You can clear the override to reveal the original Excel value again
+- Clearing overrides is safer than retyping the workbook value manually
+
+## Use Greedy rows and columns for changing ranges
+
+Greedy rows and columns tell Grunt to keep reading data until the first empty row or column.
+
+Use this when the dataset grows over time.
+
+Advanced tip from the legacy guidance:
+
+- If you use only the top-left workbook cell as the starting range, Grunt can expand and contract the detected dataset dynamically.
+
+## Avoid workbook-not-found issues
+
+Most broken Excel links are path problems, not data problems.
+
+To reduce failures:
+
+- Store the workbook in a shared location all collaborators can access
+- Prefer a synced shared folder or shared SharePoint location over a personal local path
+- Avoid OneDrive or SharePoint shortcuts
+- Make sure every collaborator can open the workbook directly in Excel
+
+## Make cloud files available locally
+
+Grunt works best when it can access a real local file path, even if the source lives in SharePoint or OneDrive.
+
+That is why the legacy support guidance recommends syncing the shared file library locally before you connect it in Grunt.
+
+## Continue
+
+If you want the overview workflow, continue to [Work with data](/powerpoint-add-in/user/work-with-data). If you need path and rendering fixes, go to [Troubleshooting](/powerpoint-add-in/user/troubleshooting).

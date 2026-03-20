@@ -33,12 +33,34 @@
             "tab": "Documentation",
             "groups": [
               {
-                "group": "For users",
+                "group": "Start here",
                 "pages": [
                   "powerpoint-add-in/index",
                   "powerpoint-add-in/user/get-started",
+                  "powerpoint-add-in/user/quick-start"
+                ]
+              },
+              {
+                "group": "Create and format",
+                "pages": [
+                  "powerpoint-add-in/user/tools-and-shortcuts",
+                  "powerpoint-add-in/user/rules",
+                  "powerpoint-add-in/user/visual-grids",
+                  "powerpoint-add-in/user/charts",
+                  "powerpoint-add-in/user/export-and-sharing"
+                ]
+              },
+              {
+                "group": "Connect to Excel",
+                "pages": [
                   "powerpoint-add-in/user/work-with-data",
-                  "powerpoint-add-in/user/export-and-sharing",
+                  "powerpoint-add-in/user/excel-connections"
+                ]
+              },
+              {
+                "group": "FAQ and troubleshooting",
+                "pages": [
+                  "powerpoint-add-in/user/faq-and-tips",
                   "powerpoint-add-in/user/troubleshooting"
                 ]
               },

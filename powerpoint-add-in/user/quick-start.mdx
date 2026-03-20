@@ -1,0 +1,75 @@
+---
+title: "Quick start"
+description: "Learn the Grunt workflow, create your first Visual Grid, and set a default PowerPoint theme"
+---
+
+Grunt is a PowerPoint add-in built around one core idea: keep your data separate from your formatting so updates stay fast and predictable.
+
+## Understand the Grunt model
+
+Legacy support guidance describes Grunt as a rule-based way of building slides:
+
+- Your data carries the values, labels, and structure.
+- Rules decide how that data should look.
+- Visual Grids combine the two to create charts, tables, and mixed layouts.
+
+This separation lets you update numbers without rebuilding the design each time.
+
+## Create your first Visual Grid
+
+To create a simple Visual Grid with embedded data:
+
+1. Open the **Grunt** tab in PowerPoint.
+2. Choose **Visual Grid**.
+3. Select the number of rows and columns you want.
+4. Draw the object on the slide.
+5. Open the data editor from the edge menu and enter your data.
+
+The grid updates as you commit changes in the data editor.
+
+## Add your first rule
+
+Rules are how you control formatting and data visualization in Grunt.
+
+1. Select the cells, rows, or columns you want to format.
+2. Add a rule from the context menu, or press `Ctrl` + `Enter`.
+3. Choose the rule you want.
+4. Turn on the properties you need in the rule dialog.
+
+Rules are applied through the rule stack on the edge of the PowerPoint window. Rules higher in the stack override conflicting settings lower in the stack.
+
+## Start with Excel when your data will change
+
+If your content will be updated often, do not type the data into PowerPoint first.
+
+Instead:
+
+1. Open the workbook in Excel.
+2. Copy the range you want to use.
+3. Paste it into PowerPoint through Grunt.
+
+This creates a link back to Excel so Grunt can refresh the object later.
+
+Continue to [Work with data](/powerpoint-add-in/user/work-with-data) or [Excel connections](/powerpoint-add-in/user/excel-connections) for that workflow.
+
+## Set a default theme for new presentations
+
+To make new presentations start with your company theme:
+
+1. Open the theme or template in PowerPoint.
+2. Open the **Design** tab and save the current theme.
+3. Find the saved theme under **Custom**.
+4. Right-click it and choose **Set as Default Theme**.
+
+This makes PowerPoint apply the saved theme automatically in new presentations.
+
+## Continue
+
+<CardGroup cols={2}>
+  <Card title="Tools and shortcuts" icon="keyboard" href="/powerpoint-add-in/user/tools-and-shortcuts">
+    Speed up common layout and editing tasks.
+  </Card>
+  <Card title="Rules" icon="wand-magic-sparkles" href="/powerpoint-add-in/user/rules">
+    Learn how formatting and visualization rules work.
+  </Card>
+</CardGroup>
