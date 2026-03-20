@@ -1,32 +1,48 @@
 ---
 title: "Licensing and provisioning"
-description: "Assign Grunt licenses and automate user provisioning"
+description: "Assign Grunt licenses and automate provisioning with Microsoft Entra ID"
 ---
 
-## License assignment
+Grunt supports both interactive license validation for end users and automated provisioning for IT-managed environments.
 
-Assign licenses in the Grunt admin portal and confirm the user signs in with the expected identity.
+## Interactive license validation
+
+When a user starts Grunt for the first time, Grunt asks for their company email address and sends a validation email. If validation fails repeatedly, Grunt can eventually show the license as expired even if the subscription is still active.
 
 If a user reports activation issues, verify:
 
-- The user has an active license
-- The user is signing in with the licensed account
-- The user can reach Grunt endpoints from their network
+- The user is validating with the correct company identity
+- The user can refresh the license from **Grunt** > **Settings** > **License**
+- The network allows access to the required Grunt endpoints
+- Proxy-based environments have **Use default proxy for API communication** enabled when needed
 
-## Automated provisioning (SCIM)
+## Automated provisioning with Microsoft Entra ID
 
-Grunt supports SCIM provisioning through Microsoft Entra ID.
+Legacy support guidance documents SCIM-based provisioning through Azure AD, now Microsoft Entra ID.
 
-Typical flow:
+Benefits include:
+
+- Automatic provisioning and deprovisioning as group membership changes
+- Reuse of your existing directory groups for Grunt access control
+- Less manual license administration
+
+### Prerequisites
+
+- A Microsoft Entra ID tenant
+- A tenant admin with global administrator rights
+- A SCIM-enabled Grunt organization and Grunt admin contact
+
+### Typical setup flow
 
 1. Configure the Grunt enterprise app in Entra.
-2. Configure provisioning credentials/token.
-3. Map users/groups for provisioning.
-4. Enable provisioning and monitor sync status.
+2. Add the provisioning credentials supplied for your Grunt organization.
+3. Map the users or groups that should receive access.
+4. Enable provisioning and monitor the first sync.
 
 ## Operational notes
 
-- Provisioning sync is not instant; allow propagation time.
-- Keep group-based licensing rules consistent across HR/IT identity systems.
+- Provisioning is not instant. Allow time for directory sync and API propagation.
+- Keep the same group logic across HR, identity, and software deployment processes.
+- If users still see expired-license errors after provisioning, troubleshoot endpoint access and proxy handling before reassigning licenses.
 
-For detailed configuration steps, use the related support guides on [support.grunt.pro](https://support.grunt.pro/).
+For deployment-related network requirements, continue to [Network and security](/powerpoint-add-in/it/network-and-security).

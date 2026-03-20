@@ -1,40 +1,60 @@
 ---
 title: "Get started"
-description: "Install the Grunt PowerPoint add-in and activate your license"
+description: "Install the Grunt PowerPoint add-in, activate your license, and verify the ribbon is ready"
 ---
 
-Use this guide to install Grunt and verify it is ready in PowerPoint.
+Use this guide to install Grunt and confirm it is ready in PowerPoint.
 
 ## Prerequisites
 
-- PowerPoint for Microsoft 365 on Windows
-- Office 2024 for Mac (beta)
-- Windows 10/11 or macOS 15+
-- A Grunt account and active license
+- Windows 10 or Windows 11, with PowerPoint 2016 or later recommended
+- Your Grunt installer from [app.grunt.pro/download](https://app.grunt.pro/download)
+- A company email address with an active Grunt license
+
+<Info>
+Legacy support content also references a Mac beta build. If you are deploying on macOS, use the installer variant that matches your hardware.
+</Info>
 
 ## Install Grunt
 
 1. Download the installer from [app.grunt.pro/download](https://app.grunt.pro/download).
-2. Run the installer.
-3. Open PowerPoint and confirm the **Grunt** tab appears in the ribbon.
+2. Use the default `x64` installer unless you are on a legacy 32-bit system.
+3. Close all running PowerPoint windows.
+4. Run the installer.
+5. Open PowerPoint and confirm the **Grunt** tab appears in the ribbon.
+
+Grunt normally installs to `C:\Users\<username>\AppData\Local\Programs\Grunt\`. This default install does not usually require admin rights.
 
 ## Activate your license
 
-When you open Grunt for the first time, you should get a license prompt.
+The first time Grunt starts, it should prompt you to validate your license.
 
-If you do not:
+1. Enter your company email address.
+2. Open the validation email that Grunt sends you.
+3. Complete the validation flow.
+4. Return to PowerPoint and confirm Grunt opens normally.
+
+If the prompt does not appear:
 
 1. Open PowerPoint.
 2. Go to **Grunt** > **Settings** > **License**.
-3. Sign in and complete activation.
+3. Refresh or complete the license flow from there.
+
+## If installation does not complete
+
+Start with these checks:
+
+- If Windows reports an Office add-in trust issue, ask IT to allow Office add-ins or apply the required registry fix.
+- If startup reports a certificate issue, install the Grunt certificate into **Trusted Publishers** from the installer's **Digital Signatures** tab.
+- If the **Grunt** tab is still missing after install, restart PowerPoint and re-enable the add-in from PowerPoint's disabled or inactive add-in lists.
 
 ## Next steps
 
 <CardGroup cols={2}>
   <Card title="Work with data" icon="diagram-project" href="/powerpoint-add-in/user/work-with-data">
-    Create visuals and link them to Excel data.
+    Create visuals, link to Excel, and manage overrides safely.
   </Card>
   <Card title="Export and sharing" icon="file-code" href="/powerpoint-add-in/user/export-and-sharing">
-    Export to PowerPoint-compatible objects or PDF, or send by email.
+    Export for compatibility, or send slides directly by email.
   </Card>
 </CardGroup>

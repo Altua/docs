@@ -1,28 +1,76 @@
 ---
 title: "Deployment and installation"
-description: "Deploy the Grunt PowerPoint add-in for individuals or across your organization"
+description: "Deploy the Grunt PowerPoint add-in with the right install model for your environment"
 ---
 
-Use this guide for managed deployment in enterprise environments.
+Use this guide when you deploy Grunt in a managed environment.
 
 ## Installation models
 
-Grunt supports:
+Grunt supports two main Windows deployment models:
 
-- Per-user installation (default)
-- Per-machine installation for shared devices
+- Per-user installation in the user's local profile
+- Per-machine installation in `Program Files`
+
+The default per-user install is the standard choice for most users and organizations. It does not usually require admin rights and enables auto-updates by default.
+
+## Recommended baseline
+
+Legacy support guidance recommends:
+
+- Windows 10 or Windows 11
+- PowerPoint 2016 or later
+- The default `x64` installer unless you specifically need a 32-bit package for a legacy system
+
+## Default per-user installation
+
+The standard installer from [app.grunt.pro/download](https://app.grunt.pro/download) installs Grunt to:
+
+```text
+C:\Users\<username>\AppData\Local\Programs\Grunt\
+```
+
+This mode:
+
+- Writes user-level registry entries under `HKEY_CURRENT_USER`
+- Does not normally require elevated privileges
+- Registers the Grunt add-in with PowerPoint
+- Enables automatic updates by default unless your organization disables them centrally
 
 ## Command-line installation
 
-Use command-line flags when deploying via endpoint management tools.
+Use per-machine installation when your environment blocks per-user installs or when IT wants to control updates through deployment tooling.
+
+Grunt installs per machine to:
+
+```text
+C:\Program Files\Grunt
+```
+
+Example command:
 
 ```bash
-Grunt.Installer.exe /machine /silent /verbose
+msiexec /i grunt-<version>-x64.msi MSIINSTALLPERUSER=0 /qn
 ```
+
+This mode:
+
+- Requires admin rights
+- Writes machine-level registry entries under `HKEY_LOCAL_MACHINE`
+- Disables Grunt auto-updates by design
+- Fits SCCM, Intune, and similar software deployment systems
 
 ## Managed deployment tools
 
-You can deploy with common software distribution platforms such as Intune, SCCM, or similar tooling.
+You can deploy Grunt with common software distribution platforms such as Intune, SCCM, or similar tooling. These rollouts normally use the per-machine model above.
+
+## Common blockers
+
+If deployment fails during install or first launch:
+
+- Check whether Office add-ins are blocked by policy.
+- Check whether endpoint protection is blocking Grunt binaries.
+- If Windows reports a certificate trust issue, install the signer certificate into **Trusted Publishers** or incorporate that trust step into your deployment process.
 
 ## Validate deployment
 
@@ -31,3 +79,4 @@ After rollout:
 1. Open PowerPoint on a test machine.
 2. Confirm the **Grunt** tab appears.
 3. Confirm users can open **Grunt** > **Settings** > **License**.
+4. Confirm the expected update behavior matches the install model you selected.

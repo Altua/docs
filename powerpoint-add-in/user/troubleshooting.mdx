@@ -3,23 +3,77 @@ title: "Troubleshooting"
 description: "Fix common PowerPoint add-in issues for end users"
 ---
 
+Use this page for the most common end-user issues with the Grunt PowerPoint add-in.
+
 ## Grunt tab is missing
 
+Start here:
+
 1. Confirm Grunt is installed from [app.grunt.pro/download](https://app.grunt.pro/download).
-2. Restart PowerPoint.
-3. In PowerPoint, check whether the add-in is disabled/inactive and re-enable it.
-4. If it still does not appear, reinstall Grunt.
+2. Fully close PowerPoint.
+3. Reopen PowerPoint and check whether **Grunt** appears.
 
-## License expired or not activating
+If the tab is still missing:
 
-1. Open **Grunt** > **Settings** > **License**.
-2. Re-authenticate.
-3. Restart PowerPoint and try again.
+1. Open PowerPoint **File** > **Options** > **Add-ins**.
+2. Check whether Grunt appears under disabled add-ins.
+3. Re-enable it from **Manage** > **Disabled Items**.
+4. If it appears as inactive instead, open **Manage** > **COM Add-ins** and enable it there.
+5. Restart PowerPoint.
 
-If your company uses a proxy/firewall, contact IT to verify required Grunt endpoints are reachable.
+If that still does not fix it, restart the computer and reinstall Grunt.
 
-## Generate diagnostics for support
+## License looks expired or will not validate
 
-Use the built-in troubleshooter to create a support zip and share it with your admin or Grunt support.
+Grunt validates your license against Grunt services when PowerPoint starts. If validation keeps failing, Grunt can eventually report the license as expired even when the subscription is still active.
 
-For article-level help, open [support.grunt.pro](https://support.grunt.pro/).
+Try these steps:
+
+1. Open **Grunt** > **Settings** > **License** and refresh the license.
+2. Restart PowerPoint completely. If needed, restart the PC.
+3. If your environment uses a proxy, turn on **Use default proxy for API communication**.
+4. Ask IT to allow the required Grunt endpoints over HTTPS on port `443`.
+
+## Installation or first startup fails
+
+If Windows reports a certificate issue during install or first launch:
+
+1. Right-click the installer and open **Properties**.
+2. Open **Digital Signatures**.
+3. Open the signer certificate for **Altua As**.
+4. Install the certificate into **Trusted Publishers** for the current user.
+5. Retry the install or restart PowerPoint.
+
+If Windows blocks Office add-ins entirely, ask IT to enable add-in trust. The legacy support fix updates the `MyComputer` value under `HKEY_LOCAL_MACHINE\SOFTWARE\MICROSOFT\.NETFramework\Security\TrustManager\PromptingLevel`.
+
+## Security software blocks Grunt
+
+Some environments block Grunt files during installation or startup.
+
+If IT needs targeted Windows Defender exclusions for the default per-user install, the legacy support guidance lists these files:
+
+- `%USERPROFILE%\AppData\Local\Programs\Grunt\Altua.Grunt.PowerPoint.dll`
+- `%USERPROFILE%\AppData\Local\Programs\Grunt\Updates\bin\Grunt.PowerPoint.Runner.exe`
+- `%USERPROFILE%\AppData\Local\Programs\Grunt\Updates\bin\Grunt.PowerPoint.Updater.exe`
+- `%USERPROFILE%\AppData\Local\Programs\Grunt\Updates\bin\Grunt.PowerPoint.Restarter.exe`
+
+## Excel workbook cannot be found
+
+This usually happens when the presentation points to a workbook on one person's local machine.
+
+To reduce the risk:
+
+- Store the workbook in a shared location.
+- Use the shared SharePoint or synced folder path, not a local personal path.
+- Avoid OneDrive or SharePoint shortcuts.
+- Make sure every collaborator can open the workbook directly in Excel.
+
+## Objects do not render in Microsoft Teams
+
+Legacy support guidance for decks created with Grunt `2024.1` recommends:
+
+1. Update to Grunt `2024.2` or later.
+2. Open the affected presentation.
+3. Use **Update All** on the presentation objects.
+4. Save the deck.
+5. Nudge affected objects slightly to force a re-render, then present again in Teams.

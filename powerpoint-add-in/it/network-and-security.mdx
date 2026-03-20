@@ -5,19 +5,31 @@ description: "Allow required endpoints and reduce false-positive security blocks
 
 ## Firewall and proxy requirements
 
-Allow outbound HTTPS (`443`) access to required Grunt service endpoints.
+Allow outbound HTTPS on port `443` to the required Grunt service endpoints:
 
-If users are behind a proxy, ensure proxy policy allows Grunt API communication.
+- `api.grunt.pro`
+- `api.altua.no`
+- `files.altua.no`
+- `app.grunt.pro`
+
+If users are behind a proxy, make sure proxy policy allows Grunt API communication. In affected environments, users may also need to enable **Use default proxy for API communication** in Grunt.
 
 ## Endpoint allowlisting
 
-Use your organization allowlist process for Grunt domains documented in support articles.
+Use your organization's standard allowlist process for the domains above.
 
-When troubleshooting blocked license checks or sign-in, start by testing endpoint reachability from affected devices.
+When troubleshooting blocked license checks, sign-in, templates, or updates, start by testing endpoint reachability from affected devices.
 
 ## Endpoint protection considerations
 
-Some endpoint security tools may block Grunt files after install.
+Some endpoint security tools can block Grunt binaries during installation or startup.
+
+For the default per-user install, the legacy support guidance recommends these Windows Defender exclusions:
+
+- `%USERPROFILE%\AppData\Local\Programs\Grunt\Altua.Grunt.PowerPoint.dll`
+- `%USERPROFILE%\AppData\Local\Programs\Grunt\Updates\bin\Grunt.PowerPoint.Runner.exe`
+- `%USERPROFILE%\AppData\Local\Programs\Grunt\Updates\bin\Grunt.PowerPoint.Updater.exe`
+- `%USERPROFILE%\AppData\Local\Programs\Grunt\Updates\bin\Grunt.PowerPoint.Restarter.exe`
 
 If needed, add targeted exclusions for approved Grunt install paths and executables according to your internal security process.
 
@@ -25,4 +37,12 @@ If needed, add targeted exclusions for approved Grunt install paths and executab
 Apply exclusions narrowly and only after internal security review.
 </Warning>
 
-For exact endpoint/path details, refer to the IT support articles on [support.grunt.pro](https://support.grunt.pro/).
+## Office add-in trust and certificates
+
+If Windows blocks Office add-ins entirely, the legacy support fix updates the `MyComputer` value under:
+
+```text
+HKEY_LOCAL_MACHINE\SOFTWARE\MICROSOFT\.NETFramework\Security\TrustManager\PromptingLevel
+```
+
+If install or first startup fails because the Grunt certificate is not trusted, import the installer's signer certificate for **Altua As** into **Trusted Publishers** for the affected user or machine.

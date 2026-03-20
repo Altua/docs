@@ -1,34 +1,81 @@
 ---
 title: "Work with data"
-description: "Create visuals in PowerPoint and keep them connected to Excel"
+description: "Create visuals in PowerPoint, connect them to Excel, and manage updates safely"
 ---
 
-Grunt lets you build and update chart objects directly in your slides.
+Grunt lets you work with data in two ways:
 
-## Create a visual from Excel data
+- Keep the data inside PowerPoint.
+- Link the data to an Excel workbook and refresh it as the workbook changes.
 
-1. In Excel, copy your data table.
-2. In PowerPoint, open the **Grunt** tab.
-3. Use the Grunt insertion flow and paste the data.
-4. Choose the visual type and apply formatting.
+The structure of a Grunt visual is separate from its data. That means you can change layout and formatting without changing the underlying data source.
+
+## Link a Visual Grid to Excel
+
+To create a new Visual Grid from Excel data:
+
+1. Open the Excel workbook.
+2. Copy the range you want to use.
+3. In PowerPoint, go to the target slide.
+4. Paste the data.
+5. Click and drag to size the Visual Grid on the slide.
+
+Grunt creates the Visual Grid with the same initial row and column count as the copied range and links it back to the workbook.
 
 <Info>
-Use data that already has clear headers and consistent number formatting for faster setup.
+If PowerPoint pastes a native table instead of a Grunt visual, check that the Grunt paste option is enabled in the ribbon.
 </Info>
 
-## Keep data linked
+## Connect a chart to Excel
 
-When data is linked, you can refresh visuals as source values change.
+You can connect charts in two common ways:
 
-- Use linking when you expect frequent updates.
-- Use one-time paste when the data is final.
+1. Copy a range in Excel.
+2. In PowerPoint, insert the chart type you want from the **Grunt** ribbon.
+3. Let Grunt use the clipboard data as the source.
 
-## Useful shortcuts
+You can also replace a chart's source later from the **Excel Connection** control and select a new range in Excel.
 
-- `CTRL + ALT + C`: Open chart editor
-- `CTRL + ALT + T`: Open table editor
-- `CTRL + ALT + G`: Open gantt editor
-- `CTRL + ALT + U`: Update linked data
+## Update linked data
+
+For linked workbooks, update the data in Excel first. When you save the workbook, Grunt notifies you that fresh data is available. You can then choose when to update the slide.
+
+This is the recommended workflow because edits made directly in PowerPoint do not write back to Excel.
+
+## Edit data in PowerPoint
+
+Use the data editor when you need to inspect or change multiple values at once.
+
+You can open it by:
+
+- Clicking the pencil icon on the right edge of the PowerPoint window
+- Right-clicking a Grunt object and choosing **Edit data**
+
+Inside the editor:
+
+- You can type directly into cells for single-line edits.
+- Use the formula bar for multi-line text.
+- Use Excel-style navigation such as arrow keys, `Tab`, `Shift+Tab`, `Ctrl+A`, `Ctrl+Space`, and `Shift+Space`.
+- Use `Ctrl+D` to fill down and `Ctrl+R` to fill right across a selected range.
+
+## Understand overrides and mixed data
+
+When a visual is linked to Excel, Grunt keeps the original workbook data and applies any edits you make in PowerPoint as overrides on top of it.
+
+- Overridden cells do not change the workbook.
+- Overridden cells are marked in the data editor.
+- You can clear overrides later to reveal the original Excel values again.
+
+You can also mix data sources by inserting extra rows or columns in PowerPoint. Those new rows or columns are stored in the presentation, while the original linked rows or columns keep coming from Excel.
+
+## Collaborate on Excel-linked decks
+
+To avoid workbook-not-found issues when several people work on the same presentation:
+
+- Store the workbook in a shared location that every collaborator can access.
+- Prefer the SharePoint or synced shared folder path over a local personal path.
+- Do not rely on OneDrive or SharePoint shortcuts.
+- Confirm that every collaborator can open the workbook directly in Excel.
 
 ## Continue
 

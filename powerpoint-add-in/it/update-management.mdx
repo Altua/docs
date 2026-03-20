@@ -5,12 +5,14 @@ description: "Control release cadence and keep users on approved Grunt versions"
 
 ## Update modes
 
-Grunt supports both:
+Grunt supports both automatic and manual updates. Which mode applies depends on how Grunt was installed and whether your organization has disabled auto-updates.
 
-- Automatic updates
-- Manual updates
+## How to tell which mode a device uses
 
-Automatic behavior can vary by install location and deployment model.
+Check the install location:
+
+- `C:\Users\<username>\AppData\Local\Programs\Grunt\` usually means a per-user install with auto-updates on by default.
+- `C:\Program Files\Grunt` usually means a per-machine install with auto-updates off and IT controlling updates.
 
 ## Recommended policy
 
@@ -21,7 +23,25 @@ Automatic behavior can vary by install location and deployment model.
 
 ## Manual update workflow
 
-For controlled environments, distribute approved installer versions through your software deployment tooling.
+For controlled environments:
+
+1. Download the approved installer from [app.grunt.pro/download](https://app.grunt.pro/download).
+2. Distribute it through your software deployment tooling or approved manual process.
+3. If Grunt is installed under `Program Files`, run the update with admin rights.
+
+## Release channels
+
+Legacy support guidance describes three channels:
+
+- **Stable** for broadly tested releases
+- **Early** for earlier access to newer changes
+- **Delayed/Manual** for organizations that want IT-led rollouts
+
+The legacy guidance also states that Grunt typically aims for about four stable releases per year, with occasional hotfixes when needed.
+
+<Warning>
+Keep all users in the same organization on the same version or release channel when possible. Mixed versions increase the risk of versioning conflicts.
+</Warning>
 
 ## User communication
 
@@ -31,4 +51,4 @@ When major changes are released:
 - Provide quick guidance for visible UI changes
 - Include escalation path for blocked updates
 
-Use [support.grunt.pro](https://support.grunt.pro/) for version-specific notes and update behavior details.
+Use [Deployment and installation](/powerpoint-add-in/it/deployment-and-installation) to align install method and update behavior.
