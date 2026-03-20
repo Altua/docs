@@ -1,0 +1,65 @@
+---
+title: "Missing tab and recovery"
+description: "Recover a missing Grunt tab, re-enable the add-in, and use the troubleshooting tool"
+---
+
+Use this page when Grunt disappears from PowerPoint or does not load after an install or update.
+
+## Start with the troubleshooting tool
+
+The legacy support guidance recommends the automated troubleshooter before manual repair.
+
+To use it:
+
+1. Download the Grunt troubleshooter package from the legacy support flow.
+2. Unzip the files.
+3. Run `Grunt.PowerPoint.Troubleshooter.exe`.
+4. Apply any fixes it reports.
+5. Restart PowerPoint.
+
+## Confirm Grunt is installed
+
+On Windows:
+
+1. Open **Add or remove programs**.
+2. Search for `Grunt`.
+3. Confirm the app is installed.
+
+If it is not installed, install the latest version from [app.grunt.pro/download](https://app.grunt.pro/download).
+
+## Clear stuck PowerPoint processes
+
+If Grunt was disabled after a crash or interrupted startup:
+
+1. Close all visible PowerPoint windows.
+2. Open Task Manager with `Ctrl` + `Shift` + `Esc`.
+3. End any remaining `PowerPoint` processes, including background ones.
+4. Start PowerPoint again.
+
+## Re-enable a disabled add-in
+
+If PowerPoint disabled Grunt:
+
+1. Open **File** > **Options** > **Add-ins**.
+2. Set **Manage** to **Disabled Items**.
+3. Click **Go**.
+4. Select Grunt and click **Enable**.
+5. Restart PowerPoint if needed.
+
+## Re-enable an inactive COM add-in
+
+If Grunt is inactive instead of disabled:
+
+1. Open **File** > **Options** > **Add-ins**.
+2. Set **Manage** to **COM Add-ins**.
+3. Click **Go**.
+4. Check the Grunt add-in.
+5. Click **OK**.
+
+## If the problem returns
+
+- Restart the computer and repeat the checks
+- Reinstall Grunt
+- If Windows is blocking Office add-ins, see [Troubleshooting](/powerpoint-add-in/user/troubleshooting)
+
+This page expands the recovery flow summarized in [Troubleshooting](/powerpoint-add-in/user/troubleshooting).

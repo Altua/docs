@@ -1,0 +1,98 @@
+---
+title: "Layout and structure rules"
+description: "Use Alignment, margin, merge, size, and clear rules in Grunt"
+---
+
+This page covers the legacy rules that shape layout, spacing, and structure.
+
+## Alignment rule
+
+Use Alignment when text or graphics should line up consistently within a cell or container.
+
+The legacy support article documents six settings:
+
+- Left
+- Center
+- Right
+- Top
+- Middle
+- Bottom
+
+You can apply the rule to:
+
+- Graphics
+- Text
+- Both
+
+If content still does not reach the edge you expect, check whether margins are limiting the result.
+
+## Margin rule
+
+Use Margin when text or graphics need more or less space around them.
+
+The legacy support article notes:
+
+- It works for text, icons, shapes, images, and more
+- Many visual rules have their own built-in margin settings
+- Grunt uses a default margin around most elements
+
+You can adjust:
+
+- Horizontal and vertical margins together
+- All four sides individually
+
+Set margins to `0` when content should extend to the full cell boundary.
+
+## Merge rule
+
+Use Merge when repeated or adjacent cells should behave like one larger structural unit.
+
+The legacy support article describes these merge modes:
+
+- **Merge adjacent cells**
+- **Merge similar values**
+- **Merge empty cells**
+
+It also documents a **Direction** setting to decide whether Grunt should prioritize merging by rows or by columns.
+
+Important behavior:
+
+- Grunt merges the structure, not the underlying data
+- The top-left cell is the displayed value after merge
+- Removing the rule restores the original structure
+
+## Size rule
+
+Use Size when several graphics from different rules should share the same width or height behavior.
+
+The legacy support article documents these sizing modes for width and height:
+
+- **Fixed**
+- **Relative**
+- **Fill Cell**
+
+This is especially helpful when icons, shapes, and other rule-generated graphics should feel like one coherent system.
+
+## Clear rule
+
+Use Clear when earlier formatting should be intentionally removed from a specific target area.
+
+Typical use cases:
+
+- Reset inherited formatting for one row or column
+- Strip unwanted styling before applying new rules
+- Create exceptions inside an otherwise broad target
+
+This behavior is inferred from the legacy rule catalog and the general way Grunt rule precedence works.
+
+## When to combine these rules
+
+These rules are often combined to control layout cleanly:
+
+- **Alignment** for placement
+- **Margin** for spacing
+- **Size** for graphic scale
+- **Merge** for structural grouping
+- **Clear** for exceptions
+
+For icons, chevrons, headers, and logos, continue to [Visual and logo rules](/powerpoint-add-in/user/rules-visual-and-logo).

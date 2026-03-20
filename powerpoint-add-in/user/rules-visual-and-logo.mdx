@@ -1,0 +1,97 @@
+---
+title: "Visual and logo rules"
+description: "Use Chevron, header underline, icon, icon conditional, and logo rules in Grunt"
+---
+
+This page covers the legacy rules that turn cell content into more visual slide elements.
+
+## Chevron rule
+
+Use Chevron to show sequence, direction, process steps, or timeline flow.
+
+The legacy support article documents these property groups:
+
+- **Style** for fill and outline
+- **Appearance** for skew, direction, and flat starting edge
+- **Size**
+- **Margin**
+
+Chevron direction can flow:
+
+- Left to right
+- Right to left
+- Top to bottom
+- Bottom to top
+
+## Header, underline rule
+
+Use Header, underline when header cells need a stronger visual separation from the rows below.
+
+The legacy support article highlights:
+
+- **Line style** for color, width, and thickness
+- **Label style** for text styling
+- **Alignment**
+- **Margin**
+
+This rule is useful when a simple underline plus controlled header typography is enough, without turning the header into a full shape.
+
+## Icon rule
+
+Use Icon when every targeted cell should get the same icon.
+
+The legacy support article describes these property groups:
+
+- **Style** for icon choice and color
+- **Layout** for placement in or around the cell
+- **Size**
+- **Margin**
+
+Use Icon when the visual marker is static across the whole target area.
+
+## Icon conditional rule
+
+Use Icon conditional when the icon should depend on the cell value or another value source.
+
+The legacy support article highlights:
+
+- A **Conditions** section with logical operators
+- **Layout**
+- **Size**
+- **Margin**
+
+Useful examples include:
+
+- Status indicators
+- Up/down trend arrows
+- Category-specific symbols
+
+If you select a range before adding the rule, Grunt can create starter conditions from the selected data automatically.
+
+## Logo rule
+
+Use Logo when company names or other identifiers should be replaced with real logos.
+
+The legacy support article documents two sourcing models:
+
+- Cloud search through Google and Bing
+- Local folder sources configured in Grunt settings
+
+Important behaviors:
+
+- Logos can take a few extra seconds to resolve
+- You can choose alternative search results
+- You can refine the search term when the first result is wrong
+- Local sources are preferred based on their order in settings
+
+The same article also notes a privacy tradeoff: cloud logo search shares the search term with the external search providers.
+
+## Choosing between these rules
+
+- Use **Chevron** for process flow
+- Use **Header, underline** for structured table headers
+- Use **Icon** for static repeated markers
+- Use **Icon conditional** for value-driven symbols
+- Use **Logo** for company or brand identity
+
+For gauge-style visuals and cross-column trigger logic, continue to [Gauges and value source](/powerpoint-add-in/user/rules-gauges-and-value-source).

@@ -1,0 +1,104 @@
+---
+title: "Text and number rules"
+description: "Use Font, paragraph, number, fill, border, and text rotation rules in Grunt"
+---
+
+This page covers the legacy rules used to control text appearance, number display, and cell-level styling.
+
+## Font (character style) rule
+
+Use the Font rule when you want to change the appearance of individual characters consistently across a target area.
+
+Key properties from the legacy support article:
+
+- **Color** for text color
+- **Family** for font family
+- **Size** for font size
+- **Style** for bold, italic, underline, and strikethrough
+
+Use this rule for character-level styling. Use **Paragraph style** when the whole paragraph structure should change.
+
+## Paragraph style rule
+
+Use Paragraph style when you need paragraph-level formatting rather than character styling.
+
+The legacy support article calls out these capabilities:
+
+- Text alignment
+- Text wrapping
+- Indentation level
+- Paragraph spacing and line height
+- Bullet style
+- First-line and hanging indentation
+
+Paragraph style is especially useful when every paragraph after the first should get the same formatting pattern.
+
+## Number format rule
+
+Use Number format when numeric values should be displayed differently without changing the underlying data.
+
+Legacy support guidance highlights:
+
+- Thousand separator
+- Decimal symbol
+- Magnitude such as thousands or millions
+- Decimal places
+- Negative number style
+- Zero display
+- Prefix and postfix
+
+If the object is linked to Excel, the Excel format is the default starting point, but this rule can override it in Grunt.
+
+## Fill rule
+
+Use Fill when you want to color cells, chart artifacts, or graphics inside a Grunt object.
+
+The legacy support article notes that Fill can target:
+
+- Visual Grid cells
+- Shapes inside Visual Grid cells
+- Icons inside Visual Grid cells
+- Chart artifacts such as bars, lines, and funnels
+
+Key settings:
+
+- **Color**
+- **Blending mode**
+
+Use the Font rule for text color. Use Fill for the object background or graphic fill.
+
+## Border rule
+
+Use Border when the edge of a cell or graphic should communicate structure.
+
+Typical uses:
+
+- Separate header rows from content
+- Add emphasis around selected data
+- Create table-like framing without native PowerPoint borders
+
+Common settings are border color, thickness, and which edges should be shown. This description is inferred from the legacy rule catalog and adjacent Grunt rule behavior.
+
+## Text rotation rule
+
+Use Text rotation when labels need a different reading direction, such as narrow headers or compact side labels.
+
+Typical use cases:
+
+- Rotated column headers
+- Vertical labels in dense tables
+- Compact text inside chart-style layouts
+
+This rule is best used sparingly because aggressive rotation can reduce readability. This summary is inferred from the legacy rule catalog and surrounding layout guidance.
+
+## When to combine these rules
+
+These rules often work best together:
+
+- **Font** for character emphasis
+- **Paragraph style** for bullets, spacing, and indentation
+- **Number format** for numeric readability
+- **Fill** and **Border** for visual grouping
+- **Text rotation** for space-constrained labels
+
+For alignment, margin, merge, and size behavior, continue to [Layout and structure rules](/powerpoint-add-in/user/rules-layout-and-structure).

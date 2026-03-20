@@ -1,0 +1,60 @@
+---
+title: "Windows installation"
+description: "Install Grunt on Windows with either the default per-user model or managed per-machine deployment"
+---
+
+This page expands the Windows-specific details from the legacy support installer article.
+
+## Recommended baseline
+
+The legacy guidance recommends:
+
+- Windows 10 or Windows 11
+- PowerPoint 2016 or later
+- The standard `x64` package unless you are on a legacy 32-bit setup
+
+Download the installer from [app.grunt.pro/download](https://app.grunt.pro/download).
+
+## Default installation
+
+The default install writes Grunt to:
+
+```text
+C:\Users\<username>\AppData\Local\Programs\Grunt\
+```
+
+Key characteristics:
+
+- Per-user installation
+- No admin rights in most environments
+- Registry changes under `HKEY_CURRENT_USER`
+- Auto-updates on by default unless disabled for the organization
+
+This is the recommended mode for most users.
+
+## Command-line installation
+
+For controlled environments, the legacy support article documents per-machine installation through MSI flags:
+
+```bash
+msiexec /i grunt-<version>-x64.msi MSIINSTALLPERUSER=0 /qn
+```
+
+This installs Grunt to:
+
+```text
+C:\Program Files\Grunt
+```
+
+Key characteristics:
+
+- Requires admin rights
+- Per-machine installation
+- Registry changes under `HKEY_LOCAL_MACHINE`
+- Auto-updates disabled by design
+
+## Software deployment systems
+
+The same per-machine model is intended for SCCM, Intune, and similar systems.
+
+Use [Update management](/powerpoint-add-in/it/update-management) if you also need rollout and release-channel guidance.

@@ -1,0 +1,52 @@
+---
+title: "Outlook send issues"
+description: "Fix Grunt Send behavior when Windows uses new Outlook and attachment handoff fails"
+---
+
+Grunt's **Send** feature relies on the Windows mail handoff used by Outlook. The legacy support guidance notes a specific limitation in **Outlook (new)** on Windows.
+
+## What the problem looks like
+
+When you use **Send** in Grunt:
+
+- An email draft appears to be generated
+- The attachment may be present
+- The recipient never receives the email
+- The email does not appear in **Sent Items**
+- No clear error message is shown
+
+## Why it happens
+
+According to the legacy support article, **Outlook (new)** does not support the same attachment-based email generation flow that Grunt depends on.
+
+Windows therefore needs the fallback path through **Outlook (classic)** for attachment-based sends.
+
+## Fix on Windows 10
+
+1. Open **Outlook (classic)** once.
+2. Close it again.
+3. Open **Settings** > **Apps** > **Default apps** > **Choose default apps by protocol**.
+4. Find `MAILTO`.
+5. If it currently points to **Outlook (new)**, switch it to **Outlook (classic)**.
+6. Then switch it back to **Outlook (new)**.
+
+This repair step helps Windows restore the correct fallback behavior.
+
+## Fix on Windows 11
+
+1. Open **Outlook (classic)** once.
+2. Close it again.
+3. Open **Settings** > **Apps** > **Default apps**.
+4. Search for `MAILTO`.
+5. Open the `URL:MailTo Protocol` entry.
+6. If it currently points to **Outlook (new)**, switch it to **Outlook (classic)**.
+7. Then switch it back to **Outlook (new)**.
+
+## Expected result
+
+After this change:
+
+- Emails with attachments created by Grunt should open through **Outlook (classic)**
+- Regular mail links without attachments can still open in **Outlook (new)**
+
+If email handoff is still blocked in your environment, export the file manually and attach it yourself from Outlook.
