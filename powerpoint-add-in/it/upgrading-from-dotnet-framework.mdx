@@ -1,0 +1,121 @@
+---
+title: "Upgrading from .NET Framework"
+description: "What changes when moving from the .NET Framework 4.7.2 VSTO add-in to the .NET 9 COM add-in"
+---
+
+This page covers what IT administrators need to know when upgrading from the previous Grunt PowerPoint add-in (built on .NET Framework 4.7.2 with VSTO) to the current release (built on .NET 9 as a native COM add-in).
+
+## What changed
+
+| Area | Previous (.NET Framework 4.7.2) | Current (.NET 9) |
+|------|---------------------------------|-------------------|
+| **Add-in type** | VSTO add-in | COM add-in |
+| **Runtime dependencies** | .NET Framework 4.7.2 + VSTO Runtime | Self-contained (no external runtime) |
+| **Primary binary** | `Altua.Grunt.PowerPoint.dll` + `.vsto` manifest | `Grunt.PowerPoint.ComAddinNE.dll` |
+| **Architecture** | x64 and x86 | x64 and arm64 |
+| **Add-in ProgID** | `Grunt` | `Grunt` |
+| **Add-in FriendlyName** | `Grunt` | `Grunt (.NET 9)` |
+
+## Runtime prerequisites removed
+
+The previous version required the VSTO Runtime and .NET Framework 4.7.2 to be installed on each machine. The current release is **self-contained** — the .NET 9 runtime is bundled inside the installer. No separate runtime installation is needed.
+
+If your deployment process included a step to install the VSTO Runtime or .NET Framework as a prerequisite, that step can be removed.
+
+## Registry changes
+
+### Add-in registration
+
+The PowerPoint add-in registration path remains the same:
+
+```text
+Software\Microsoft\Office\PowerPoint\AddIns\Grunt
+```
+
+However, the keys have changed:
+
+| Key | Previous value | Current value |
+|-----|----------------|---------------|
+| `FriendlyName` | `Grunt` | `Grunt (.NET 9)` |
+| `Description` | `Data binding` | `grunt.pro` |
+| `LoadBehavior` | `3` | `3` |
+| `Manifest` | `<path>\Altua.Grunt.PowerPoint.vsto\|vstolocal` | *(removed)* |
+
+The `Manifest` key pointed to the VSTO manifest and is no longer used. The COM add-in is located through CLSID registration instead.
+
+### VSTO security entries removed
+
+The previous version wrote VSTO trust entries under:
+
+```text
+Software\Microsoft\VSTO\Security\Inclusion\{3c27e410-2cf0-479b-b8ff-fce807e39615}
+```
+
+These entries are no longer created. If you have Group Policy or scripts that manage VSTO trust entries for Grunt, they can be retired.
+
+### COM class registration added
+
+The current version registers a COM class so PowerPoint can load the add-in:
+
+```text
+Software\Classes\CLSID\{AAF65EB4-AFBA-4B65-98AD-381C670B6461}
+Software\Classes\CLSID\{AAF65EB4-AFBA-4B65-98AD-381C670B6461}\InprocServer32
+Software\Classes\CLSID\{AAF65EB4-AFBA-4B65-98AD-381C670B6461}\ProgID
+Software\Classes\Grunt
+Software\Classes\Grunt\CLSID
+```
+
+These are created automatically by the MSI installer.
+
+### Grunt metadata key added
+
+A new registry key stores add-in metadata:
+
+```text
+Software\Grunt
+    architecture = <x64 or arm64>
+    Version      = <semantic version>
+    Revision     = <revision identifier>
+    content      = <content directory path>
+    variant      = <variant>
+    ClientId     = <client identifier>
+```
+
+## VSTO trust manager fix no longer needed
+
+The previous VSTO version sometimes required a registry fix at:
+
+```text
+HKEY_LOCAL_MACHINE\SOFTWARE\MICROSOFT\.NETFramework\Security\TrustManager\PromptingLevel
+```
+
+This is no longer relevant. If your deployment includes this fix specifically for Grunt, it can be removed.
+
+## 32-bit support dropped
+
+The previous version shipped both `x64` and `x86` installers. The current version ships `x64` and `arm64` only. Organizations still running 32-bit Office should upgrade to 64-bit Office before deploying the new Grunt version.
+
+## Upgrade path
+
+The MSI installer handles the upgrade in place. No manual uninstall of the previous version is needed — the installer detects the existing installation and upgrades it.
+
+For managed deployments:
+
+1. Download the new MSI from [app.grunt.pro/download](https://app.grunt.pro/download).
+2. Deploy it through your existing software distribution tooling (Intune, SCCM, etc.) using the same flags as before.
+3. The installer will remove the old VSTO-based version and install the new COM add-in.
+4. Validate by opening PowerPoint and confirming the **Grunt** tab appears.
+
+For per-user installs, auto-update will handle the upgrade automatically if enabled.
+
+## Endpoint protection
+
+If your endpoint protection allowlist references the old binary name (`Altua.Grunt.PowerPoint.dll`), update it to the new binary:
+
+- `Grunt.PowerPoint.ComAddinNE.dll`
+
+See [Network and security](/powerpoint-add-in/it/network-and-security) for the full list of paths.
+
+## COM add-in policy
+
+If your organization uses Office Group Policy to manage COM add-ins, ensure the Grunt ProgID (`Grunt`) or CLSID (`{AAF65EB4-AFBA-4B65-98AD-381C670B6461}`) is allowed. The previous VSTO-based add-in did not require COM add-in policy configuration.

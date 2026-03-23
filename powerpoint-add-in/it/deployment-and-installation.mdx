@@ -5,6 +5,10 @@ description: "Deploy the Grunt PowerPoint add-in with the right install model fo
 
 Use this guide when you deploy Grunt in a managed environment.
 
+<Info>
+Starting with the 2025 release, Grunt ships as a self-contained .NET 9 COM add-in. It no longer requires the VSTO Runtime or .NET Framework on the target machine. If you are upgrading from the previous .NET Framework 4.7.2 version, see [Upgrading from .NET Framework](/powerpoint-add-in/it/upgrading-from-dotnet-framework) for migration details.
+</Info>
+
 ## Installation models
 
 Grunt supports two main Windows deployment models:
@@ -16,11 +20,9 @@ The default per-user install is the standard choice for most users and organizat
 
 ## Recommended baseline
 
-Legacy support guidance recommends:
-
 - Windows 10 or Windows 11
-- PowerPoint 2016 or later
-- The default `x64` installer unless you specifically need a 32-bit package for a legacy system
+- PowerPoint 2016 or later (Microsoft 365 recommended)
+- The default `x64` installer for most environments, or `arm64` for Windows on ARM devices
 
 ## Default per-user installation
 
@@ -34,7 +36,7 @@ This mode:
 
 - Writes user-level registry entries under `HKEY_CURRENT_USER`
 - Does not normally require elevated privileges
-- Registers the Grunt add-in with PowerPoint
+- Registers the Grunt COM add-in with PowerPoint
 - Enables automatic updates by default unless your organization disables them centrally
 
 ## Command-line installation
@@ -64,12 +66,18 @@ This mode:
 
 You can deploy Grunt with common software distribution platforms such as Intune, SCCM, or similar tooling. These rollouts normally use the per-machine model above.
 
+## Prerequisites
+
+Grunt is self-contained and bundles its own .NET runtime. There are no external runtime prerequisites to install on the target machine.
+
+Previous versions required the VSTO Runtime and .NET Framework 4.7.2. These are no longer needed for the current release.
+
 ## Common blockers
 
 If deployment fails during install or first launch:
 
 - Check whether Office add-ins are blocked by policy.
-- Check whether endpoint protection is blocking Grunt binaries.
+- Check whether endpoint protection is blocking Grunt binaries. The primary binary to allowlist is `Grunt.PowerPoint.ComAddinNE.dll` in the Grunt install directory.
 - If Windows reports a certificate trust issue, install the signer certificate into **Trusted Publishers** or incorporate that trust step into your deployment process.
 
 ## Validate deployment

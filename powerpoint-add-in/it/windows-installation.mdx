@@ -3,15 +3,17 @@ title: "Windows installation"
 description: "Install Grunt on Windows with either the default per-user model or managed per-machine deployment"
 ---
 
-This page expands the Windows-specific details from the legacy support installer article.
+This page covers the Windows-specific installation details for the current .NET 9 release.
+
+<Info>
+Grunt is self-contained and no longer requires the VSTO Runtime or .NET Framework on the target machine. If you are upgrading from the .NET Framework 4.7.2 version, see [Upgrading from .NET Framework](/powerpoint-add-in/it/upgrading-from-dotnet-framework).
+</Info>
 
 ## Recommended baseline
 
-The legacy guidance recommends:
-
 - Windows 10 or Windows 11
-- PowerPoint 2016 or later
-- The standard `x64` package unless you are on a legacy 32-bit setup
+- PowerPoint 2016 or later (Microsoft 365 recommended)
+- The standard `x64` package, or `arm64` for Windows on ARM
 
 Download the installer from [app.grunt.pro/download](https://app.grunt.pro/download).
 
@@ -34,7 +36,7 @@ This is the recommended mode for most users.
 
 ## Command-line installation
 
-For controlled environments, the legacy support article documents per-machine installation through MSI flags:
+For controlled environments, use per-machine installation through MSI flags:
 
 ```bash
 msiexec /i grunt-<version>-x64.msi MSIINSTALLPERUSER=0 /qn
@@ -52,6 +54,55 @@ Key characteristics:
 - Per-machine installation
 - Registry changes under `HKEY_LOCAL_MACHINE`
 - Auto-updates disabled by design
+
+## Registry entries
+
+The installer writes the following registry entries. The root is `HKEY_CURRENT_USER` for per-user installs and `HKEY_LOCAL_MACHINE` for per-machine installs.
+
+### PowerPoint add-in registration
+
+```text
+Software\Microsoft\Office\PowerPoint\AddIns\Grunt
+    FriendlyName = "Grunt (.NET 9)"
+    Description  = "grunt.pro"
+    LoadBehavior = 3
+```
+
+### COM class registration
+
+```text
+Software\Classes\CLSID\{AAF65EB4-AFBA-4B65-98AD-381C670B6461}
+    (Default) = "Grunt.PowerPoint.ComAddin.GruntComAddin"
+
+Software\Classes\CLSID\{AAF65EB4-AFBA-4B65-98AD-381C670B6461}\InprocServer32
+    (Default)        = <install path>\Grunt.PowerPoint.ComAddinNE.dll
+    ThreadingModel   = "Both"
+
+Software\Classes\CLSID\{AAF65EB4-AFBA-4B65-98AD-381C670B6461}\ProgID
+    (Default) = "Grunt"
+
+Software\Classes\Grunt
+    (Default) = "Grunt.PowerPoint.ComAddin.GruntComAddin"
+
+Software\Classes\Grunt\CLSID
+    (Default) = "{AAF65EB4-AFBA-4B65-98AD-381C670B6461}"
+```
+
+### Grunt metadata
+
+```text
+Software\Grunt
+    architecture = <x64 or arm64>
+    Version      = <semantic version>
+    Revision     = <revision identifier>
+    content      = <content directory path>
+    variant      = <variant>
+    ClientId     = <client identifier>
+```
+
+<Info>
+On 64-bit systems, the installer also mirrors the registry entries under `Software\Wow6432Node\` for compatibility with 32-bit Office.
+</Info>
 
 ## Software deployment systems
 

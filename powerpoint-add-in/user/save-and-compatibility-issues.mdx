@@ -3,16 +3,17 @@ title: "Save and compatibility issues"
 description: "Check Office and Grunt architecture alignment when save errors or instability appear"
 ---
 
-If PowerPoint shows a save error while Grunt is installed, one possible cause from the legacy support guidance is an architecture mismatch between Microsoft Office and the Grunt add-in.
+If PowerPoint shows a save error while Grunt is installed, one possible cause is an architecture mismatch between Microsoft Office and the Grunt add-in.
 
 ## Why architecture matters
 
-If Office is `32-bit` and Grunt is `64-bit`, or the other way around, you can see:
+The current Grunt release ships as a 64-bit (`x64`) COM add-in, with an `arm64` variant for Windows on ARM. Grunt does not ship a 32-bit build. If your Office installation is 32-bit, the Grunt add-in will not load.
 
+Symptoms of a mismatch include:
+
+- Grunt tab missing
 - Save failures
-- Crashes
-- Unexpected behavior
-- Lower stability
+- Crashes or unexpected behavior
 
 ## Check your Office architecture
 
@@ -21,22 +22,13 @@ If Office is `32-bit` and Grunt is `64-bit`, or the other way around, you can se
 3. Choose **Account**.
 4. Look under **Product Information** to confirm whether Office is `32-bit` or `64-bit`.
 
-## Check your Grunt architecture
-
-1. Open the **Grunt** tab.
-2. Open **Settings**.
-3. Open the information icon at the bottom of the settings view.
-4. Check whether the Grunt add-in is `32-bit` or `64-bit`.
-
 ## Fix the mismatch
 
-If the architectures do not match:
+If Office is 32-bit, upgrade Office to 64-bit. Microsoft 365 installs are 64-bit by default. If your organization controls Office deployment, ask IT to switch to the 64-bit channel.
 
-1. Download the correct Grunt installer from [app.grunt.pro/download](https://app.grunt.pro/download).
-2. Install the matching build.
-3. Restart PowerPoint.
+If you are on a Windows on ARM device, use the `arm64` Grunt installer from [app.grunt.pro/download](https://app.grunt.pro/download).
 
-If your organization controls deployment centrally, ask IT to distribute the matching package instead.
+If your organization controls deployment centrally, ask IT to distribute the matching package.
 
 ## Related pages
 

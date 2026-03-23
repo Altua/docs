@@ -44,15 +44,15 @@ If Windows reports a certificate issue during install or first launch:
 4. Install the certificate into **Trusted Publishers** for the current user.
 5. Retry the install or restart PowerPoint.
 
-If Windows blocks Office add-ins entirely, ask IT to enable add-in trust. The legacy support fix updates the `MyComputer` value under `HKEY_LOCAL_MACHINE\SOFTWARE\MICROSOFT\.NETFramework\Security\TrustManager\PromptingLevel`.
+If Office Group Policy blocks COM add-ins, ask IT to ensure the Grunt add-in is not on the block list.
 
 ## Security software blocks Grunt
 
 Some environments block Grunt files during installation or startup.
 
-If IT needs targeted Windows Defender exclusions for the default per-user install, the legacy support guidance lists these files:
+If IT needs targeted Windows Defender exclusions for the default per-user install:
 
-- `%USERPROFILE%\AppData\Local\Programs\Grunt\Altua.Grunt.PowerPoint.dll`
+- `%USERPROFILE%\AppData\Local\Programs\Grunt\<version>\PowerPoint\Grunt.PowerPoint.ComAddinNE.dll`
 - `%USERPROFILE%\AppData\Local\Programs\Grunt\Updates\bin\Grunt.PowerPoint.Runner.exe`
 - `%USERPROFILE%\AppData\Local\Programs\Grunt\Updates\bin\Grunt.PowerPoint.Updater.exe`
 - `%USERPROFILE%\AppData\Local\Programs\Grunt\Updates\bin\Grunt.PowerPoint.Restarter.exe`

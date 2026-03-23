@@ -24,9 +24,9 @@ When troubleshooting blocked license checks, sign-in, templates, or updates, sta
 
 Some endpoint security tools can block Grunt binaries during installation or startup.
 
-For the default per-user install, the legacy support guidance recommends these Windows Defender exclusions:
+For the default per-user install, consider adding Windows Defender exclusions for the main Grunt binaries:
 
-- `%USERPROFILE%\AppData\Local\Programs\Grunt\Altua.Grunt.PowerPoint.dll`
+- `%USERPROFILE%\AppData\Local\Programs\Grunt\<version>\PowerPoint\Grunt.PowerPoint.ComAddinNE.dll`
 - `%USERPROFILE%\AppData\Local\Programs\Grunt\Updates\bin\Grunt.PowerPoint.Runner.exe`
 - `%USERPROFILE%\AppData\Local\Programs\Grunt\Updates\bin\Grunt.PowerPoint.Updater.exe`
 - `%USERPROFILE%\AppData\Local\Programs\Grunt\Updates\bin\Grunt.PowerPoint.Restarter.exe`
@@ -39,10 +39,8 @@ Apply exclusions narrowly and only after internal security review.
 
 ## Office add-in trust and certificates
 
-If Windows blocks Office add-ins entirely, the legacy support fix updates the `MyComputer` value under:
-
-```text
-HKEY_LOCAL_MACHINE\SOFTWARE\MICROSOFT\.NETFramework\Security\TrustManager\PromptingLevel
-```
+Grunt registers as a COM add-in and does not use VSTO manifests. The previous VSTO-era fix for `HKEY_LOCAL_MACHINE\SOFTWARE\MICROSOFT\.NETFramework\Security\TrustManager\PromptingLevel` is no longer relevant for the current .NET 9 release.
 
 If install or first startup fails because the Grunt certificate is not trusted, import the installer's signer certificate for **Altua As** into **Trusted Publishers** for the affected user or machine.
+
+If Office Group Policy blocks COM add-ins, ensure the Grunt ProgID (`Grunt`) or CLSID (`{AAF65EB4-AFBA-4B65-98AD-381C670B6461}`) is not on the block list.
