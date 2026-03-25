@@ -1,0 +1,43 @@
+---
+title: "Enable cloud templates for an organization"
+description: "Steps to enable cloud templates for a customer organization"
+---
+
+This guide covers how to enable cloud templates for a customer organization. Cloud templates allow customers to manage and distribute PowerPoint templates centrally through Grunt.
+
+## Prerequisites
+
+- Admin access to the [backoffice](https://www.altua.no/admin)
+- The name of the customer organization
+- A designated template admin (email address)
+- A name for the initial template collection
+
+## Steps
+
+<Steps>
+  <Step title="Navigate to the organization">
+    Go to the [backoffice](https://www.altua.no/admin) and navigate to the customer's organization.
+  </Step>
+  <Step title="Open the subscription menu">
+    On the organization page, find the **subscription card** and click the **three-dot menu** (⋮) in the top-right corner of the card.
+  </Step>
+  <Step title="Select Enable cloud templates">
+    From the dropdown menu, select **Enable cloud templates**. This will open a new page for configuring the cloud template setup.
+
+    <Warning>
+      The cloud template configuration site currently uses an Azure domain as its certificate common name, which causes a certificate warning in Chrome. You will need to click **Advanced** and then **Proceed to site** (or equivalent) to continue.
+    </Warning>
+  </Step>
+  <Step title="Configure the cloud template setup">
+    On the cloud template configuration page, fill in the following:
+
+    1. **Collection name** — Enter a name for the first template collection (e.g. the customer's company name or department).
+    2. **Template admin** — Set the template admin by entering the email address of the person who will manage the templates.
+    3. Click **Enable** to complete the setup.
+  </Step>
+</Steps>
+
+## Troubleshooting
+
+- **Certificate warning when opening the configuration page** — This is expected. The site currently uses an Azure domain certificate. Click through the browser warning to proceed.
+- **Enable cloud templates option not visible** — Make sure you are clicking the three-dot menu on the subscription card specifically, not elsewhere on the page.

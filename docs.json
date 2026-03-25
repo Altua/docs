@@ -137,7 +137,8 @@
                 "group": "Guides",
                 "pages": [
                   "internal/index",
-                  "internal/enable-sso"
+                  "internal/enable-sso",
+                  "internal/enable-cloud-templates"
                 ]
               }
             ]
