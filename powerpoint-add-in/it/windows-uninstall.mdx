@@ -1,0 +1,80 @@
+---
+title: "Windows uninstall"
+description: "Silently uninstall Grunt from Windows in managed environments, regardless of the installed version"
+---
+
+This page covers how to silently remove Grunt from Windows machines in managed deployment scenarios such as Intune or SCCM.
+
+## The version mismatch problem
+
+The standard MSI uninstall command requires the exact MSI file that was used to install Grunt:
+
+```bash
+msiexec /x grunt-<version>-x64.msi /qn
+```
+
+This works only as long as the installed version matches the MSI file. If a user updates Grunt through the built-in updater, the installed `ProductCode` changes and the uninstall command for the old version no longer matches. The result is a silent failure — the uninstall exits without removing anything.
+
+## Version-independent uninstall using UpgradeCode
+
+The reliable approach is to look up the currently installed Grunt package by its `UpgradeCode` and uninstall the matching `ProductCode`. The `UpgradeCode` stays the same across all Grunt versions, so this method works regardless of which version the user is running.
+
+### Grunt UpgradeCode
+
+| Architecture | UpgradeCode |
+| ------------ | ----------- |
+| x64          | `{E98C1BF9-9AF8-47CF-940B-14F8937CED83}` |
+
+### PowerShell script
+
+The following script finds and uninstalls the installed Grunt package using the Windows Installer COM object:
+
+```powershell
+$upgradeCode = "{E98C1BF9-9AF8-47CF-940B-14F8937CED83}"
+$installer = New-Object -ComObject WindowsInstaller.Installer
+$relatedProducts = @($installer.RelatedProducts($upgradeCode))
+
+foreach ($productCode in $relatedProducts) {
+    Start-Process "msiexec.exe" -ArgumentList "/x $productCode /qn REBOOT=ReallySuppress" -Wait
+}
+```
+
+This script:
+
+1. Queries the Windows Installer database for any product registered under the Grunt `UpgradeCode`
+2. Retrieves the `ProductCode` of the installed version
+3. Runs `msiexec /x` against that `ProductCode` to perform a silent uninstall
+
+<Info>
+Because Grunt uses a per-user installation model by default, this script must run in the **user context**. If you are using PSADT, use `Execute-ProcessAsUser` (v3) or `Start-ADTMsiProcessAsUser` (v4) to run the uninstall as the logged-in user.
+</Info>
+
+### PSADT v3 example
+
+```powershell
+# Save the script to a temporary location
+$uninstallScript = @'
+$upgradeCode = "{E98C1BF9-9AF8-47CF-940B-14F8937CED83}"
+$installer = New-Object -ComObject WindowsInstaller.Installer
+$relatedProducts = @($installer.RelatedProducts($upgradeCode))
+foreach ($productCode in $relatedProducts) {
+    Start-Process "msiexec.exe" -ArgumentList "/x $productCode /qn REBOOT=ReallySuppress" -Wait
+}
+'@
+
+$scriptPath = "$envProgramData\Grunt_Uninstall\Uninstall-Grunt.ps1"
+New-Item -Path (Split-Path $scriptPath) -ItemType Directory -Force
+$uninstallScript | Set-Content -Path $scriptPath -Force
+
+Execute-ProcessAsUser -Path "powershell.exe" -Parameters "-ExecutionPolicy Bypass -File `"$scriptPath`"" -Wait
+
+Remove-Folder -Path "$envProgramData\Grunt_Uninstall\"
+```
+
+## Why not uninstall by MSI file
+
+Uninstalling with `msiexec /x <file>.msi` ties the uninstall to a specific Grunt version. If the user has updated Grunt since the original deployment, the MSI file no longer matches the installed product and the uninstall silently fails. The `UpgradeCode` approach avoids this by dynamically resolving the correct `ProductCode` at uninstall time.
+
+## Manual uninstall
+
+Users can always remove Grunt through **Settings > Apps > Installed apps** (Windows 11) or **Control Panel > Programs and Features** (Windows 10). This works regardless of version because Windows resolves the correct uninstaller automatically.
