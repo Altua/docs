@@ -1,0 +1,41 @@
+---
+title: "Enable SSO for an organization"
+description: "Steps to enable Microsoft Entra single sign-on for a customer organization"
+---
+
+This guide covers how to enable Microsoft Entra ID (formerly Azure AD) single sign-on for a customer organization.
+
+Once enabled, users whose email domain matches the organization's configured domain will be redirected to Microsoft Entra SSO when signing in, instead of using the standard email validation flow.
+
+## Prerequisites
+
+- Admin access to the backoffice solution
+- The customer's email domain (e.g. `example.com`)
+
+## Steps
+
+<Steps>
+  <Step title="Set the organization domain">
+    In the backoffice solution, open the customer's organization and fill in the **Domain** field with the customer's email domain (e.g. `example.com`).
+
+    This is the domain that will be matched against the user's email address during sign-in.
+  </Step>
+  <Step title="Enable the MicrosoftSignIn feature flag">
+    In the backoffice solution, navigate to the organization's feature flags. Add and enable the **MicrosoftSignIn** feature flag.
+  </Step>
+</Steps>
+
+## How it works
+
+After both steps are completed:
+
+1. A user opens Grunt and enters their email address.
+2. Grunt checks the domain of the email address against organizations with SSO enabled.
+3. If the domain matches, the user is redirected to Microsoft Entra SSO instead of the standard email validation.
+4. After successful authentication with Entra, the user is signed in to Grunt.
+
+## Troubleshooting
+
+- **SSO not triggering** — Verify that the domain field is filled in correctly and matches the user's email domain exactly. Confirm the MicrosoftSignIn feature flag is enabled.
+- **User gets standard sign-in instead of SSO** — The email domain may not match. Double-check the domain configured for the organization.
+- **Authentication fails at Microsoft** — This is on the customer's Entra ID side. Ask the customer's IT department to verify their Entra configuration.

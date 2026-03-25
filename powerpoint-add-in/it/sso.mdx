@@ -1,0 +1,31 @@
+---
+title: "Single sign-on (SSO)"
+description: "Sign in to Grunt using your organization's Microsoft Entra ID"
+---
+
+Grunt supports single sign-on (SSO) through Microsoft Entra ID (formerly Azure AD). When SSO is enabled for your organization, users sign in to Grunt with their existing Microsoft credentials instead of using email-based validation.
+
+## How it works
+
+When a user enters their email address in Grunt, the domain is checked against organizations with SSO enabled. If the domain matches, the user is redirected to Microsoft Entra ID to authenticate. After successful authentication, the user is signed in to Grunt automatically.
+
+This means users benefit from:
+
+- **Existing credentials** — no separate Grunt password or email validation needed
+- **Conditional access policies** — your organization's Entra policies (MFA, device compliance, etc.) apply to Grunt sign-in
+- **Centralized access control** — manage Grunt access alongside your other enterprise applications
+
+## Requirements
+
+- A Microsoft Entra ID tenant
+- Your organization's email domain must be configured for SSO by Grunt
+
+## Getting started
+
+To enable SSO for your organization, contact your Grunt account representative or reach out to [support](mailto:support@grunt.pro). The Grunt team will configure SSO for your organization's domain.
+
+Once enabled, no additional setup is needed on your end. Users in your organization will automatically be redirected to Microsoft Entra SSO when they sign in with an email address matching your domain.
+
+## Network considerations
+
+SSO authentication requires access to Microsoft Entra ID endpoints in addition to the standard [Grunt endpoints](/powerpoint-add-in/it/network-and-security). Ensure your network allows outbound HTTPS access to Microsoft login services (e.g. `login.microsoftonline.com`).
