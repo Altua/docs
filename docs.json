@@ -138,7 +138,8 @@
                 "pages": [
                   "internal/index",
                   "internal/enable-sso",
-                  "internal/enable-cloud-templates"
+                  "internal/enable-cloud-templates",
+                  "internal/collect-fusion-log"
                 ]
               }
             ]

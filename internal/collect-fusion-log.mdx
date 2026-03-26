@@ -1,0 +1,53 @@
+---
+title: "Collect a Fusion++ assembly binding log"
+description: "Ask an IT department to capture assembly binding failures using Fusion++ and send the log"
+---
+
+When a customer reports issues that may be caused by assembly binding failures (e.g. Grunt crashing on launch or failing to load in PowerPoint), ask the IT contact to capture a Fusion++ log using the steps below.
+
+You can copy and paste these instructions directly into your reply.
+
+<Warning>
+This documentation is for internal use only. Do not link to this page from public-facing documentation.
+</Warning>
+
+---
+
+## Instructions to send to the customer
+
+**Step 1 — Download Fusion++**
+
+Download Fusion++ from the following link: [Fusion++ v1.5](https://github.com/awaescher/Fusion/releases/download/v1.5/Fusion++.1.5.zip)
+
+**Step 2 — Unzip the file**
+
+1. Locate **Fusion++.1.5.zip** in your Downloads folder.
+2. Right-click the ZIP file and select **Extract All…** (or use your preferred unzip tool).
+3. Extract it to a location you can easily find, such as your Desktop.
+
+**Step 3 — Run Fusion++**
+
+1. Open the extracted folder.
+2. Double-click **Fusion++** (it may appear as `Fusion++.exe` depending on your settings) to launch the tool.
+
+**Step 4 — Start recording**
+
+1. In the top-left corner of Fusion++, click the **Record** button (red circle icon).
+2. While recording is active, open PowerPoint and reproduce the issue with Grunt (for example, trigger the crash or bug).
+
+**Step 5 — Stop recording**
+
+1. When the issue has occurred, go back to Fusion++.
+2. Click the **Stop** button (square icon in the top-left corner).
+3. Fusion++ should now display a list of recorded events.
+
+**Step 6 — Locate the log folder**
+
+1. Below the Record button, find the dropdown labelled **Recent sessions**.
+2. Click it and choose **Show in Windows Explorer**.
+
+**Step 7 — Send the log**
+
+1. A folder with a long name (date and timestamp) will open.
+2. Right-click the folder and choose **Send to → Compressed (zipped) folder**.
+3. Send the resulting `.zip` file back to us via email or through your support channel.
