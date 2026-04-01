@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 360" font-family="Segoe UI, system-ui, sans-serif">
+  <!-- Background -->
+  <rect width="520" height="360" rx="8" fill="#f8fafc"/>
+
+  <!-- Arrow markers -->
+  <defs>
+    <marker id="arrowRed" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <polygon points="0,0 8,3 0,6" fill="#e76f51"/>
+    </marker>
+    <marker id="arrowRedDown" markerWidth="6" markerHeight="8" refX="3" refY="8" orient="auto">
+      <polygon points="0,0 3,8 6,0" fill="#e76f51"/>
+    </marker>
+  </defs>
+
+  <!-- Chart/plot area (matches bounds exactly) -->
+  <rect x="110" y="55" width="340" height="225" rx="2" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+
+  <!-- Bounds rectangle (drawn on top so dashes aren't clipped) -->
+  <rect x="110" y="55" width="340" height="225" rx="4" fill="none" stroke="#2a9d8f" stroke-width="2" stroke-dasharray="8 4"/>
+
+  <!-- Dimension arrows for bounds -->
+  <line x1="110" y1="38" x2="450" y2="38" stroke="#2a9d8f" stroke-width="1"/>
+  <polygon points="110,38 118,34 118,42" fill="#2a9d8f"/>
+  <polygon points="450,38 442,34 442,42" fill="#2a9d8f"/>
+  <text x="280" y="34" text-anchor="middle" font-size="11" fill="#2a9d8f" font-weight="600">Bounds = chart area</text>
+
+  <!-- Grid lines -->
+  <line x1="110" y1="111" x2="450" y2="111" stroke="#f1f5f9" stroke-width="1"/>
+  <line x1="110" y1="167" x2="450" y2="167" stroke="#f1f5f9" stroke-width="1"/>
+  <line x1="110" y1="223" x2="450" y2="223" stroke="#f1f5f9" stroke-width="1"/>
+
+  <!-- Bars (no corner radius) -->
+  <rect x="140" y="100" width="55" height="180" fill="#264653"/>
+  <rect x="215" y="145" width="55" height="135" fill="#264653"/>
+  <rect x="290" y="170" width="55" height="110" fill="#264653"/>
+  <rect x="365" y="125" width="55" height="155" fill="#264653"/>
+
+  <!-- Y-axis labels (OUTSIDE bounds, to the left) -->
+  <text x="100" y="62" text-anchor="end" font-size="11" fill="#64748b">100</text>
+  <text x="100" y="118" text-anchor="end" font-size="11" fill="#64748b">75</text>
+  <text x="100" y="174" text-anchor="end" font-size="11" fill="#64748b">50</text>
+  <text x="100" y="230" text-anchor="end" font-size="11" fill="#64748b">25</text>
+  <text x="100" y="283" text-anchor="end" font-size="11" fill="#64748b">0</text>
+
+  <!-- X-axis labels (OUTSIDE bounds, below) -->
+  <text x="167" y="300" text-anchor="middle" font-size="11" fill="#64748b">Q1</text>
+  <text x="242" y="300" text-anchor="middle" font-size="11" fill="#64748b">Q2</text>
+  <text x="317" y="300" text-anchor="middle" font-size="11" fill="#64748b">Q3</text>
+  <text x="392" y="300" text-anchor="middle" font-size="11" fill="#64748b">Q4</text>
+
+  <!-- Arrows showing labels extend outside -->
+  <line x1="105" y1="100" x2="72" y2="100" stroke="#e76f51" stroke-width="1.5"/>
+  <polygon points="64,100 72,97 72,103" fill="#e76f51"/>
+  <line x1="205" y1="284" x2="205" y2="304" stroke="#e76f51" stroke-width="1.5"/>
+  <polygon points="205,312 202,304 208,304" fill="#e76f51"/>
+
+  <!-- "Extends outside" label -->
+  <text x="170" y="330" font-size="10" fill="#e76f51">Labels extend</text>
+  <text x="170" y="343" font-size="10" fill="#e76f51">outside bounds</text>
+</svg>

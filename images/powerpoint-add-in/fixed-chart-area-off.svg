@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 320" font-family="Segoe UI, system-ui, sans-serif">
+  <!-- Background -->
+  <rect width="520" height="320" rx="8" fill="#f8fafc"/>
+
+  <!-- Bounds rectangle -->
+  <rect x="60" y="30" width="400" height="280" rx="4" fill="none" stroke="#2a9d8f" stroke-width="2" stroke-dasharray="8 4"/>
+
+  <!-- Dimension arrows for bounds -->
+  <line x1="60" y1="14" x2="460" y2="14" stroke="#2a9d8f" stroke-width="1"/>
+  <polygon points="60,14 68,10 68,18" fill="#2a9d8f"/>
+  <polygon points="460,14 452,10 452,18" fill="#2a9d8f"/>
+  <text x="260" y="11" text-anchor="middle" font-size="11" fill="#2a9d8f">Bounds</text>
+
+  <!-- Y-axis labels (inside bounds) -->
+  <text x="100" y="62" text-anchor="end" font-size="11" fill="#64748b">100</text>
+  <text x="100" y="118" text-anchor="end" font-size="11" fill="#64748b">75</text>
+  <text x="100" y="174" text-anchor="end" font-size="11" fill="#64748b">50</text>
+  <text x="100" y="230" text-anchor="end" font-size="11" fill="#64748b">25</text>
+  <text x="100" y="283" text-anchor="end" font-size="11" fill="#64748b">0</text>
+
+  <!-- Chart/plot area (smaller, inside bounds) -->
+  <rect x="110" y="55" width="340" height="225" rx="2" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+
+  <!-- Grid lines -->
+  <line x1="110" y1="111" x2="450" y2="111" stroke="#f1f5f9" stroke-width="1"/>
+  <line x1="110" y1="167" x2="450" y2="167" stroke="#f1f5f9" stroke-width="1"/>
+  <line x1="110" y1="223" x2="450" y2="223" stroke="#f1f5f9" stroke-width="1"/>
+
+  <!-- Bars (no corner radius, brand color) -->
+  <rect x="140" y="100" width="55" height="180" fill="#264653"/>
+  <rect x="215" y="145" width="55" height="135" fill="#264653"/>
+  <rect x="290" y="170" width="55" height="110" fill="#264653"/>
+  <rect x="365" y="125" width="55" height="155" fill="#264653"/>
+
+  <!-- X-axis labels (inside bounds) -->
+  <text x="167" y="296" text-anchor="middle" font-size="11" fill="#64748b">Q1</text>
+  <text x="242" y="296" text-anchor="middle" font-size="11" fill="#64748b">Q2</text>
+  <text x="317" y="296" text-anchor="middle" font-size="11" fill="#64748b">Q3</text>
+  <text x="392" y="296" text-anchor="middle" font-size="11" fill="#64748b">Q4</text>
+
+  <!-- Label: everything inside -->
+  <rect x="160" y="38" width="200" height="22" rx="4" fill="#e6f5f3" stroke="#2a9d8f" stroke-width="1"/>
+  <text x="260" y="53" text-anchor="middle" font-size="11" font-weight="600" fill="#2a9d8f">Everything inside the bounds</text>
+</svg>

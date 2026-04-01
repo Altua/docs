@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 440" font-family="Segoe UI, system-ui, sans-serif">
+  <!-- Background -->
+  <rect width="520" height="440" rx="8" fill="#f8fafc"/>
+
+  <!-- Title -->
+  <text x="260" y="24" text-anchor="middle" font-size="12" font-weight="600" fill="#334155">Two charts with different Y-axis label lengths</text>
+
+  <!-- Alignment guide lines (left and right edges of chart area) -->
+  <line x1="120" y1="38" x2="120" y2="430" stroke="#e76f51" stroke-width="1" stroke-dasharray="3 3" opacity="0.5"/>
+  <line x1="470" y1="38" x2="470" y2="430" stroke="#e76f51" stroke-width="1" stroke-dasharray="3 3" opacity="0.5"/>
+
+  <!-- === TOP CHART: short Y-axis labels === -->
+  <rect x="16" y="44" width="195" height="15" fill="#f8fafc"/>
+  <text x="20" y="55" font-size="10" fill="#64748b" font-weight="600">Chart A — short Y-axis labels</text>
+
+  <!-- Chart area (white background) -->
+  <rect x="120" y="65" width="350" height="130" rx="2" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+
+  <!-- Grid lines -->
+  <line x1="120" y1="97" x2="470" y2="97" stroke="#f1f5f9" stroke-width="1"/>
+  <line x1="120" y1="130" x2="470" y2="130" stroke="#f1f5f9" stroke-width="1"/>
+  <line x1="120" y1="163" x2="470" y2="163" stroke="#f1f5f9" stroke-width="1"/>
+
+  <!-- Bounds (dashed, on top of chart area) -->
+  <rect x="120" y="65" width="350" height="130" rx="3" fill="none" stroke="#2a9d8f" stroke-width="2" stroke-dasharray="8 4"/>
+
+  <!-- Y-axis labels (short: 0, 25, 50, 75) -->
+  <text x="112" y="72" text-anchor="end" font-size="10" fill="#64748b">75</text>
+  <text x="112" y="105" text-anchor="end" font-size="10" fill="#64748b">50</text>
+  <text x="112" y="137" text-anchor="end" font-size="10" fill="#64748b">25</text>
+  <text x="112" y="170" text-anchor="end" font-size="10" fill="#64748b">0</text>
+
+  <!-- Bars -->
+  <rect x="148" y="82" width="45" height="113" fill="#264653"/>
+  <rect x="223" y="98" width="45" height="97" fill="#264653"/>
+  <rect x="298" y="108" width="45" height="87" fill="#264653"/>
+  <rect x="373" y="90" width="45" height="105" fill="#264653"/>
+
+  <!-- X-axis labels -->
+  <text x="170" y="208" text-anchor="middle" font-size="10" fill="#64748b">Q1</text>
+  <text x="245" y="208" text-anchor="middle" font-size="10" fill="#64748b">Q2</text>
+  <text x="320" y="208" text-anchor="middle" font-size="10" fill="#64748b">Q3</text>
+  <text x="395" y="208" text-anchor="middle" font-size="10" fill="#64748b">Q4</text>
+
+  <!-- === BOTTOM CHART: long Y-axis labels === -->
+  <rect x="16" y="229" width="195" height="15" fill="#f8fafc"/>
+  <text x="20" y="240" font-size="10" fill="#64748b" font-weight="600">Chart B — long Y-axis labels</text>
+
+  <!-- Chart area (white background) -->
+  <rect x="120" y="250" width="350" height="130" rx="2" fill="#ffffff" stroke="#e2e8f0" stroke-width="1"/>
+
+  <!-- Grid lines -->
+  <line x1="120" y1="282" x2="470" y2="282" stroke="#f1f5f9" stroke-width="1"/>
+  <line x1="120" y1="315" x2="470" y2="315" stroke="#f1f5f9" stroke-width="1"/>
+  <line x1="120" y1="348" x2="470" y2="348" stroke="#f1f5f9" stroke-width="1"/>
+
+  <!-- Bounds (dashed, on top of chart area) -->
+  <rect x="120" y="250" width="350" height="130" rx="3" fill="none" stroke="#2a9d8f" stroke-width="2" stroke-dasharray="8 4"/>
+
+  <!-- Y-axis labels (long: 0, 250,000, 500,000, 750,000) -->
+  <text x="112" y="257" text-anchor="end" font-size="10" fill="#64748b">750,000</text>
+  <text x="112" y="290" text-anchor="end" font-size="10" fill="#64748b">500,000</text>
+  <text x="112" y="322" text-anchor="end" font-size="10" fill="#64748b">250,000</text>
+  <text x="112" y="355" text-anchor="end" font-size="10" fill="#64748b">0</text>
+
+  <!-- Bars -->
+  <rect x="148" y="263" width="45" height="117" fill="#264653"/>
+  <rect x="223" y="280" width="45" height="100" fill="#264653"/>
+  <rect x="298" y="295" width="45" height="85" fill="#264653"/>
+  <rect x="373" y="272" width="45" height="108" fill="#264653"/>
+
+  <!-- X-axis labels -->
+  <text x="170" y="393" text-anchor="middle" font-size="10" fill="#64748b">Q1</text>
+  <text x="245" y="393" text-anchor="middle" font-size="10" fill="#64748b">Q2</text>
+  <text x="320" y="393" text-anchor="middle" font-size="10" fill="#64748b">Q3</text>
+  <text x="395" y="393" text-anchor="middle" font-size="10" fill="#64748b">Q4</text>
+
+  <!-- Alignment annotation -->
+  <text x="488" y="200" font-size="10" fill="#e76f51" font-weight="600" transform="rotate(90 488 200)">Chart areas aligned</text>
+</svg>
