@@ -5,6 +5,7 @@
 | Version | Effective date | Owner | Summary |
 |---------|----------------|-------|---------|
 | 1.0 | March 11, 2026 | Jan Kristian Bjerke | Initial documented |
+| 1.1 | April 10, 2026 | Jan Kristian Bjerke | Added backup data retention policy |
 
 
 ## Purpose
@@ -59,6 +60,7 @@ The following table defines default retention periods. Data owners may adjust re
 | Business Email | Restricted | 5 years | Automated deletion |
 | Internal Reports & Presentations | Restricted | Indefinite | Secure archival or deletion |
 | Source Code | Confidential | Indefinite while product maintained | Secure archival or deletion |
+| Backups | Confidential | 1 year | Automated deletion |
 | Marketing Materials | Public | Indefinite | No deletion requirement |
 
 If chat messages or email contain records that fall into another category, such as contracts, finance, HR, security, or incident handling, the longer retention period for that category applies.
