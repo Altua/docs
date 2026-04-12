@@ -1,0 +1,274 @@
+---
+title: "IT FAQ"
+description: "Frequently asked questions from IT departments about security, data handling, compliance, licensing, and operations"
+---
+
+Common questions we receive from IT departments during vendor assessments and security reviews.
+
+## Data and privacy
+
+<AccordionGroup>
+  <Accordion title="Can Grunt read or access data in our Excel and PowerPoint?">
+    No. Grunt cannot access any information contained in your Excel or PowerPoint files. We do not store any information other than the items listed in our [data policy](https://app.grunt.pro/legal), which are necessary for account creation, login, and tracking error metrics needed to provide support.
+  </Accordion>
+
+  <Accordion title="Does the supplier process any personal data on behalf of the client?">
+    Yes. We process name and email addresses in order to grant licenses to users of our software. These licenses are linked to an email address. In addition, we register telephone numbers for a small number of contact persons, for example for inquiries related to technical questions, invoices, or user administration.
+  </Accordion>
+
+  <Accordion title="Is data stored or made available outside the EU/EEA?">
+    No. All data centers for our subprocessors are located in the EU/EEA. Specifically, data is retained and processed in Northern Europe on servers controlled by Microsoft Azure.
+  </Accordion>
+
+  <Accordion title="What is the retention period for the storage of data?">
+    Data is retained for as long as the subscription is valid, and for a period after to allow for resubscription or other inquiries (normally 1 year). Data may be stored longer if required to comply with applicable laws or regulatory requirements.
+  </Accordion>
+
+  <Accordion title="What type of cloud or hosting service does Grunt use?">
+    Grunt is a SaaS offering, but it is primarily an on-premise installation running locally on the user's computer. We have a cloud infrastructure that is primarily used to validate user licenses and for certain optional add-on functionalities.
+  </Accordion>
+
+  <Accordion title="What is the tier level of the data centres used?">
+    The data centers used are Microsoft Azure, which are designed to meet or exceed Tier III standards and, in some cases, align with Tier IV standards for regions with Availability Zones.
+  </Accordion>
+
+  <Accordion title="Which components of the service are shared with other customers?">
+    The cloud infrastructure is shared with other customers but does not store any customer proprietary data except data used to validate software licenses.
+  </Accordion>
+</AccordionGroup>
+
+## Security
+
+<AccordionGroup>
+  <Accordion title="Who is the responsible point of contact for information security?">
+    Our CTO is responsible for information security in the company.
+  </Accordion>
+
+  <Accordion title="Does Grunt have an information security management system?">
+    Yes. We have established a management system for information security based on the requirements of the ISO 27001 standard. This includes policies, risk management, security controls, role and responsibility distribution, training, incident management, monitoring, and documentation.
+  </Accordion>
+
+  <Accordion title="Does Grunt have a methodology for carrying out risk assessments?">
+    Yes. Our application is built for customers with high security requirements, working with sensitive information related to banking, finance, and M&A. We work continuously with risk assessment through both internal and external evaluations.
+  </Accordion>
+
+  <Accordion title="Does Grunt have routines for follow-up of risk-reducing measures?">
+    Yes. Security assessments are an important part of our development criteria. If potential challenges are reported internally or externally, a team is appointed to analyze the situation, draw up a mitigation plan, and implement a solution. This work is prioritized over other development to ensure the shortest possible response time.
+  </Accordion>
+
+  <Accordion title="Does Grunt have routines for when and how risk assessments are carried out?">
+    Yes. We have clearly defined routines for handling information security in project work, along with routine evaluation of our systems including periodic external evaluation when necessary.
+  </Accordion>
+
+  <Accordion title="Does Grunt inform clients if vulnerabilities are identified?">
+    Yes.
+  </Accordion>
+
+  <Accordion title="How frequently are security policies reviewed and updated?">
+    Our security policies are reviewed twice a year, or following any material change to our business.
+  </Accordion>
+
+  <Accordion title="Describe your data encryption requirements and key management">
+    We use AES-256 encryption for securing data at rest and in transit. Data in transit is encrypted using TLS 1.2/1.3. Encryption keys are securely managed using Azure Key Vault, and key lengths comply with minimum cipher strength requirements.
+  </Accordion>
+
+  <Accordion title="Describe your network defences">
+    Our network defenses include firewalls, anti-malware solutions, application whitelisting, intrusion prevention systems (IPS), and two-factor authentication for secure access. Our cloud infrastructure (Microsoft Azure) provides built-in DDoS protection as part of its security services.
+  </Accordion>
+
+  <Accordion title="Has Grunt run a penetration test to assess vulnerabilities?">
+    Yes. We conduct regular external penetration tests. Identified vulnerabilities are tracked and remediated through our standard vulnerability management process.
+  </Accordion>
+
+  <Accordion title="Do you have evidence of a code scan process?">
+    We have automatic scans checking for issues with the code or dependencies as part of our development process. We have also verified with external independent technical auditors that there are no obvious issues with data communication.
+  </Accordion>
+
+  <Accordion title="Does Grunt have routines for handling security breaches?">
+    Yes. We handle security incidents through established routines for reporting and follow-up. Customers who are affected by security incidents are followed up in accordance with our guidelines for incident reporting. If a breach requires notification to the Norwegian Data Protection Authority, they will also be notified.
+  </Accordion>
+
+  <Accordion title="Does Grunt have routines for incident notification without unjustified delay?">
+    Yes. Notification routines and deadlines are normally agreed through data processing agreements and/or in an appendix to the customer agreement.
+  </Accordion>
+
+  <Accordion title="Can security logs be transferred to the customer on request?">
+    Yes. The customer can access security logs provided this does not compromise other customers or create a security risk for our systems. In such cases, we will work with the customer on a cost/benefit assessment and clean system logs of sensitive information.
+  </Accordion>
+
+  <Accordion title="Do you have SSO?">
+    Yes. See our [SSO documentation](/powerpoint-add-in/it/sso) for details.
+  </Accordion>
+
+  <Accordion title="Does Grunt require disabling Defender or other security features?">
+    We sign all software with an EV certificate, so Defender exclusions are generally not needed. That said, we recommend adding a Defender exception for our auto-update mechanism to ensure it runs smoothly. See [network and security](/powerpoint-add-in/it/network-and-security) for details.
+  </Accordion>
+</AccordionGroup>
+
+## Employee policies
+
+<AccordionGroup>
+  <Accordion title="What safety procedures exist for employment and when people leave?">
+    We carry out assessments of candidates' suitability to comply with our security requirements. Employment contracts define confidentiality clauses and guidelines, and security training is an important part of onboarding for employees with system access. When a person leaves, all access to systems is withdrawn before the person departs.
+  </Accordion>
+
+  <Accordion title="Is a security training and awareness program in place for all employees?">
+    Yes. A security training and awareness program is in place for all employees, including new hires, permanent, temporary, and contract staff. New hires undergo training during onboarding, and all employees receive yearly updates to stay informed about security best practices and policies.
+  </Accordion>
+</AccordionGroup>
+
+## Access control
+
+<AccordionGroup>
+  <Accordion title="How are access rights allocated, revised, and deleted?">
+    We have established routines for access control to systems and data. We operate according to the principle of least privilege, where employees are only granted rights required for their current role. Access rights are revised annually and continuously adjusted as needed.
+  </Accordion>
+
+  <Accordion title="What routines exist for remote access and use of mobile devices?">
+    Work with data and systems is not based on local settings or physical machines. Access to mobile devices does not give third parties access to our systems.
+  </Accordion>
+
+  <Accordion title="Is automatic logging of logins and system access implemented?">
+    Yes. This information is logged.
+  </Accordion>
+
+  <Accordion title="How do you track employees with access to client systems and information?">
+    Employees do not have access to customer systems. To the extent that employees have access to customer information, this is access controlled and documented.
+  </Accordion>
+
+  <Accordion title="Can Grunt provide a formal overview of access to client systems on request?">
+    Yes. This can be delivered on request.
+  </Accordion>
+</AccordionGroup>
+
+## Operations
+
+<AccordionGroup>
+  <Accordion title="Does Grunt have operating documentation and routines for maintaining it?">
+    Yes. Our operating model documents how system development is carried out and which guidelines exist.
+  </Accordion>
+
+  <Accordion title="Does Grunt have routines for change management?">
+    Yes. Change management follows our standard development process and operating model.
+  </Accordion>
+
+  <Accordion title="Does Grunt have routines for incident handling?">
+    Yes. We have templates and processes for reporting event logs to our customers.
+  </Accordion>
+
+  <Accordion title="Does Grunt have routines for backup?">
+    Yes. We have several layers of backup of both system code and other necessary information, such as license information needed for user access.
+  </Accordion>
+
+  <Accordion title="Does Grunt regularly test restores from backup?">
+    Yes. System code is restored from backup daily as part of our development model. Other information is tested periodically.
+  </Accordion>
+
+  <Accordion title="Does Grunt have routines for logging and monitoring?">
+    Yes. We have built-in logging and monitoring of our systems. These logs can be configured by the customer's IT department.
+  </Accordion>
+
+  <Accordion title="What encryption routines are in place between systems?">
+    Information is always encrypted in transit through industry standards (SSL/TLS) for data transfer between systems and in communication with customers and subcontractors. Encryption at rest is implemented where critical to protect sensitive information.
+  </Accordion>
+
+  <Accordion title="Does Grunt have continuity plans?">
+    Yes. We have documented continuity plans that ensure our services can be maintained or quickly restored in the event of unforeseen events. These plans include procedures for disaster recovery, resource allocation, and communication with affected parties.
+  </Accordion>
+
+  <Accordion title="How are continuity plans maintained and tested?">
+    The plans are reviewed and revised annually.
+  </Accordion>
+
+  <Accordion title="Does Grunt have routines for secure system development?">
+    Yes. We follow best practices for secure software development. The development model is documented in our system development process.
+  </Accordion>
+
+  <Accordion title="Does Grunt have routines for the follow-up of its suppliers?">
+    Yes. We have thorough reviews with our suppliers when entering into new agreements. For the most important subcontractors we have regular contact and follow-up, with a minimum of annual contact with all suppliers.
+  </Accordion>
+
+  <Accordion title="Does Grunt verify that subcontractors comply with client requirements?">
+    Yes. We continuously incorporate customer requirements in our dialogue with suppliers and annually revise contracts based on any need for changes.
+  </Accordion>
+
+  <Accordion title="Does the service include API access? Is it authenticated and encrypted?">
+    Yes. The service requires API calls for functions such as license validation. All API calls are authenticated and encrypted.
+  </Accordion>
+
+  <Accordion title="Does the application support role-based access?">
+    Yes. Role-based access is supported for managing users and licenses.
+  </Accordion>
+
+  <Accordion title="Does your service support web services? REST or SOAP?">
+    Our APIs are REST based.
+  </Accordion>
+
+  <Accordion title="Do you conduct source code scanning with automated tools?">
+    Yes. We use SonarCloud as our SAST tool and rely on multiple Roslyn Analyzers to continuously automate code analysis during development.
+  </Accordion>
+</AccordionGroup>
+
+## Physical security and continuity
+
+<AccordionGroup>
+  <Accordion title="How does Grunt handle physical threats like power cuts?">
+    The company is fully equipped to operate independently of our offices and can move operations to other suitable premises, with home office as an immediate temporary solution.
+  </Accordion>
+
+  <Accordion title="Does Grunt have routines for the destruction of storage media?">
+    Yes. The company does not use physical storage media on its own premises. We have routines for deleting data from servers operated by subcontractors.
+  </Accordion>
+</AccordionGroup>
+
+## License management
+
+<AccordionGroup>
+  <Accordion title="How are licenses handled?">
+    You can appoint one or more license managers who handle licenses online. Licenses are assigned to users and can be used on several machines as long as it is the same user. You can add, remove, or re-allocate licenses at any time and the update takes place immediately.
+
+    Licenses are linked to user email addresses. Users log in with their email address in Grunt within PowerPoint, and validation is done against our license server. The license is validated regularly but is not required at each startup, so users can work offline (for example on flights or short travel).
+
+    If you use proxy servers that filter web traffic, our license server must be whitelisted so licenses can be validated. See [network and security](/powerpoint-add-in/it/network-and-security) for the required endpoints.
+  </Accordion>
+
+  <Accordion title="How do you manage distribution? Can Grunt be packaged and pushed?">
+    Yes. We support centralized distribution, used today at banks and other organizations with high security requirements.
+
+    **Managed deployment:**
+    - MSI file is distributed to your IT team
+    - Installation can be automated using common tools and configured with command line arguments
+    - Grunt is installed to Program Files
+    - Updates are distributed to your IT team according to your agreement (typically monthly or every other month)
+    - Users can see that new versions are available but cannot upgrade themselves
+
+    **Standard deployment (used by most customers):**
+    - Installation from MSI file (from IT or by the user manually)
+    - Grunt is installed without administrative rights to the user's AppData folder
+    - New updates are made available online and the user is offered to update the next time they open PowerPoint
+    - The upgrade completes within 15 seconds
+    - New versions are normally available once a month
+
+    See [deployment and installation](/powerpoint-add-in/it/deployment-and-installation) and [update management](/powerpoint-add-in/it/update-management) for full details.
+  </Accordion>
+</AccordionGroup>
+
+## Certifications and compliance
+
+<AccordionGroup>
+  <Accordion title="Is Grunt certified according to ISO/IEC 27001 or other standards?">
+    We are currently in the process of obtaining ISO certification. In the meantime, we comply with many of the requirements in the standard and work according to process descriptions prepared based on these standards.
+  </Accordion>
+
+  <Accordion title="Does Grunt comply with applicable regulations?">
+    We follow the regulations applicable to the business based on the geographical areas we operate in. As a Norwegian company, we comply with Norwegian laws and norms for good business practice.
+  </Accordion>
+
+  <Accordion title="Does Grunt have routines for notifications to the Norwegian Data Protection Authority?">
+    Yes. We have routines for notification of deviations to the Norwegian Data Protection Authority in accordance with applicable regulations.
+  </Accordion>
+
+  <Accordion title="Does Grunt have routines for notifying the client if there is no basis for processing personal data?">
+    Yes. We give clients the opportunity to carry out independent audits of our information security and assist with external audits as required. The frequency and scope of audits is assessed on a business basis.
+  </Accordion>
+</AccordionGroup>
