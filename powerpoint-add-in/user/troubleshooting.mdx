@@ -77,3 +77,40 @@ Legacy support guidance for decks created with Grunt `2024.1` recommends:
 3. Use **Update All** on the presentation objects.
 4. Save the deck.
 5. Nudge affected objects slightly to force a re-render, then present again in Teams.
+
+## External monitor issues
+
+There is a known issue where the Data Editor, Excel connection window, or rule menus may not appear correctly, freeze, or disappear when PowerPoint is running on an external monitor.
+
+**Workaround:**
+
+1. Disconnect the external monitor or move PowerPoint to the laptop's built-in screen.
+2. Perform the operation (open Data Editor, connect to Excel, edit rules).
+3. Move PowerPoint back to the external monitor when done.
+
+This applies to both HDMI and other display connections. A fix is being worked on.
+
+## ThinkCell installed alongside Grunt
+
+If ThinkCell is installed on the same machine, you may experience:
+
+- Error dialogs or unexpected behavior when using Grunt
+- Smart Selection not working (ThinkCell overrides PowerPoint's selection mechanism)
+
+**Workaround:** Disable ThinkCell temporarily when using Grunt features that conflict. If errors persist after disabling ThinkCell, contact support with your Grunt version and a description of the error.
+
+## PowerPoint is slow but Grunt may not be the cause
+
+If PowerPoint becomes extremely slow (5–10 seconds per action, long startup times), first check whether the issue is Grunt-related:
+
+1. Close PowerPoint completely.
+2. Disable the Grunt add-in from **File** > **Options** > **Add-ins** > **COM Add-ins**.
+3. Restart PowerPoint and test performance.
+
+If performance is still poor without Grunt, the issue is likely a Microsoft Office version problem or a machine-specific issue. Try:
+
+- Checking for Office updates
+- Restarting the computer
+- Testing on a different machine
+
+If performance improves after disabling Grunt, re-enable the add-in and contact support.

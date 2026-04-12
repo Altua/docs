@@ -62,6 +62,33 @@ Important migration note:
 - Old exclude-from-sum behavior is also handled through connector movement.
 - Some border and connector dash styling can change during upgrade.
 
+## Waterfall chart: floating sums show absolute values
+
+Floating sums in waterfall charts display the absolute (total) value, not a signed relative value. For example, a floating sum will show `25` rather than `-25`, even when the waterfall segment represents a negative change.
+
+This is by design and matches standard waterfall chart conventions. Showing a negative sign on the floating sum would also incorrectly trigger negative-number color formatting.
+
+## Chart axis and label tips
+
+**Tick mark spacing** is determined automatically by Grunt's layout algorithm. It cannot be set manually per chart or per customer. If the default spacing is consistently wrong for your data, contact support so the algorithm can be improved.
+
+**Diagonal or vertical label orientation** is not currently supported. Workarounds for long category labels:
+
+- Switch to a horizontal bar chart so labels have more space
+- Increase spacing between clusters
+- Move unit indicators (such as `%`) to the axis title instead of repeating them on each label
+
+**Hiding axis labels without removing in-chart labels:** If you want category names to appear as labels inside the chart but not on the axis, set the axis label font color to match the slide background color. This visually hides the axis labels without affecting the in-chart category labels.
+
+## Donut chart: showing actual values
+
+To display actual numeric values instead of percentages in a donut chart:
+
+1. Click directly on the labels inside the chart (not the main chart floater).
+2. Change the **label calculation** setting from the label-level menu.
+
+The main chart floater may not expose this option when the chart is set to show percentages by default.
+
 ## Use a Visual Grid when you need more layout control
 
 If you need tighter control over labels, surrounding text, or mixed content on the same slide, build the chart inside a [Visual Grid](/powerpoint-add-in/user/visual-grids) instead of using a stand-alone chart tool.

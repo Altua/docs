@@ -80,6 +80,34 @@ Grunt works best when it can access a real local file path, even if the source l
 
 That is why the legacy support guidance recommends syncing the shared file library locally before you connect it in Grunt.
 
+## Data limits for Excel connections
+
+Grunt enforces these limits per connection:
+
+- **Maximum rows:** 8,192
+- **Maximum cells:** 32,768
+
+If your Excel range exceeds these limits, you will see a **"Range has too many rows"** error. This commonly happens when connecting to large pivot tables backed by extensive datasets. Reduce the connected range or summarize the data before connecting.
+
+## OneDrive-synced files may not auto-detect changes
+
+When working with files synced through OneDrive, Grunt may not always detect changes automatically after you save in Excel. This depends on how OneDrive handles file synchronization on your machine.
+
+If you do not see the update notification:
+
+1. Click **Update** manually in the Grunt ribbon or edge menu to check for changes.
+2. Verify the file is fully synced in OneDrive (check for the green checkmark icon).
+
+<Info>
+Testing with a fully local (non-OneDrive) file can help confirm whether the issue is related to OneDrive sync behavior.
+</Info>
+
+## File permissions and data refresh
+
+Grunt uses the same file access permissions as your Windows account. If you do not have access to the linked Excel file, Grunt cannot read it or notify you of changes — even if someone else with access has updated the file.
+
+Make sure every collaborator who needs update notifications has direct access to the workbook.
+
 ## Continue
 
 If you want the overview workflow, continue to [Work with data](/powerpoint-add-in/user/work-with-data). If you need path and rendering fixes, go to [Troubleshooting](/powerpoint-add-in/user/troubleshooting).
