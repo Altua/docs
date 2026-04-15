@@ -27,6 +27,8 @@ If a Grunt AS employee, contractor, user, or customer becomes aware of an inform
 
 - Huma whistleblowing portal
 
+A full directory of IT, Engineering, and executive contacts is available in Huma: https://grunt.humahr.com/people
+
 If the Huma portal is unavailable, use the following alternative channels:
 
 - Email: jan@grunt.pro
@@ -53,7 +55,7 @@ Critical issues relate to actively exploited risks and involve a malicious actor
 
 ## Escalation and internal reporting
 
-The incident escalation contacts can be found below in Appendix A.
+The incident escalation contacts can be found in the Reporting section above and in Huma.
 
 | Severity | Escalation Path |
 |----------|-----------------|
@@ -171,6 +173,3 @@ Requests for an exception to this Policy must be submitted to and authorized by 
 
 Any known violations of this policy should be reported to the CEO. Violations of this policy may result in immediate withdrawal or suspension of system and network privileges and/or disciplinary action in accordance with company procedures up to and including termination of employment.
 
-## Appendix A — Contact information
-
-Contacts for IT and Engineering Management as well as executive staff and can be found Huma - https://grunt.humahr.com/people.
