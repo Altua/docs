@@ -4,17 +4,22 @@
 
 | Version | Effective date | Owner | Summary |
 |---------|----------------|-------|---------|
+| 4.0 | April 16, 2026 | Jan Kristian Bjerke | Consolidated data management, data retention, and data policy into a single policy. Approved by Einar Bjering. |
 | 3.0 | March 17, 2026 | Jan Kristian Bjerke | Updated data retention. Approved by Einar Bjering. |
 | 2.0 | February 9, 2026 | Mads Gedde | Updated data management policy. Approved by Einar Bjering. |
 | 1.0 | December 10, 2025 | Mads Gedde | Initial documented policy. Approved by Einar Bjering. |
 
 ## Purpose
 
-This policy ensures that information is classified, protected, retained, and securely disposed of according to its importance to Grunt AS.
+This policy ensures that information is classified, protected, retained, and securely disposed of according to its importance to Grunt AS. It also defines how Grunt AS handles data collected through its software products.
 
 ## Scope
 
-This policy applies to all Grunt AS data, information, and information systems.
+This policy applies to:
+
+- All Grunt AS data, information, and information systems
+- All employees, contractors, and third-party service providers handling Grunt AS data
+- Data collected through Grunt AS software products
 
 ## General requirements
 
@@ -120,6 +125,34 @@ Restricted data is subject to the following requirements:
 
 Public data does not require special protection or handling controls and may be freely distributed.
 
+## Product data collection
+
+Grunt AS is committed to protecting the privacy of users of its software products. Only the minimum amount of data needed to diagnose problems and improve the software is collected.
+
+When collecting data, Grunt AS tracks what actions users perform, never what users are working on.
+
+Grunt AS does not gather information that could reveal the content of user files, including:
+
+- File names
+- File paths
+- Text
+- Numbers
+- Data contained in files
+- External data sources
+
+Usage tracking is strictly limited to which actions are performed and how often.
+
+### License validation
+
+When users use Grunt software, the following data is sent to validate the license:
+
+- A hardware identifier to identify the computer
+- The email address used as the license key
+
+### Metrics tracking
+
+The metrics tracking system focuses only on actions performed in the software. This allows Grunt AS to understand how the software is used and improve the product without collecting any information about the content of user work.
+
 ## Data retention
 
 Grunt AS retains data only as long as needed for business use or to meet regulatory or contractual requirements.
@@ -130,7 +163,53 @@ Data owners, in consultation with legal counsel, may determine retention periods
 
 Personally identifiable information (PII) must be deleted or de-identified as soon as it no longer has a business use.
 
-Retention periods must be documented in the data retention matrix in Appendix B of this policy.
+Once the retention period expires and no legal hold or operational need exists, the data must be securely deleted or anonymized.
+
+### Data retention matrix
+
+The following table defines default retention periods. Data owners may adjust retention periods where required by law, contract, or operational needs.
+
+| Data Type | Classification | Retention Period | Disposal Method |
+|---|---|---|---|
+| Customer uploaded data | Confidential | Duration of customer relationship + 1 year | Secure deletion |
+| Personally Identifiable Information (PII) | Confidential | As long as business purpose exists | Deletion or anonymization |
+| Authentication Logs | Confidential | 1 year | Automated deletion |
+| Security & Audit Logs | Confidential | 3 years | Automated deletion |
+| Incident Reports | Confidential | 3 years | Secure deletion |
+| Contracts & Legal Documents | Restricted | Indefinite | Secure archival or deletion |
+| Financial Records | Confidential | 7 years | Secure deletion |
+| Internal Chat Messages (Slack or similar) | Restricted | 5 years | Automated deletion |
+| Business Email | Restricted | 5 years | Automated deletion |
+| Internal Reports & Presentations | Restricted | Indefinite | Secure archival or deletion |
+| Source Code | Confidential | Indefinite while product maintained | Secure archival or deletion |
+| Backups | Confidential | 1 year | Automated deletion |
+| Customer support tickets (HubSpot) | Confidential | Indefinite | Secure archival or deletion |
+| Customer sales data (HubSpot) | Confidential | Indefinite | Secure archival or deletion |
+| QA and testing data (GitHub) | Restricted | Indefinite | Secure archival or deletion |
+| Security policies | Restricted | One year after archive | Secure deletion |
+| Marketing Materials | Public | Indefinite | No deletion requirement |
+
+If chat messages or email contain records that fall into another category, such as contracts, finance, HR, security, or incident handling, the longer retention period for that category applies.
+
+Data owners may define additional retention rules specific to their systems.
+
+### Automated data deletion
+
+Grunt AS implements automated processes to ensure data is deleted when its retention period expires.
+
+Automated deletion mechanisms may include:
+
+- Scheduled deletion jobs
+- Lifecycle policies in cloud storage
+- Automated log rotation and expiration
+- Database cleanup scripts
+- Third-party SaaS retention controls
+
+Automated processes must:
+
+- Run on a scheduled basis
+- Remove or anonymize expired records
+- Generate system logs documenting deletion activities
 
 ## Data and device disposal
 
@@ -149,38 +228,6 @@ Personally identifiable information (PII) must be collected, used, and retained 
 PII must be securely deleted after contract termination according to company policy, contractual commitments, and applicable laws and regulations.
 
 PII must also be deleted in response to a verified consumer or data subject request when Grunt AS does not have a legitimate business interest or legal obligation to retain the data.
-
-## Annual data review
-
-Management must review data retention requirements during the annual review of this policy.
-
-Data must be disposed of according to this policy.
-
-## Legal requirements
-
-Grunt AS may become subject to legal proceedings that require the retention of data associated with legal holds, lawsuits, or other matters identified by legal counsel.
-
-These records are exempt from the other retention requirements in this policy and must be retained according to requirements identified by the legal department.
-
-All legal holds and special retention requirements are subject to annual review with legal counsel to confirm continuing need and scope.
-
-## Policy compliance
-
-Grunt AS measures and verifies compliance with this policy through methods including business tool reports and internal and external audits.
-
-## Exceptions
-
-Requests for an exception to this policy must be submitted to the CEO for approval.
-
-## Violations and enforcement
-
-Known violations of this policy must be reported to the CEO.
-
-Violations may result in immediate withdrawal or suspension of system and network privileges and disciplinary action, up to and including termination of employment.
-
-## Appendix A: Internal retention and disposal procedure
-
-Grunt AS's Technology Team is responsible for setting and enforcing data retention and disposal procedures for Grunt-managed accounts and devices.
 
 ### Customer accounts
 
@@ -203,16 +250,81 @@ Grunt AS keeps certificates of destruction on record for one year.
 
 Physical destruction is optional if the device is verified to be encrypted with full-disk encryption and the risk of data recovery is therefore mitigated.
 
-Management reviews this procedure at least annually.
+## Monitoring and validation
 
-## Appendix B: Data retention matrix
+To ensure compliance with this policy:
 
-| System or application | Data description | Retention period |
-|-----------------------|------------------|------------------|
-| Grunt SaaS products | PII end-user data | Up to one year after contract termination |
-| Grunt data metrics | Customer metrics describing user actions | Indefinite |
-| Grunt error logs | Customer error reports, metadata, and debugging data | Indefinite |
-| Grunt customer support tickets (`HubSpot`) | Support tickets and cases | Indefinite |
-| Grunt customer sales (`HubSpot`) | Opportunity and sales data | Indefinite |
-| Grunt AS QA and testing data (`GitHub`) | QA, testing scenarios, and results data | Indefinite |
-| Security policies | Security policy documents | One year after archive |
+- Automated deletion processes must be tested during implementation
+- System logs must be reviewed periodically
+- Configuration settings must be reviewed during annual policy review
+- Any deletion failures must be investigated and corrected
+
+The Security or Engineering team is responsible for validating that retention enforcement operates correctly.
+
+## Evidence and auditability
+
+To demonstrate compliance with this policy, Grunt AS maintains evidence including:
+
+- System logs showing deletion of expired records
+- Automated deletion reports from data systems
+- Configuration screenshots demonstrating retention settings
+- Documentation of automated deletion scripts or lifecycle rules
+- Periodic audit records validating retention enforcement
+
+These records may be used for internal reviews, audits, and compliance verification.
+
+## Legal holds
+
+When Grunt AS becomes subject to legal proceedings, investigations, or regulatory requests:
+
+- Relevant data must be preserved regardless of retention schedules
+- Data retention automation must exclude records under legal hold
+- Legal counsel will determine the duration of the hold
+
+All legal holds and special retention requirements are subject to annual review with legal counsel to confirm continuing need and scope.
+
+## Roles and responsibilities
+
+### Data Owners
+
+- Define retention requirements for their data
+- Ensure systems follow retention policies
+
+### Engineering / IT
+
+- Implement automated deletion mechanisms
+- Maintain logs of deletion activity
+- Ensure systems enforce retention rules
+
+### Security / Compliance
+
+- Monitor compliance
+- Maintain policy documentation
+- Provide evidence for audits
+
+## Annual policy review
+
+Management must review data retention and data management requirements during the annual review of this policy.
+
+This policy is reviewed annually to ensure alignment with:
+
+- Legal requirements
+- Business needs
+- Security practices
+- Compliance frameworks
+
+Data must be disposed of according to this policy.
+
+## Policy compliance
+
+Grunt AS measures and verifies compliance with this policy through methods including business tool reports and internal and external audits.
+
+## Exceptions
+
+Requests for an exception to this policy must be submitted to the CEO for approval.
+
+## Violations and enforcement
+
+Known violations of this policy must be reported to the CEO.
+
+Violations may result in immediate withdrawal or suspension of system and network privileges and disciplinary action, up to and including termination of employment.

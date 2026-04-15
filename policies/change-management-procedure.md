@@ -14,7 +14,7 @@ The goal is to ensure that changes are reviewed, tested, approved, deployed in a
 
 ## Scope
 
-This procedure applies to changes that can affect Grunt AS production services or the security, availability, confidentiality, or integrity of systems and data, including:
+This procedure applies to changes that can affect Grunt AS production services, the ISMS, or the security, availability, confidentiality, or integrity of systems and data, including:
 
 - Application code and release packages
 - APIs and backend services
@@ -23,6 +23,11 @@ This procedure applies to changes that can affect Grunt AS production services o
 - Databases and data-processing components
 - Security tooling and monitoring configuration
 - Third-party SaaS platforms that support business-critical functions
+- ISMS policies, procedures, and supporting documents
+- ISMS scope, objectives, or risk treatment plans
+- Organizational roles, responsibilities, or reporting lines that affect information security
+- Supplier and third-party arrangements with security implications
+- Legal, regulatory, or contractual obligations that affect information security
 
 ## Core approach
 
@@ -130,6 +135,41 @@ Emergency changes must still:
 - Include the reason for the emergency path
 - Be reviewed after implementation to confirm outcome and identify any follow-up actions
 
+## Non-technical ISMS changes
+
+Non-technical changes include updates to policies, procedures, ISMS scope, risk assessments, organizational structure, supplier arrangements, or legal and regulatory obligations that affect information security.
+
+These changes do not follow the GitHub-based engineering workflow but must still be proposed, reviewed, approved, and documented.
+
+### Propose the change
+
+The person requesting the change describes what is changing, why, and what areas of the ISMS are affected.
+
+The proposal can be made through email, a shared document, or any other channel agreed with the ISMS owner.
+
+### Review and approval
+
+Non-technical ISMS changes must be reviewed and approved before they take effect.
+
+| Change | Approver |
+|--------|----------|
+| Policy or procedure updates | ISMS owner or management |
+| ISMS scope or objectives | Management |
+| Risk assessment or treatment plan updates | ISMS owner or management |
+| Organizational changes affecting security roles | Management |
+| Supplier or third-party changes with security implications | ISMS owner or management |
+| Changes driven by legal, regulatory, or contractual requirements | Management |
+
+### Document the change
+
+Approved changes must be documented. For policy and procedure documents, this means updating the version history table in the document itself with the effective date, owner, and a summary of what changed.
+
+For other non-technical changes, a record of the decision and approval should be retained in a format appropriate to the change, such as email, meeting minutes, or a shared decision log.
+
+### Communicate the change
+
+Affected parties must be informed of the change and its effective date. This may include team-wide communication, updated training material, or direct notification depending on the nature and scope of the change.
+
 ## Roles and responsibilities
 
 | Role | Responsibilities |
@@ -138,6 +178,8 @@ Emergency changes must still:
 | Reviewer | Review the pull request, confirm the change is understandable, and verify that required checks and testing are appropriate. |
 | Release approver or deployer | Confirm the change is ready for production based on the normal release workflow and approvals in use. |
 | Engineering leadership | Support decisions on higher-risk or emergency changes when additional oversight is needed. |
+| ISMS owner | Propose, review, or approve non-technical ISMS changes such as policy updates, risk treatment changes, and scope adjustments. |
+| Management | Approve changes to ISMS scope, objectives, organizational structure, and other changes that require management-level authority. |
 
 ## Required change records
 
