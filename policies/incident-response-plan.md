@@ -173,3 +173,122 @@ Requests for an exception to this Policy must be submitted to and authorized by 
 
 Any known violations of this policy should be reported to the CEO. Violations of this policy may result in immediate withdrawal or suspension of system and network privileges and/or disciplinary action in accordance with company procedures up to and including termination of employment.
 
+## Appendix — Incident collection form
+
+*One form per affected system is recommended.*
+
+### General information
+
+**Incident detector's information**
+
+| Field | Value |
+|-------|-------|
+| Name | |
+| Title | |
+| Phone | |
+| Email | |
+| Date and time detected | |
+| Location incident detected from | |
+| Additional information | |
+
+### Incident summary
+
+**Type of incident detected** (check one):
+
+- [ ] Denial of service
+- [ ] Unauthorized use
+- [ ] Espionage
+- [ ] Probe
+- [ ] Hoax
+- [ ] Malicious code
+- [ ] Unauthorized access
+- [ ] Other: _______________
+
+**Incident location**
+
+| Field | Value |
+|-------|-------|
+| Site | |
+| Site point of contact | |
+| Phone | |
+| Email | |
+
+**How was the incident detected:**
+
+___
+
+**Additional information:**
+
+___
+
+**Location(s) of affected systems:**
+
+___
+
+**Date and time incident handlers arrived at site:**
+
+___
+
+### Affected information system(s)
+
+| Field | Value |
+|-------|-------|
+| Hardware manufacturer | |
+| Serial number | |
+| Corporate property number (if applicable) | |
+
+**Is the affected system connected to a network?**
+
+- [ ] Yes
+- [ ] No
+
+**Describe the physical security of the location of affected information systems (locks, security alarms, building access, etc.):**
+
+___
+
+### Isolate affected systems
+
+**Approval to remove from network:**
+
+- [ ] Yes
+- [ ] No
+
+| Field | Value |
+|-------|-------|
+| If YES, name of approver | |
+| Date and time removed | |
+| If NO, state the reason | |
+
+### Backup of affected system(s)
+
+**Last system backup successful?**
+
+- [ ] Yes
+- [ ] No
+
+| Field | Value |
+|-------|-------|
+| Name of the persons who did backup | |
+| Date and time last backups started | |
+| Date and time last backups completed | |
+| Backup storage location | |
+
+### Incident eradication
+
+| Field | Value |
+|-------|-------|
+| Name of persons performing forensics | |
+
+**Was the vulnerability (root cause) identified?**
+
+- [ ] Yes
+- [ ] No
+
+**Describe:**
+
+___
+
+**How was eradication validated:**
+
+___
+
