@@ -53,7 +53,7 @@ npm install
 Export a Markdown file to PDF:
 
 ```bash
-npm run md-to-pdf -- policies/test-policy.md
+npm run md-to-pdf -- policies/*.md
 ```
 
 This writes the PDF next to the source file, using the same name with a `.pdf` extension. The export uses A4 page size and the styling defined in `scripts/md-to-pdf.config.js` and `scripts/md-to-pdf.css`.

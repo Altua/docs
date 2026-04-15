@@ -4,6 +4,7 @@
 
 | Version | Date | Description | Author | Approver |
 |---------|------|-------------|--------|----------|
+| 1.2 | April 16, 2026 | Added GDPR breach reporting timeline, ICO reporting link, and emergency contact details | Jan Kristian Bjerke | Einar Bjering |
 | 1.0 | Feb 26, 2026 | Version 1.0 | Mads Gedde | Einar Bjering |
 
 ## Purpose
@@ -25,6 +26,12 @@ A **security incident** is a security event which results in loss or damage to t
 If a Grunt AS employee, contractor, user, or customer becomes aware of an information security event or incident, possible incident, imminent incident, unauthorized access, policy violation, security weakness, or suspicious activity, then they shall immediately report the information using one of the following communication channels:
 
 - Huma whistleblowing portal
+
+If the Huma portal is unavailable, use the following alternative channels:
+
+- Email: jan@grunt.pro
+- Phone: +47 40220842
+- Slack: contact Jan Kristian Bjerke directly via Slack DM
 
 Reporters should act as a good witness and behave as if they are reporting a crime. Reports should include specific details about what has been observed or discovered.
 
@@ -115,6 +122,16 @@ Incident responders must have Slack arranged before listing themselves as part o
 ## External communications and breach reporting
 
 Legal and executive staff shall confer with technical teams in the event of unauthorized access to company or customer systems, networks, and/or data. Legal staff along with the CEO shall determine if breach reporting or external communications are required. Breaches shall be reported to customers, consumers, data subjects and regulators without undue delay and in accordance with all contractual commitments and applicable legislation.
+
+### GDPR breach reporting
+
+Under the General Data Protection Regulation (GDPR), Grunt AS must report personal data breaches to the relevant supervisory authority without undue delay and, where feasible, no later than **72 hours** after becoming aware of the breach. If notification is not made within 72 hours, it must be accompanied by reasons for the delay.
+
+Where a breach is likely to result in a high risk to the rights and freedoms of individuals, affected data subjects must also be notified without undue delay.
+
+For breaches involving data subjects under the jurisdiction of the UK Information Commissioner's Office (ICO), reports must be submitted via the ICO's breach reporting page: https://ico.org.uk/make-a-complaint/data-protection-complaints/data-protection-complaints/
+
+The Incident Manager must ensure that all facts related to a potential personal data breach, including timeline, scope, and categories of data affected, are documented promptly to support regulatory reporting within the 72-hour window.
 
 No personnel may disclose information regarding incident or potential breaches to any third party or unauthorized person without the approval of legal and/or executive management.
 
