@@ -48,7 +48,21 @@ The SOFTWARE PRODUCT periodically checks for updates from Grunt AS and downloads
 
 You agree that Grunt AS collect, use, store and transmit technical and related information that identifies your computer (including CPU ID, Internet Protocol Address), operating system, email address, application usage and error reports that may be gathered to facilitate the provision of software updates, dynamically served content, product support and other services to you, including online services. IF YOU DO NOT WANT Grunt AS TO COLLECT, USE, STORE, TRANSMIT OR DISPLAY THE DATA DESCRIBED IN THIS SECTION, PLEASE DO NOT INSTALL OR USE THE APPLICATION.
 
-#### (h) Compliance with Applicable Laws
+In addition, when you use features that require Grunt AS to process content you provide — including AI functionality and content distribution features — the content you submit to those features is transmitted to Grunt AS and, where applicable, to our sub-processors, solely to deliver the requested functionality. See the [Privacy Policy](/privacy-policy/) for details on how this content is handled.
+
+#### (h) Customer content
+
+As between you and Grunt AS, you retain all right, title, and interest in and to the content you submit to the SOFTWARE PRODUCT ("Customer Content"). You grant Grunt AS a limited, non-exclusive, worldwide, royalty-free license to host, copy, transmit, display, and otherwise process Customer Content solely as necessary to provide the SOFTWARE PRODUCT and the features you request (including AI functionality and content distribution). Grunt AS will not use Customer Content to train third-party or general-purpose AI models. You are responsible for ensuring you have the rights necessary to submit Customer Content to the SOFTWARE PRODUCT and to permit its processing as described in this EULA and the [Privacy Policy](/privacy-policy/).
+
+#### (i) Sub-processors
+
+Grunt AS engages third-party sub-processors to help provide certain features of the SOFTWARE PRODUCT, including hosting providers and AI service providers that process content submitted to AI features. By using the SOFTWARE PRODUCT, you agree to Grunt AS's use of sub-processors for these purposes. A current list of sub-processors is available on request.
+
+#### (j) AI-generated output
+
+Features of the SOFTWARE PRODUCT that use artificial intelligence or machine learning generate output based on the inputs you provide and the behavior of the underlying models. Such output may be inaccurate, incomplete, or otherwise unsuitable for your intended purpose. You are solely responsible for reviewing, validating, and determining the suitability of any AI-generated output before relying on it or using it for any purpose. Grunt AS does not warrant the accuracy, completeness, or fitness for any particular purpose of AI-generated output.
+
+#### (k) Compliance with Applicable Laws
 
 You must comply with all applicable laws regarding use of the SOFTWARE PRODUCT.
 
