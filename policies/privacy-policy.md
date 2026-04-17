@@ -4,9 +4,11 @@ We understand that your privacy is important to you. We are committed to respect
 
 ### Data collection summary
 
-As a provider of software to professionals - including banks, consultancies and other businesses that routinely work with sensitive and private data we take data protection very seriously. We only transfer the minimum amount of data we need in order to diagnose and resolve problems and improve our software. We are strongly committed to enforcing a data policy that, without exception, removes sensitive data from messages that are sent to our servers.
+As a provider of software to professionals - including banks, consultancies and other businesses that routinely work with sensitive and private data we take data protection very seriously. We limit the data we transfer to what is needed to operate the features you use, to validate your license and account, and to diagnose and improve our software.
 
-When collecting data, we look at *what actions you perform, never what you are working on*. As important as the information we *do* gather, is the information we *do not* gather. In particular, we *do not* gather information that could reveal to us the information or data inside your presentations and spreadsheets, including file names, file paths, text, numbers, data, external data sources etc. To the extent that any information about what you are doing is gathered through our usage tracking systems, it is strictly limited to which actions you perform and how often you do so. As an example, if you connect to an Excel workbook, we may be informed that such an action has been performed, but we will not be told the name of the workbook, the path to it, nor its contents.
+For our usage tracking and error reporting systems, we look at *what actions you perform, never what you are working on*. Our telemetry *does not* gather information that could reveal the information or data inside your presentations and spreadsheets, including file names, file paths, text, numbers, data, external data sources etc. Telemetry is strictly limited to which actions you perform and how often you do so. As an example, if you connect to an Excel workbook, we may be informed that such an action has been performed, but we will not be told the name of the workbook, the path to it, nor its contents.
+
+Separately, certain product features — such as AI functionality and content distribution — require us to process content you provide when you choose to use them. See [Customer content processed by product features](#customer-content-processed-by-product-features) below for details.
 
 See the full [data policy](data-policy) for further details.
 
@@ -17,6 +19,15 @@ When you use Grunt, we need to send a minimum amount of data to validate your li
 ### Metrics Tracking
 
 Our metrics tracking system is concerned with actions you perform. This system is necessary to inform us of which features our users utilize. When you perform an action, a message with an identifier associated with that action is sent to our servers. Not all actions will trigger such an event.  The identifier is global, in the sense that it is the same for all users. In fact, the identifier is the *only* thing sent to our servers during metrics tracking in regard to the action you performed. No other data regarding the action is sent. Metrics tracking occurs in the background, and you will not be notified.
+
+### Customer content processed by product features
+
+Some Grunt features process content you provide so they can perform the task you have asked them to perform. Unlike our telemetry, these features necessarily transmit the content you submit to them.
+
+- **AI functionality.** When you use AI features, the slide, spreadsheet, text, or other content you submit to the feature is transmitted to Grunt and, where applicable, to the AI service providers we use, in order to generate the requested output.
+- **Content distribution.** When you use features that distribute or share content on your behalf, the content you choose to distribute is transmitted to Grunt and delivered to the recipients or destinations you select.
+
+Content submitted to these features is processed only to deliver the requested functionality and is handled in accordance with this Privacy Policy and our agreements with sub-processors. These features are opt-in: no customer content is sent to Grunt unless you choose to use a feature that requires it.
 
 ### Error Reporting
 
@@ -50,6 +61,7 @@ Examples of data not considered personal data:
 - When you interact with Grunt AS through our website ("Site") to purchase an Grunt AS product, download our software, register for or participate in a demo or training session, participate in an online forum or survey, or for any other reason, we may collects a variety of information such as your name and surname, email address, mailing address, phone number, company, job position, country, social profiles and online activities, contact preferences, and credit card information.
 - When you use Grunt AS software, we may collect your email address, IP address and device identifiers such as your computer name and Windows username that may contain personal information or, when combined with other information, may be used to identify you.
 - When you invite others to participate in Grunt products or services, we may collect information you provide about those people such as names, email addresses, mailing addresses, and phone numbers.
+- When you use features that process customer-provided content (such as AI functionality or content distribution), the content you submit to those features may itself contain personal data. We process that content on your behalf only to deliver the feature you have requested.
 
 - We keep track of the email addresses and personal information provided to us by users who download or purchase Grunt AS products.
 - When purchasing our software, we require your credit card information, address, billing address, etc. The credit card information is stored with our payment provider and not with Grunt. This information will only be used to complete your purchase and never given to any party outside Grunt or for any other purpose other than the purchase you agreed to.
