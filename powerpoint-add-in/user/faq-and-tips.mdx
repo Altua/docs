@@ -69,6 +69,28 @@ The legacy FAQ guidance points to local-folder sourcing for logos when the built
 
 If a needed logo is not available, ask your team to configure a local logo folder for the logo rule workflow.
 
+## Templates from the Content Library look wrong on Mac
+
+When inserting templates from the Content Library on Mac, slides may appear with old Grunt-branded graphical elements instead of your company's brand colors.
+
+This happens because Mac PowerPoint defaults to **Keep Source Theme** when inserting slides, while Windows uses **Keep Destination Theme**.
+
+**Workaround:** After inserting the template slide on Mac, right-click the slide and choose **Change layout** to reset the theme to your current presentation's theme.
+
+## Content Library search does not find everything
+
+The search function in the Content Library indexes text content from slides, but with some limitations:
+
+- There is a short delay after uploading before new content is indexed
+- Content inside Grunt objects (such as Visual Grids) may not be fully indexed — native PowerPoint text boxes are indexed more reliably
+- Only one top-level company folder is supported per organization
+
+If you need to organize many templates, use a naming convention with slashes (e.g., `Finance/Quarterly/Revenue`) to simulate a folder structure within the flat list.
+
+## Can Copilot read data inside Grunt objects?
+
+Microsoft Copilot cannot read data stored inside Grunt objects (charts and Visual Grids). Copilot can only access native PowerPoint content such as text boxes and shapes.
+
 ## Related pages
 
 - Use [Rules](/powerpoint-add-in/user/rules) for rule behavior and targeting fundamentals.

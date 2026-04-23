@@ -86,7 +86,8 @@
                   "powerpoint-add-in/it/licensing-and-provisioning",
                   "powerpoint-add-in/it/network-and-security",
                   "powerpoint-add-in/it/update-management",
-                  "powerpoint-add-in/it/sso"
+                  "powerpoint-add-in/it/sso",
+                  "powerpoint-add-in/it/faq"
                 ]
               }
             ]
