@@ -8,9 +8,9 @@ As a provider of software to professionals — including banks, consultancies an
 
 For our usage tracking and error reporting systems, we record what actions you perform, not what you are working on. Our telemetry does not gather information that could reveal the contents of your presentations and spreadsheets, including file names, file paths, text, numbers, data, or external data sources. Telemetry is strictly limited to which actions you perform and how often you do so. For example, if you connect to an Excel workbook, we may be informed that such an action has been performed, but we will not be told the name of the workbook, the path to it, or its contents.
 
-Separately, certain product features — such as AI functionality and content distribution — require us to process content you provide when you choose to use them. See [Customer content processed by product features](#customer-content-processed-by-product-features) below for details.
+By contrast, certain product features — such as AI functionality and content distribution — necessarily process the content you provide when you choose to use them. These features are opt-in and are described separately in [Customer content processed by product features](#customer-content-processed-by-product-features) below.
 
-See the full [data policy](data-policy) for further details.
+See our [Data Management Policy](data-management-policy) for further details on how we classify, retain, and dispose of data.
 
 ### License Validation
 
@@ -27,7 +27,11 @@ Some Grunt features process content you provide in order to carry out the task y
 - **AI functionality.** When you use AI features, the slide, spreadsheet, text, or other content you submit to the feature is transmitted to Grunt and, where applicable, to the AI service providers we use, in order to generate the requested output.
 - **Content distribution.** When you use features that distribute or share content on your behalf, the content you choose to distribute is transmitted to Grunt and delivered to the recipients or destinations you select.
 
-Content submitted to these features is processed only to deliver the requested functionality and is handled in accordance with this Privacy Policy and our agreements with sub-processors. These features are opt-in: no customer content is sent to Grunt unless you choose to use a feature that requires it.
+Content submitted to these features is processed only to deliver the requested functionality and is handled in accordance with this Privacy Policy and our agreements with sub-processors. We do not use the content you submit to these features to train AI models, and our AI sub-processors are contractually prohibited from doing so.
+
+Submitted content is retained only for as long as necessary to deliver the requested output and is then deleted from Grunt's systems. Content delivered through content-distribution features is, by its nature, transmitted to the recipients or destinations you select; once delivered, those recipients retain whatever copies they receive.
+
+These features are opt-in: no customer content is sent to Grunt unless you choose to use a feature that requires it.
 
 ### Error Reporting
 
