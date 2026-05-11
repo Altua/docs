@@ -54,6 +54,7 @@
                   "powerpoint-add-in/user/rules-gauges-and-value-source",
                   "powerpoint-add-in/user/visual-grids",
                   "powerpoint-add-in/user/charts",
+                  "powerpoint-add-in/user/fixed-chart-area",
                   "powerpoint-add-in/user/export-and-sharing"
                 ]
               },
