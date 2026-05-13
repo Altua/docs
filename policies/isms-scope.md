@@ -4,7 +4,7 @@
 
 | Version | Effective date | Owner | Summary |
 |---------|----------------|-------|---------|
-| 1.1 | May 13, 2026 | Jan Kristian Bjerke | Imported and reformatted the ISMS scope for the documentation repository. |
+| 1.1 | May 13, 2026 | Jan Kristian Bjerke | Imported and reformatted the ISMS scope for the documentation repository and added a description of services. |
 | 1.0 | February 9, 2026 | Mads Gedde | Initial ISMS scope. Approved by Einar Bjering. |
 
 ## Purpose
@@ -26,6 +26,16 @@ The scope is defined with consideration of:
 - Interfaces and dependencies with third parties
 - In-scope assets, systems, locations, departments, and personnel
 - Scope exclusions and shared responsibility boundaries
+
+## Description of services
+
+Grunt AS provides `grunt.pro`, a software product and supporting service for professionals who create, update, and maintain PowerPoint presentations and data visualizations.
+
+The core service is the Grunt PowerPoint add-in. The add-in runs in Microsoft PowerPoint and helps customers build, format, update, and manage data-driven slide content such as charts, visualizations, tables, and presentation layouts.
+
+Grunt AS also provides supporting data visualization services and online services needed to deliver and operate the product. These services include licensing, authentication, downloads and updates, customer administration, customer portals, APIs, support workflows, sales workflows, and related operational systems.
+
+The ISMS covers the people, processes, systems, suppliers, and information assets used to develop, sell, deliver, support, operate, and secure these services.
 
 ## In-scope activities
 
