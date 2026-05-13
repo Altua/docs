@@ -4,7 +4,7 @@
 
 | Version | Effective date | Owner | Summary |
 |---------|----------------|-------|---------|
-| 2.1 | May 12, 2026 | Jan Kristian Bjerke | Imported and reformatted the risk management policy for the documentation repository, including risk assessment appendices. |
+| 2.1 | May 13, 2026 | Jan Kristian Bjerke | Imported and reformatted the risk management policy for the documentation repository, including risk assessment appendices, acceptable risk level, and residual risk management. |
 | 2.0 | February 9, 2026 | Mads Gedde | Updated risk management policy. Approved by Einar Bjering. |
 | 1.0 | December 10, 2025 | Mads Gedde | Initial documented policy. Approved by Einar Bjering. |
 
@@ -126,6 +126,24 @@ Likelihood x Impact = Risk score
 | Medium | 5-14 | The event would have a serious adverse effect. |
 | High | 15-25 | The event would have a severe adverse effect. |
 
+## Acceptable risk level
+
+The acceptable risk level is the level of risk that Grunt AS is willing to retain without additional treatment.
+
+Grunt AS uses the risk score after considering existing controls to determine whether a risk is acceptable.
+
+The default acceptable risk level is `Low`.
+
+| Risk level | Score range | Acceptability | Required action |
+|------------|-------------|---------------|-----------------|
+| Low | 1-4 | Acceptable by default | The risk may be accepted and monitored by the risk owner. Material risks should still be recorded in the risk register. |
+| Medium | 5-14 | Not automatically acceptable | The risk requires a treatment plan or documented acceptance by the Chief Technology Officer, Information Security Officer, or management. |
+| High | 15-25 | Above the acceptable risk level | The risk requires a treatment plan, leadership visibility, and prioritized follow-up. Any acceptance of high risk requires documented approval from the CEO or Chief Technology Officer. |
+
+A risk must not be accepted when acceptance would violate legal, regulatory, contractual, customer, privacy, or security obligations.
+
+Management may define a lower acceptable risk level for specific systems, customers, data types, suppliers, or regulatory contexts.
+
 ## Risk assessment process
 
 ### Establish context
@@ -154,7 +172,7 @@ The analysis should consider existing controls, threat activity, exposure, data 
 
 The risk owner compares the analyzed risk against Grunt AS risk criteria and determines whether the risk should be accepted, treated, transferred, or avoided.
 
-Risks above the acceptable threshold are prioritized for treatment.
+Risks above the acceptable risk level are prioritized for treatment.
 
 Lower-level risks may be accepted, monitored, or handled through normal operational planning.
 
@@ -191,6 +209,29 @@ When Grunt AS chooses mitigation or transfer, the risk owner must document a ris
 
 Accepted risks must be documented with the reason for acceptance, approving role, and review date.
 
+## Managing residual risk
+
+Residual risk is the risk that remains after existing controls and approved treatment actions are considered.
+
+Risk owners must assess residual risk when:
+
+- A new risk is recorded
+- A treatment plan is proposed
+- Treatment actions are completed
+- A material change affects the risk, system, supplier, threat, vulnerability, or business context
+
+Residual risk is managed using the same likelihood, impact, and acceptable risk level criteria defined in this policy.
+
+After treatment, the risk owner must update the risk register with the residual likelihood, residual impact, residual risk level, treatment status, and any remaining acceptance decision.
+
+If residual risk is `Low`, the risk may be accepted and monitored.
+
+If residual risk is `Medium`, the risk must have either a further treatment plan or documented acceptance by the Chief Technology Officer, Information Security Officer, or management.
+
+If residual risk is `High`, the risk remains above the acceptable risk level and must receive leadership visibility. High residual risk may only be accepted with documented approval from the CEO or Chief Technology Officer, including the rationale, compensating controls, owner, and review date.
+
+Accepted residual risks are reviewed at least annually and when material changes occur.
+
 ## Risk register and treatment plan
 
 Grunt AS maintains a risk register and treatment plan.
@@ -202,14 +243,19 @@ Each risk record should include:
 - Risk description
 - Risk category
 - Affected assets, systems, processes, or suppliers
-- Likelihood score
-- Impact score
-- Overall risk level
+- Inherent likelihood score
+- Inherent impact score
+- Inherent risk level
+- Existing controls
 - Risk owner
 - Selected risk response
 - Treatment actions, if applicable
+- Residual likelihood score
+- Residual impact score
+- Residual risk level
 - Due dates and status
 - Approval or acceptance notes, if applicable
+- Residual risk review date, if applicable
 
 Risks are prioritized based on likelihood, impact, business relevance, cost, work effort, resource availability, and treatment urgency.
 
@@ -325,7 +371,7 @@ Risk analysis determines:
 
 Risk evaluation compares the analyzed risk against Grunt AS risk criteria.
 
-Risks above the acceptable threshold are prioritized for treatment.
+Risks above the acceptable risk level are prioritized for treatment.
 
 Lower-level risks may be accepted or monitored.
 
@@ -340,6 +386,8 @@ Treatment activities include:
 - Confirming that the treatment aligns with business objectives and risk appetite
 - Getting approval for the selected treatment or acceptance decision
 - Implementing and tracking the treatment plan
+- Reassessing residual risk after treatment
+- Documenting whether residual risk is accepted or requires further treatment
 
 ### Step 4: Risk communication and consultation
 
@@ -360,6 +408,7 @@ Monitoring activities include:
 
 - Monitoring changes in threats, vulnerabilities, assets, suppliers, and business context
 - Reviewing treatment effectiveness
+- Reviewing accepted residual risks
 - Updating risk assessments at least annually and when significant changes occur
 - Maintaining current risk records, treatment plans, and monitoring evidence
 
