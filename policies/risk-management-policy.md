@@ -4,7 +4,7 @@
 
 | Version | Effective date | Owner | Summary |
 |---------|----------------|-------|---------|
-| 2.1 | May 12, 2026 | Mads Gedde | Imported and reformatted the risk management policy for the documentation repository. |
+| 2.1 | May 12, 2026 | Jan Kristian Bjerke | Imported and reformatted the risk management policy for the documentation repository, including risk assessment appendices. |
 | 2.0 | February 9, 2026 | Mads Gedde | Updated risk management policy. Approved by Einar Bjering. |
 | 1.0 | December 10, 2025 | Mads Gedde | Initial documented policy. Approved by Einar Bjering. |
 
@@ -272,3 +272,139 @@ The risk management process supports ISO/IEC 27001 clauses 6.1 and 6.2.
 ## Review
 
 The Information Security Officer reviews this policy at least annually and when material changes occur to the ISMS, business objectives, risk criteria, regulatory obligations, or operating environment.
+
+## Appendix A - Risk assessment process
+
+This appendix provides a practical overview of the process Grunt AS uses to assess and manage information security risks.
+
+The process is based on ISO/IEC 27005 and aligns with ISO/IEC 27001.
+
+It is used to:
+
+- Identify and assess information security risks
+- Evaluate risks against Grunt AS risk criteria
+- Treat, monitor, and communicate risks in a structured way
+
+The risk management process includes:
+
+1. Context establishment
+2. Risk assessment, including identification, analysis, and evaluation
+3. Risk treatment
+4. Risk communication and consultation
+5. Risk monitoring and review
+
+### Step 1: Context establishment
+
+The objective of this step is to define the parameters for risk assessment and treatment.
+
+Key activities:
+
+- Define the organizational functions, systems, and processes to be assessed
+- Define assessment boundaries and time frame
+- Set likelihood, impact, and risk acceptance criteria
+- Identify critical assets, including information, systems, people, and suppliers
+- Document assumptions and constraints, including business objectives, resource availability, and legal or regulatory requirements
+- Identify information sources such as system diagrams, standards, threat intelligence, audit findings, and previous incidents
+
+### Step 2: Risk assessment
+
+The objective of this step is to identify, analyze, and evaluate information security risks.
+
+Risk identification determines:
+
+- Threats that could cause harm to Grunt AS
+- Vulnerabilities in systems, processes, suppliers, or controls
+- Assets or processes that require protection
+- Potential consequences if the risk occurs
+
+Risk analysis determines:
+
+- Likelihood of the risk occurring
+- Impact if the risk occurs
+- Overall risk level based on likelihood and impact
+
+Risk evaluation compares the analyzed risk against Grunt AS risk criteria.
+
+Risks above the acceptable threshold are prioritized for treatment.
+
+Lower-level risks may be accepted or monitored.
+
+### Step 3: Risk treatment
+
+The objective of this step is to decide how Grunt AS will address identified risks.
+
+Treatment activities include:
+
+- Selecting a risk response: avoid, mitigate, transfer, or accept
+- Defining specific treatment actions, timelines, and responsible personnel
+- Confirming that the treatment aligns with business objectives and risk appetite
+- Getting approval for the selected treatment or acceptance decision
+- Implementing and tracking the treatment plan
+
+### Step 4: Risk communication and consultation
+
+The objective of this step is to make sure relevant stakeholders understand risk assessment results and treatment decisions.
+
+Communication activities include:
+
+- Sharing findings with leadership, teams, and decision-makers
+- Consulting relevant personnel for input on risks and treatments
+- Reporting risks, treatment status, and material changes clearly
+- Retaining records that support risk decisions
+
+### Step 5: Risk monitoring and review
+
+The objective of this step is to keep risk information current and confirm that treatments remain effective.
+
+Monitoring activities include:
+
+- Monitoring changes in threats, vulnerabilities, assets, suppliers, and business context
+- Reviewing treatment effectiveness
+- Updating risk assessments at least annually and when significant changes occur
+- Maintaining current risk records, treatment plans, and monitoring evidence
+
+## Appendix B - Risk assessment matrix and description key
+
+Each risk is assessed using likelihood and impact.
+
+Likelihood ranges from 1, very unlikely, to 5, very likely.
+
+Impact ranges from 1, very low impact, to 5, very high impact.
+
+### Risk matrix
+
+| Impact \ Likelihood | Very unlikely (1) | Unlikely (2) | Somewhat likely (3) | Likely (4) | Very likely (5) |
+|---------------------|-------------------|--------------|---------------------|------------|-----------------|
+| Very high impact (5) | 5 | 10 | 15 | 20 | 25 |
+| High impact (4) | 4 | 8 | 12 | 16 | 20 |
+| Medium impact (3) | 3 | 6 | 9 | 12 | 15 |
+| Low impact (2) | 2 | 4 | 6 | 8 | 10 |
+| Very low impact (1) | 1 | 2 | 3 | 4 | 5 |
+
+### Risk levels
+
+| Risk level | Score | Description |
+|------------|-------|-------------|
+| Low | 1-4 | A threat event could have a limited adverse effect on Grunt AS operations, assets, customers, or other organizations. |
+| Medium | 5-14 | A threat event could have a serious adverse effect on Grunt AS operations, assets, customers, or other organizations. |
+| High | 15-25 | A threat event could have a severe adverse effect on Grunt AS operations, assets, customers, or other organizations. |
+
+### Impact descriptions
+
+| Impact | Score | Description |
+|--------|-------|-------------|
+| Very low impact | 1 | The event would have almost no adverse effect on operations, assets, individuals, customers, or other organizations. |
+| Low impact | 2 | The event would have a limited adverse effect, such as minor degradation, minor damage, minor financial loss, or limited effect on non-critical resources. |
+| Medium impact | 3 | The event would have a serious adverse effect, such as reduced operational capability, meaningful disruption, or significant effect on some critical resources. |
+| High impact | 4 | The event would have a severe adverse effect, such as major damage, major financial loss, or loss of one or more primary functions. |
+| Very high impact | 5 | The event would have multiple severe or catastrophic effects across operations, assets, individuals, customers, or other organizations. |
+
+### Likelihood descriptions
+
+| Likelihood | Score | Description |
+|------------|-------|-------------|
+| Very unlikely | 1 | The event is not expected to occur. The threat source lacks motivation or capability, or controls prevent or significantly impede exploitation. |
+| Unlikely | 2 | The event is unlikely, but there is a slight possibility it may occur. The threat source has limited motivation or capability, or controls reduce the likelihood. |
+| Somewhat likely | 3 | The event may occur. The threat source has motivation or capability, but controls may reduce successful exploitation. |
+| Likely | 4 | The event is likely. The threat source has motivation, capability, and resources, but some controls may reduce successful exploitation. |
+| Very likely | 5 | The event is highly likely. Controls are missing, ineffective, or unlikely to prevent exploitation. |
