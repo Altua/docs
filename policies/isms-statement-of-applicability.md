@@ -4,7 +4,8 @@
 
 | Version | Effective date | Owner | Summary |
 |---------|----------------|-------|---------|
-| 1.1 | May 11, 2026 | Jan Kristian Bjerke | Reformatted the statement of applicability for the documentation repository, removed duplicate control rows, updated controls 8.4, 8.6, and 8.14 to be in scope, and marked all applicable controls as implemented. |
+| 1.2 | May 15, 2026 | Jan Kristian Bjerke | Updated control 8.14 to be applicable, marked remaining applicable controls as implemented, and updated the summary counts. |
+| 1.1 | May 11, 2026 | Jan Kristian Bjerke | Reformatted the statement of applicability for the documentation repository, removed duplicate control rows, updated controls 8.4 and 8.6 to be applicable, and marked in-progress controls as implemented. |
 | 1.0 | February 9, 2026 | Mads Gedde | Initial statement of applicability. Approved by Einar Bjering. |
 
 ## Purpose
