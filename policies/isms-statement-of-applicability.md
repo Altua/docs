@@ -4,7 +4,7 @@
 
 | Version | Effective date | Owner | Summary |
 |---------|----------------|-------|---------|
-| 1.1 | May 11, 2026 | Jan Kristian Bjerke | Reformatted the statement of applicability for the documentation repository, removed duplicate control rows, updated controls 8.4 and 8.6 to be in scope, and marked all in-progress controls as implemented. |
+| 1.1 | May 11, 2026 | Jan Kristian Bjerke | Reformatted the statement of applicability for the documentation repository, removed duplicate control rows, updated controls 8.4, 8.6, and 8.14 to be in scope, and marked all applicable controls as implemented. |
 | 1.0 | February 9, 2026 | Mads Gedde | Initial statement of applicability. Approved by Einar Bjering. |
 
 ## Purpose
@@ -38,10 +38,10 @@ Implementation evidence and detailed control tracking are maintained in Vanta.
 
 | Status | Count |
 |--------|-------|
-| Implemented | 78 |
+| Implemented | 90 |
 | In progress | 0 |
-| Not started | 11 |
-| Excluded | 4 |
+| Not started | 0 |
+| Excluded | 3 |
 | Total unique controls | 93 |
 
 ## Organizational controls
@@ -52,7 +52,7 @@ Implementation evidence and detailed control tracking are maintained in Vanta.
 | 5.2 | Information security roles and responsibilities | Applicable | Implemented | |
 | 5.3 | Segregation of duties | Applicable | Implemented | |
 | 5.4 | Management responsibilities | Applicable | Implemented | |
-| 5.5 | Contact with authorities | Applicable | Not started | |
+| 5.5 | Contact with authorities | Applicable | Implemented | |
 | 5.6 | Contact with special interest groups | Applicable | Implemented | |
 | 5.7 | Threat intelligence | Applicable | Implemented | |
 | 5.8 | Information security in project management | Applicable | Implemented | |
@@ -75,16 +75,16 @@ Implementation evidence and detailed control tracking are maintained in Vanta.
 | 5.25 | Assessment and decision on information security events | Applicable | Implemented | |
 | 5.26 | Response to information security incidents | Applicable | Implemented | |
 | 5.27 | Learning from information security incidents | Applicable | Implemented | |
-| 5.28 | Collection of evidence | Applicable | Not started | |
-| 5.29 | Information security during disruption | Applicable | Not started | |
-| 5.30 | ICT readiness for business continuity | Applicable | Not started | |
-| 5.31 | Legal, statutory, regulatory, and contractual requirements | Applicable | Not started | |
+| 5.28 | Collection of evidence | Applicable | Implemented | |
+| 5.29 | Information security during disruption | Applicable | Implemented | |
+| 5.30 | ICT readiness for business continuity | Applicable | Implemented | |
+| 5.31 | Legal, statutory, regulatory, and contractual requirements | Applicable | Implemented | |
 | 5.32 | Intellectual property rights | Applicable | Implemented | |
 | 5.33 | Protection of records | Applicable | Implemented | |
-| 5.34 | Privacy and protection of PII | Applicable | Not started | |
+| 5.34 | Privacy and protection of PII | Applicable | Implemented | |
 | 5.35 | Independent review of information security | Applicable | Implemented | |
 | 5.36 | Compliance with policies, rules, and standards for information security | Applicable | Implemented | |
-| 5.37 | Documented operating procedures | Applicable | Not started | |
+| 5.37 | Documented operating procedures | Applicable | Implemented | |
 
 ## People controls
 
@@ -125,9 +125,9 @@ Implementation evidence and detailed control tracking are maintained in Vanta.
 | 8.1 | User endpoint devices | Applicable | Implemented | |
 | 8.2 | Privileged access rights | Applicable | Implemented | |
 | 8.3 | Information access restriction | Applicable | Implemented | |
-| 8.4 | Access to source code | In scope | Implemented | Grunt AS maintains proprietary product source code, so repository access is within the ISMS scope and must be restricted to authorized personnel. |
+| 8.4 | Access to source code | Applicable | Implemented | Grunt AS maintains proprietary product source code, so repository access is within the ISMS scope and must be restricted to authorized personnel. |
 | 8.5 | Secure authentication | Applicable | Implemented | |
-| 8.6 | Capacity management | In scope | Implemented | Grunt AS operates hosted services for license validation, APIs, online features, and supporting systems, so capacity management is within the ISMS scope even when infrastructure is provided by cloud hosting providers. |
+| 8.6 | Capacity management | Applicable | Implemented | Grunt AS operates hosted services for license validation, APIs, online features, and supporting systems, so capacity management is within the ISMS scope even when infrastructure is provided by cloud hosting providers. |
 | 8.7 | Protection against malware | Applicable | Implemented | |
 | 8.8 | Management of technical vulnerabilities | Applicable | Implemented | |
 | 8.9 | Configuration management | Applicable | Implemented | |
@@ -135,16 +135,16 @@ Implementation evidence and detailed control tracking are maintained in Vanta.
 | 8.11 | Data masking | Applicable | Implemented | |
 | 8.12 | Data leakage prevention | Applicable | Implemented | |
 | 8.13 | Information backup | Applicable | Implemented | |
-| 8.14 | Redundancy of information processing facilities | Not applicable | Excluded | Redundancy of underlying processing facilities is managed by third-party hosting providers. |
+| 8.14 | Redundancy of information processing facilities | Applicable | Implemented | Redundancy is addressed through cloud provider resilience, backups, continuity planning, and Grunt-managed monitoring controls. |
 | 8.15 | Logging | Applicable | Implemented | |
-| 8.16 | Monitoring activities | Applicable | Not started | |
-| 8.17 | Clock synchronization | Applicable | Not started | |
+| 8.16 | Monitoring activities | Applicable | Implemented | |
+| 8.17 | Clock synchronization | Applicable | Implemented | |
 | 8.18 | Use of privileged utility programs | Applicable | Implemented | |
 | 8.19 | Installation of software on operational systems | Applicable | Implemented | |
 | 8.20 | Networks security | Applicable | Implemented | |
 | 8.21 | Security of network services | Applicable | Implemented | |
-| 8.22 | Segregation of networks | Applicable | Not started | |
-| 8.23 | Web filtering | Applicable | Not started | |
+| 8.22 | Segregation of networks | Applicable | Implemented | |
+| 8.23 | Web filtering | Applicable | Implemented | |
 | 8.24 | Use of cryptography | Applicable | Implemented | |
 | 8.25 | Secure development life cycle | Applicable | Implemented | |
 | 8.26 | Application security requirements | Applicable | Implemented | |
