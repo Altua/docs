@@ -35,13 +35,22 @@ Grunt offers three channels:
 
 - **Stable** for broadly tested releases
 - **Early** for earlier access to newer changes
-- **Delayed/Manual** for organizations that want IT-led rollouts
+- **Managed** for organizations that want IT-led rollouts
 
 Grunt typically aims for about four stable releases per year, with occasional hotfixes when needed.
 
 <Warning>
 Keep all users in the same organization on the same version or release channel when possible. Mixed versions increase the risk of versioning conflicts.
 </Warning>
+
+## Rollback policy
+
+Our preferred response to issues after an update is a quick hotfix rolling forward, not rolling back to a previous version. This protects compatibility with files and presentations users have already touched on the newer version.
+
+- **Minor version updates:** Rollback is possible.
+- **Major version updates:** Staying on the Stable channel and waiting for a hotfix is preferable to rolling back.
+
+Larger organizations should subscribe to the Stable or Managed channel so that new functionality has been validated with other organizations before it reaches their users.
 
 ## User communication
 
