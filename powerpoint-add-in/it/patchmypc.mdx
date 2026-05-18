@@ -1,0 +1,133 @@
+---
+title: "Deploy with PatchMyPC"
+description: "Use Patch My PC to package, deploy, and keep Grunt up to date through Intune or ConfigMgr"
+---
+
+[Patch My PC](https://patchmypc.com/) automates third-party application packaging and patching for Microsoft Intune and ConfigMgr (SCCM). Because Grunt ships as a standard MSI installer, you can add it as a **custom application** in the Patch My PC catalog and let the platform handle packaging, publishing, and ongoing updates.
+
+<Info>
+This guide assumes you already have a working Patch My PC environment connected to Intune or ConfigMgr. See the [Patch My PC documentation](https://docs.patchmypc.com/) for initial setup.
+</Info>
+
+## Prerequisites
+
+- A licensed Patch My PC Publisher or Patch My PC Cloud subscription
+- The Grunt MSI installer downloaded from [app.grunt.pro/download](https://app.grunt.pro/download) — use the `x64` package for most environments or `arm64` for Windows on ARM
+- Intune or ConfigMgr connected to your Patch My PC environment
+- Admin rights to create and publish custom applications
+
+## Create a custom application
+
+Grunt is not part of the default Patch My PC catalog, so you need to add it as a custom application.
+
+### Patch My PC Cloud
+
+1. Open the **Patch My PC Cloud** portal.
+2. Navigate to **Custom Apps** and select **Create Custom App**.
+3. Upload the Grunt MSI installer.
+4. Set the following on the **Configuration** tab:
+
+| Setting | Value |
+| --- | --- |
+| **App name** | Grunt |
+| **Install command** | `msiexec /i grunt-<version>-x64.msi MSIINSTALLPERUSER=0 /qn` |
+| **Uninstall command** | `msiexec /x grunt-<version>-x64.msi /qn` |
+| **Install behavior** | System (per-machine) |
+
+5. Configure a detection rule (see [Detection rules](#detection-rules) below).
+6. Save the custom app.
+
+### Patch My PC Publisher (on-premises)
+
+1. Open the **Patch My PC Publishing Service**.
+2. Go to the **Custom Apps** node.
+3. Add a new custom application and point it to the Grunt MSI.
+4. Set the silent install command:
+
+```bash
+msiexec /i grunt-<version>-x64.msi MSIINSTALLPERUSER=0 /qn
+```
+
+5. Configure detection rules and any required metadata.
+6. Enable the custom app by checking the box next to it in the catalog.
+7. Run a **Publishing Service sync** to publish the app to Intune or ConfigMgr.
+
+## Detection rules
+
+Use one of the following approaches so Intune or ConfigMgr can verify that Grunt is installed.
+
+### Registry-based detection (recommended)
+
+| Property | Value |
+| --- | --- |
+| **Rule type** | Registry |
+| **Key path** | `HKEY_LOCAL_MACHINE\Software\Grunt` |
+| **Value name** | `Version` |
+| **Detection method** | Value exists |
+
+### File-based detection
+
+| Property | Value |
+| --- | --- |
+| **Rule type** | File |
+| **Path** | `C:\Program Files\Grunt` |
+| **File** | `Grunt.PowerPoint.ComAddinNE.dll` |
+| **Detection method** | File exists |
+
+## Publish and assign
+
+After the custom app is configured:
+
+1. Publish the application through a sync cycle.
+2. In Intune or ConfigMgr, assign the Grunt application to the target device or user groups.
+3. Set the assignment type to **Required** for automatic deployment or **Available** for Company Portal self-service.
+
+## Update workflow
+
+When a new Grunt version is released:
+
+1. Download the updated MSI from [app.grunt.pro/download](https://app.grunt.pro/download).
+2. Upload the new installer to your custom app in Patch My PC (Cloud or Publisher).
+3. Update the version number and install command if the filename changed.
+4. Run a sync to publish the update.
+
+Patch My PC detects the version change and pushes the update through your existing Intune or ConfigMgr deployment assignments.
+
+<Warning>
+Per-machine installs disable Grunt's built-in auto-update. Make sure your Patch My PC workflow covers ongoing updates so users stay on a supported version. See [Update management](/powerpoint-add-in/it/update-management) for more detail.
+</Warning>
+
+## Validate deployment
+
+After rollout, verify on a target device:
+
+1. Open PowerPoint and confirm the **Grunt** tab appears in the ribbon.
+2. Go to **Grunt** > **Settings** > **License** and confirm the license is active.
+3. Check the install path is `C:\Program Files\Grunt`.
+4. Confirm the registry key `HKEY_LOCAL_MACHINE\Software\Grunt\Version` matches the deployed version.
+
+## Troubleshooting
+
+| Symptom | Action |
+| --- | --- |
+| Grunt tab does not appear after install | Verify the COM add-in registration under `HKLM\Software\Microsoft\Office\PowerPoint\AddIns\Grunt`. Check that `LoadBehavior` is `3`. |
+| Install fails silently | Review the MSI log. Run with logging enabled: `msiexec /i grunt-<version>-x64.msi MSIINSTALLPERUSER=0 /qn /l*v grunt-install.log` |
+| Detection rule does not match | Confirm the install completed under `C:\Program Files\Grunt` and not the per-user path. Per-machine mode requires `MSIINSTALLPERUSER=0`. |
+| Endpoint protection blocks install | Allowlist `Grunt.PowerPoint.ComAddinNE.dll` in your endpoint protection policy. See [Network and security](/powerpoint-add-in/it/network-and-security). |
+
+## Related pages
+
+<CardGroup cols={2}>
+  <Card title="Deployment and installation" icon="box" href="/powerpoint-add-in/it/deployment-and-installation">
+    Overview of install models and prerequisites
+  </Card>
+  <Card title="Windows installation" icon="windows" href="/powerpoint-add-in/it/windows-installation">
+    Registry entries and MSI details
+  </Card>
+  <Card title="Update management" icon="arrows-rotate" href="/powerpoint-add-in/it/update-management">
+    Release channels and update policies
+  </Card>
+  <Card title="Network and security" icon="shield" href="/powerpoint-add-in/it/network-and-security">
+    Firewall rules and endpoint allowlisting
+  </Card>
+</CardGroup>
