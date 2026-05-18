@@ -5,6 +5,7 @@
 # Draft content
 drafts/
 *.draft.mdx
+AGENTS.md
 
 # Standalone policy content and tooling
 policies/

@@ -9,7 +9,7 @@ Common questions we receive from IT departments during vendor assessments and se
 
 <AccordionGroup>
   <Accordion title="Can Grunt read or access data in our Excel and PowerPoint?">
-    No. Grunt cannot access any information contained in your Excel or PowerPoint files. We do not store any information other than the items listed in our [data policy](https://app.grunt.pro/legal), which are necessary for account creation, login, and tracking error metrics needed to provide support.
+    The local Grunt add-in reads the selected Excel ranges needed to create and refresh Grunt objects. For SharePoint and OneDrive workbooks, it can read those ranges through Microsoft Graph with the signed-in user's delegated `Files.Read` permission. Workbook contents are not sent to or stored in Grunt cloud services. We store only the items listed in our [data policy](https://app.grunt.pro/legal), which are necessary for account creation, login, and tracking error metrics needed to provide support.
   </Accordion>
 
   <Accordion title="Does the supplier process any personal data on behalf of the client?">

@@ -1,9 +1,11 @@
 ---
 title: "Excel connections"
-description: "Connect Grunt objects to Excel, manage updates, and avoid broken workbook paths"
+description: "Connect Grunt objects to Excel, refresh SharePoint-backed workbooks, and manage overrides"
 ---
 
 Use Excel connections when your data should keep updating after the slide is created.
+
+For workbooks stored in SharePoint or OneDrive, Grunt can refresh selected ranges through Microsoft Graph. The connection is stored as a cloud file link, so collaborators do not need the same local sync path on their computers.
 
 ## Connect a Visual Grid to Excel
 
@@ -15,7 +17,9 @@ To create a linked Visual Grid:
 4. Paste the data through Grunt.
 5. Size the Visual Grid on the slide.
 
-Grunt links the grid back to the workbook and keeps the original workbook path with the object.
+Grunt links the grid back to the workbook and keeps the workbook reference with the object.
+
+If the workbook is stored in SharePoint or OneDrive and Grunt offers **Use cloud file**, choose it. This stores the SharePoint-backed location instead of the local synced path.
 
 ## Connect any chart to Excel
 
@@ -63,22 +67,44 @@ Advanced tip from the legacy guidance:
 
 - If you use only the top-left workbook cell as the starting range, Grunt can expand and contract the detected dataset dynamically.
 
+<Info>
+SharePoint refresh supports regular selected ranges and named ranges. Greedy ranges and style-heavy imports may use the Excel desktop fallback when needed.
+</Info>
+
+## Refresh SharePoint and OneDrive workbooks
+
+When a connection is stored as a cloud file, Grunt reads the selected workbook range from SharePoint or OneDrive through Microsoft Graph.
+
+This means:
+
+- The workbook does not have to be opened in Excel just to refresh values.
+- Each collaborator refreshes with their own Microsoft account and workbook permissions.
+- Grunt reads the selected range, number formats, and formulas needed for the object.
+- The workbook data is used locally by the add-in and is not stored in Grunt cloud services.
+
+You may be asked to sign in with Microsoft the first time Grunt needs Graph access. Your organization may also need to approve the requested Microsoft Graph permission.
+
+<Note>
+If Graph refresh is unavailable, Grunt falls back to reading through the Excel desktop app.
+</Note>
+
 ## Avoid workbook-not-found issues
 
-Most broken Excel links are path problems, not data problems.
+Most broken Excel links are path problems or permission problems, not data problems.
 
 To reduce failures:
 
 - Store the workbook in a shared location all collaborators can access
-- Prefer a synced shared folder or shared SharePoint location over a personal local path
-- Avoid OneDrive or SharePoint shortcuts
+- Prefer SharePoint or OneDrive locations that Grunt can store as cloud files
+- Choose **Use cloud file** if Grunt warns that a cloud file is stored as a local file
+- Avoid OneDrive or SharePoint shortcuts that point to a location Grunt cannot resolve
 - Make sure every collaborator can open the workbook directly in Excel
 
-## Make cloud files available locally
+## When a local file path is still used
 
-Grunt works best when it can access a real local file path, even if the source lives in SharePoint or OneDrive.
+Some connection features still need Excel desktop access. This includes some advanced range expansion and style-reading cases.
 
-That is why the legacy support guidance recommends syncing the shared file library locally before you connect it in Grunt.
+If Grunt falls back to Excel desktop, make sure the workbook can still be opened from the machine you are using. For SharePoint and OneDrive files, keep the library synced locally as a fallback.
 
 ## Data limits for Excel connections
 
@@ -91,12 +117,13 @@ If your Excel range exceeds these limits, you will see a **"Range has too many r
 
 ## OneDrive-synced files may not auto-detect changes
 
-When working with files synced through OneDrive, Grunt may not always detect changes automatically after you save in Excel. This depends on how OneDrive handles file synchronization on your machine.
+When working with files synced through OneDrive as local paths, Grunt may not always detect changes automatically after you save in Excel. This depends on how OneDrive handles file synchronization on your machine.
 
 If you do not see the update notification:
 
 1. Click **Update** manually in the Grunt ribbon or edge menu to check for changes.
-2. Verify the file is fully synced in OneDrive (check for the green checkmark icon).
+2. If Grunt shows **Use cloud file**, switch the connection to the cloud file.
+3. Verify the file is fully synced in OneDrive if the connection still uses a local fallback path.
 
 <Info>
 Testing with a fully local (non-OneDrive) file can help confirm whether the issue is related to OneDrive sync behavior.
@@ -104,7 +131,9 @@ Testing with a fully local (non-OneDrive) file can help confirm whether the issu
 
 ## File permissions and data refresh
 
-Grunt uses the same file access permissions as your Windows account. If you do not have access to the linked Excel file, Grunt cannot read it or notify you of changes — even if someone else with access has updated the file.
+For SharePoint and OneDrive workbooks, Grunt uses your Microsoft account permissions. If you do not have access to the linked Excel file, Grunt cannot read it or notify you of changes, even if someone else with access has updated the file.
+
+For local fallback reads, Grunt uses the file access permissions available on your machine.
 
 Make sure every collaborator who needs update notifications has direct access to the workbook.
 

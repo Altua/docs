@@ -17,6 +17,8 @@ Legacy support guidance describes two main ways to connect a chart to workbook d
 
 Grunt stores the cell reference and prompts you to update when the workbook changes later.
 
+For workbooks stored in SharePoint or OneDrive, use the cloud file connection when Grunt offers it. This lets Grunt refresh the selected range through SharePoint instead of depending on a local synced path.
+
 ### Method 2: Replace chart data
 
 1. Select the chart in PowerPoint.
@@ -33,6 +35,8 @@ When the workbook changes:
 3. Use the Grunt update prompt or **Update** control to refresh the chart.
 
 If your dataset keeps expanding, consider using Greedy rows or columns in the Excel connection advanced settings.
+
+SharePoint-backed connections can refresh regular ranges and named ranges through Microsoft Graph. If a chart uses Greedy rows or columns, Grunt may use the Excel desktop fallback during refresh.
 
 ## When a chart turns into an image
 

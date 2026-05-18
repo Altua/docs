@@ -22,6 +22,8 @@ To create a new Visual Grid from Excel data:
 
 Grunt creates the Visual Grid with the same initial row and column count as the copied range and links it back to the workbook.
 
+If the workbook is stored in SharePoint or OneDrive and Grunt offers **Use cloud file**, choose it. The connection can then refresh through SharePoint instead of depending on one person's local sync path.
+
 <Info>
 If PowerPoint pastes a native table instead of a Grunt visual, check that the Grunt paste option is enabled in the ribbon.
 </Info>
@@ -41,6 +43,8 @@ You can also replace a chart's source later from the **Excel Connection** contro
 For linked workbooks, update the data in Excel first. When you save the workbook, Grunt notifies you that fresh data is available. You can then choose when to update the slide.
 
 This is the recommended workflow because edits made directly in PowerPoint do not write back to Excel.
+
+For SharePoint or OneDrive workbooks stored as cloud files, Grunt can read the selected range through Microsoft Graph using your Microsoft account permissions. If that is not available for a specific connection, Grunt falls back to the Excel desktop app.
 
 ## Edit data in PowerPoint
 
@@ -73,8 +77,9 @@ You can also mix data sources by inserting extra rows or columns in PowerPoint. 
 To avoid workbook-not-found issues when several people work on the same presentation:
 
 - Store the workbook in a shared location that every collaborator can access.
-- Prefer the SharePoint or synced shared folder path over a local personal path.
-- Do not rely on OneDrive or SharePoint shortcuts.
+- Prefer SharePoint or OneDrive locations that Grunt can store as cloud files.
+- Use **Use cloud file** if Grunt warns that a cloud workbook is stored as a local file.
+- Do not rely on OneDrive or SharePoint shortcuts that point to a location Grunt cannot resolve.
 - Confirm that every collaborator can open the workbook directly in Excel.
 
 ## Continue

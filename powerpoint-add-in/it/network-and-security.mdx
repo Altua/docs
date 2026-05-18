@@ -14,11 +14,22 @@ Allow outbound HTTPS on port `443` to the required Grunt service endpoints:
 
 If users are behind a proxy, make sure proxy policy allows Grunt API communication. In affected environments, users may also need to enable **Use default proxy for API communication** in Grunt.
 
+For Microsoft sign-in, SSO, and SharePoint-backed Excel refresh, also allow outbound HTTPS on port `443` to Microsoft services:
+
+- `login.microsoftonline.com`
+- `graph.microsoft.com`
+
+SharePoint-backed Excel refresh uses Microsoft Graph from the local PowerPoint add-in. The add-in requests delegated `Files.Read` access so it can read the selected workbook range with the signed-in user's Microsoft permissions.
+
+<Info>
+Grunt uses a local browser redirect during Microsoft authentication. Security software should allow loopback traffic to `http://localhost:12345` for the sign-in flow.
+</Info>
+
 ## Endpoint allowlisting
 
 Use your organization's standard allowlist process for the domains above.
 
-When troubleshooting blocked license checks, sign-in, templates, or updates, start by testing endpoint reachability from affected devices.
+When troubleshooting blocked license checks, sign-in, templates, SharePoint Excel refresh, or updates, start by testing endpoint reachability from affected devices.
 
 ## Endpoint protection considerations
 
