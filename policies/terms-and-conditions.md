@@ -1,93 +1,183 @@
-# Terms and Conditions (EULA)
+# Terms of Service
 
-**END-USER LICENSE AGREEMENT FOR Grunt Add-ln for Microsoft PowerPoint**
+*Last updated: 13 May 2026*
 
-*Please read this End-User License Agreement ("AGREEMENT") carefully before downloading, installing or using  Grunt Add-In for Microsoft PowerPoint.*
+These Terms of Service (the "Agreement") form a legal agreement between Grunt AS, a Norwegian company with registered office at Lilleakerveien 2D, 0283 Oslo, Norway ("Grunt", "we", "us"), and the entity or individual identified as the customer on an order, invoice, or account registration ("Customer", "you"). The Agreement governs Customer's access to and use of the Grunt software, services, and related materials made available by Grunt (collectively, the "Service").
 
-Grunt AS End-User License Agreement ("EULA") is a legal agreement between you (either an individual or a single entity) and Grunt AS for the Grunt AS software product(s) identified above, which may include associated software components, media, printed materials, and "online" or electronic documentation ("SOFTWARE PRODUCT"). By installing, copying, or otherwise using the SOFTWARE PRODUCT, you agree to be bound by the terms of this EULA. This license agreement represents the entire agreement concerning the program between you and Grunt AS, (referred to as "licenser"), and it supersedes any prior proposal, representation, or understanding between the parties. If you do not agree to the terms of this EULA, do not install or use the SOFTWARE PRODUCT. The SOFTWARE PRODUCT is protected by copyright laws and international copyright treaties, as well as other intellectual property laws and treaties. The SOFTWARE PRODUCT is licensed, not sold.
+By placing an order, registering for an account, or otherwise accessing or using the Service, Customer agrees to be bound by this Agreement. If Customer does not agree, Customer may not access or use the Service.
 
-### 1. GRANT OF LICENSE
+### 1. Definitions
 
-The SOFTWARE PRODUCT is licensed as follows:
+**"Service"** means the Grunt software products and related add-ins and integrations for host applications (including the Grunt Add-In for Microsoft PowerPoint), together with the hosted services made available by Grunt to Customer, and any related documentation, updates, and support provided by Grunt.
 
-#### (a) Installation and Use.
+**"Customer Content"** means content (including presentations, spreadsheets, data, text, images, and similar materials) that Customer or its Authorized Users submit to or process through the Service.
 
-Grunt AS grants you the right to install and use copies of the SOFTWARE PRODUCT on your computer running a validly licensed copy of the operating system for which the SOFTWARE PRODUCT was designed [e.g. Microsoft Windows 7, Windows 8, Windows 10] and a validly licensed copy of the host application [e.g. the Microsoft Office Suite].
+**"Authorized User"** means an individual employee, contractor, or agent of Customer to whom Customer grants access to the Service.
 
-#### (b) Backup Copies.
+**"Order"** means an order form, subscription confirmation, online checkout, or invoice issued by or on behalf of Grunt that identifies the Service, the deployment model, the term, and the fees applicable to Customer.
 
-You may also make copies of the SOFTWARE PRODUCT as may be necessary for backup and archival purposes.
+**"Documentation"** means the user and technical documentation made available by Grunt for the Service.
 
-### 2. DESCRIPTION OF OTHER RIGHTS AND LIMITATIONS
+### 2. The Service
 
-#### (a) Maintenance of Copyright Notices
+#### 2.1 Right to use the Service
 
-You must not remove or alter any copyright notices on any and all copies of the SOFTWARE PRODUCT.
+Subject to this Agreement and payment of applicable fees, Grunt grants Customer a non-exclusive, non-transferable, non-sublicensable right during the Term to access and use the Service for Customer's internal business purposes, in accordance with the Documentation and the Order.
 
-#### (b) Distribution
+#### 2.2 Hosting
 
-You must not distribute copies of the SOFTWARE PRODUCT to third parties
+Each Grunt add-in or integration runs within the host application environment to which it integrates. The Grunt Add-In for Microsoft PowerPoint, for example, is installed locally on Customer's computer and runs there. Auxiliary services that support those integrations — including license validation and other server-side product features — run on Grunt-operated cloud infrastructure (**Grunt Cloud**). The content distribution feature also runs on Grunt Cloud by default; where identified in the Order, it may instead be deployed in a single-tenant Azure subscription operated by Grunt (**Grunt Managed**) or in Customer's own Azure tenant operated by Customer (**Grunt Self-Hosted**). The hosting arrangement for content distribution affects where and by whom that content is processed, as described in the [Privacy Policy](/privacy-policy/).
 
-#### (c) Prohibition on Reverse Engineering, Decompilation, and Disassembly
+#### 2.3 Third-party host applications
 
-You may not reverse engineer, decompile, or disassemble the SOFTWARE PRODUCT, except and only to the extent that such activity is expressly permitted by applicable law notwithstanding this limitation.
+Customer's use of Grunt add-ins and integrations within a third-party host application (such as Microsoft PowerPoint or Google Workspace) is also subject to that host application's own terms and policies. Grunt is not responsible for the availability or behavior of third-party host applications.
 
-#### (d) Rental
+#### 2.4 Authorized Users
 
-You may not rent, lease, or lend the SOFTWARE PRODUCT.
+Customer is responsible for its Authorized Users' compliance with this Agreement and for any acts or omissions of its Authorized Users in connection with the Service.
 
-#### (e) Support Services
+#### 2.5 Updates
 
-Grunt AS may provide you with support services related to the SOFTWARE PRODUCT ("Support Services"). Any supplemental software code provided to you as part of the Support Services shall be considered part of the SOFTWARE PRODUCT and subject to the terms and conditions of this EULA.
+Grunt may update the Service from time to time. Updates may be installed automatically. Grunt will not materially reduce the functionality of the Service during the then-current term without offering Customer a reasonable alternative.
 
-#### (f) Updates
+### 3. Customer obligations and acceptable use
 
-The SOFTWARE PRODUCT periodically checks for updates from Grunt AS and downloads and installs them for you. By accepting this agreement, you agree to receive these types of automatic updates without any additional notice.
+Customer agrees that it will not, and will not permit any Authorized User or third party to: copy, modify, or create derivative works of the Service, except as expressly permitted under this Agreement; reverse engineer, decompile, or disassemble the Service, except to the extent such activity is expressly permitted by applicable law notwithstanding this limitation; rent, lease, lend, sublicense, or otherwise make the Service available to any third party; remove or alter any copyright, trademark, or other proprietary notices contained in the Service; or use the Service in violation of applicable law or in a manner that infringes the rights of any third party.
 
-#### (g) Data collection
+### 4. Customer Content
 
-You agree that Grunt AS collect, use, store and transmit technical and related information that identifies your computer (including CPU ID, Internet Protocol Address), operating system, email address, application usage and error reports that may be gathered to facilitate the provision of software updates, dynamically served content, product support and other services to you, including online services. IF YOU DO NOT WANT Grunt AS TO COLLECT, USE, STORE, TRANSMIT OR DISPLAY THE DATA DESCRIBED IN THIS SECTION, PLEASE DO NOT INSTALL OR USE THE APPLICATION.
+#### 4.1 Ownership
 
-In addition, when you use features that require Grunt AS to process content you provide — including AI functionality and content distribution features — the content you submit to those features is transmitted to Grunt AS and, where applicable, to our sub-processors, solely to deliver the requested functionality. See the [Privacy Policy](/privacy-policy/) for details on how this content is handled.
+As between the parties, Customer retains all right, title, and interest in and to Customer Content. Customer grants Grunt a limited, non-exclusive, worldwide, royalty-free license to host, copy, transmit, display, and otherwise process Customer Content solely as necessary to provide the Service and the features Customer requests.
 
-#### (h) Customer content
+#### 4.2 Use of Customer Content
 
-As between you and Grunt AS, you retain all right, title, and interest in and to the content you submit to the SOFTWARE PRODUCT ("Customer Content"). You grant Grunt AS a limited, non-exclusive, worldwide, royalty-free license to host, copy, transmit, display, and otherwise process Customer Content solely as necessary to provide the SOFTWARE PRODUCT and the features you request (including AI functionality and content distribution). Grunt AS will not use Customer Content to train third-party or general-purpose AI models. You are responsible for ensuring you have the rights necessary to submit Customer Content to the SOFTWARE PRODUCT and to permit its processing as described in this EULA and the [Privacy Policy](/privacy-policy/).
+Grunt will not use Customer Content to train third-party or general-purpose AI models, and will require its AI sub-processors to commit to the same restriction. Customer Content is processed in accordance with this Agreement and the [Privacy Policy](/privacy-policy/).
 
-#### (i) Sub-processors
+#### 4.3 Customer responsibility
 
-Grunt AS engages third-party sub-processors to help provide certain features of the SOFTWARE PRODUCT, including hosting providers and AI service providers that process content submitted to AI features. By using the SOFTWARE PRODUCT, you agree to Grunt AS's use of sub-processors for these purposes. A current list of sub-processors is available on request.
+Customer represents and warrants that (i) it has all rights necessary to submit Customer Content to the Service and to permit its processing as described in this Agreement and the Privacy Policy, and (ii) Customer Content does not violate applicable law and does not infringe the intellectual property, privacy, publicity, or other rights of any third party.
 
-#### (j) AI-generated output
+#### 4.4 Return and deletion on termination
 
-Features of the SOFTWARE PRODUCT that use artificial intelligence or machine learning generate output based on the inputs you provide and the behavior of the underlying models. Such output may be inaccurate, incomplete, or otherwise unsuitable for your intended purpose. You are solely responsible for reviewing, validating, and determining the suitability of any AI-generated output before relying on it or using it for any purpose. Grunt AS does not warrant the accuracy, completeness, or fitness for any particular purpose of AI-generated output.
+Upon termination or expiration of the Agreement, Grunt will, at Customer's request made within 30 days, make Customer Content stored on Grunt-operated infrastructure available for export in a commonly used format. Following that period, Grunt will delete such Customer Content from its systems in accordance with the Privacy Policy, unless retention is required by law. Where content distribution is deployed under Grunt Self-Hosted, the distributed content resides in Customer's own Azure tenant and is governed by Customer's own retention and deletion controls.
 
-#### (k) Compliance with Applicable Laws
+### 5. AI features
 
-You must comply with all applicable laws regarding use of the SOFTWARE PRODUCT.
+Some features of the Service use artificial intelligence or machine learning to generate output based on the inputs Customer provides and the behavior of the underlying models. AI-generated output may be inaccurate, incomplete, or otherwise unsuitable for Customer's intended purpose. Customer is solely responsible for reviewing, validating, and determining the suitability of any AI-generated output before relying on it. Grunt does not warrant the accuracy, completeness, or fitness for any particular purpose of AI-generated output.
 
-### 3. SUBSCRIPTION TERMS
+### 6. Sub-processors
 
-#### (a) RENEWAL
+Grunt engages third-party sub-processors to help provide the Service, including hosting providers and AI service providers. A current list of sub-processors is published on Grunt's Trust Center at [trust.grunt.pro](https://trust.grunt.pro). By using the Service, Customer agrees to Grunt's use of sub-processors for these purposes.
 
-The fees listed under Commercial Terms in your subscription represent the annual fees for the delivery of Grunt services, Grunt shall be entitled to adjust the Subscription fees each calendar year. In case of an increase in the Subscription fee, such increase shall not exceed the increase in the Norwegian Consumer Price Index from January of the previous year to January of the present year unless a prior written warning has been sent to the Customer.
+### 7. Fees and payment
 
-#### (b) TERMINATION
+#### 7.1 Fees
 
-Without prejudice to any other rights, Grunt AS may terminate this EULA if you fail to comply with the terms and conditions of this EULA. In such event, you must destroy all copies of the SOFTWARE PRODUCT in your possession.
+Customer will pay the fees set out in the Order. Unless otherwise stated in the Order, fees are exclusive of value-added tax and other applicable taxes, which Customer is responsible for paying.
 
-### 4. COPYRIGHT
+#### 7.2 Payment terms
 
-All title, including but not limited to copyrights, in and to the SOFTWARE PRODUCT and any copies thereof are owned by Grunt AS or its suppliers. All title and intellectual property rights in and to the content which may be accessed through use of the SOFTWARE PRODUCT is the property of the respective content owner and may be protected by applicable copyright or other intellectual property laws and treaties. This EULA grants you no rights to use such content. All rights not expressly granted are reserved by Grunt AS.
+Customers paying by credit card authorize Grunt or its payment provider to charge the applicable fees to the card on file at the start of each billing period. Customers paying by invoice will pay each invoice within 14 days of the invoice date, unless a different period is set out in the Order. Late payments may accrue interest at the rate set by the Norwegian Late Payment Interest Act (forsinkelsesrenteloven).
 
-### 5. NO WARRANTIES
+#### 7.3 Price changes
 
-Grunt AS expressly disclaims any warranty for the SOFTWARE PRODUCT. The SOFTWARE PRODUCT is provided 'As Is' without any express or implied warranty of any kind, including but not limited to any warranties of merchantability, noninfringement, or fitness of a particular purpose. Grunt AS does not warrant or assume responsibility for the accuracy or completeness of any information, text, graphics, links or other items contained within the SOFTWARE PRODUCT. Grunt AS makes no warranties respecting any harm that may be caused by the transmission of a computer virus, worm, time bomb, logic bomb, or other such computer program. Grunt AS further expressly disclaims any warranty or representation to Authorized Users or to any third party.
+Following the Initial Term, the subscription fee will be subject to an automatic price adjustment of 5% per renewal term. To allow for review, any additional price increase beyond this automatic adjustment must be communicated to Customer in writing at least 90 days prior to the renewal date.
 
-### 6. LIMITATION OF LIABILITY
+### 8. Term, renewal, and termination
 
-In no event shall Grunt AS be liable for any damages (including, without limitation, lost profits, business interruption, or lost information) rising out of Authorized Users use of or inability to use the SOFTWARE PRODUCT, even if Grunt AS has been advised of the possibility of such damages. In no event will Grunt AS be liable for loss of data or for indirect, special, incidental, consequential (including lost profit), or other damages based in contract, tort or otherwise. Grunt AS have no liability with respect to the content of the SOFTWARE PRODUCT or any part thereof, including but not limited to errors or omissions contained therein, libel, infringements of rights of publicity, privacy, trademark rights, business interruption, personal injury, loss of privacy, moral rights or the disclosure of confidential information.
+#### 8.1 Term and renewal
 
-### 7. [COOKIE POLICY](/cookie-policy/)
+The Agreement begins on the start date set out in the Order (or, if earlier, the date Customer first accepts these Terms) and continues for the subscription term specified in the Order (the "Initial Term"). Unless cancelled in accordance with Section 8.2, the subscription will automatically renew for successive periods equal to the Initial Term, at the then-current fees.
 
-### 8. [PRIVACY POLICY](/privacy-policy/)
+#### 8.2 Cancellation and non-renewal
+
+Where Customer purchased the subscription through Grunt's self-service online checkout (paid by credit card), Customer may cancel at any time through its account or by emailing [support@grunt.pro](mailto:support@grunt.pro); cancellation takes effect at the end of the then-current billing period, and the subscription will not auto-renew thereafter. Where the subscription was purchased under an order form or is paid by invoice, either party may give written notice of non-renewal at least 60 days before the end of the then-current term.
+
+#### 8.3 Termination for cause
+
+Either party may terminate the Agreement for cause if the other party materially breaches the Agreement and fails to cure that breach within 30 days of receiving written notice of it. Grunt may suspend Customer's access immediately if Customer's use of the Service poses a security or legal risk. Grunt may also suspend access for non-payment: for credit-card subscriptions, promptly after a failed payment (subject to any retry period applied by Grunt's payment provider); for invoiced subscriptions, if Customer's account is more than 30 days overdue.
+
+#### 8.4 Effect of termination
+
+On termination, Customer's right to access and use the Service ends. Section 4.4 (return and deletion of Customer Content), Section 9 (warranties), Section 10 (indemnification), Section 11 (limitation of liability), Section 13 (confidentiality), and Section 16 (governing law) survive termination.
+
+#### 8.5 Refunds
+
+Except where required by applicable consumer law, fees paid are non-refundable. If Grunt terminates the Agreement other than for Customer's breach, Grunt will refund any pre-paid fees for the unused portion of the then-current term.
+
+### 9. Warranties and disclaimers
+
+Grunt warrants that during the Term the Service will materially conform to its then-current Documentation when used by Customer in accordance with this Agreement. To make a claim under this warranty, Customer must give Grunt written notice describing the alleged non-conformity in reasonable detail and a reasonable opportunity to investigate and reproduce it. As Customer's sole and exclusive remedy for a breach of this warranty, Grunt will use commercially reasonable efforts to correct the non-conformity; if Grunt is unable to do so within a commercially reasonable period after Customer's notice, Customer may terminate the affected subscription and receive a refund of pre-paid fees for the unused portion of the then-current term. The warranty in this Section does not apply to non-conformities caused by Customer Content, by Customer's use of the Service in combination with materials or environments not provided by Grunt, by use of the Service contrary to the Documentation, or by modifications to the Service not made by Grunt.
+
+Grunt also represents and warrants that (i) the Service will be free, at the time of delivery, of any virus, worm, Trojan horse, backdoor, or other malicious code intended to disrupt, disable, or harm the Service or Customer's systems; and (ii) the Service does not incorporate any third-party code under license terms that would require Customer to license, modify, or distribute Customer's own patents, copyrights, trade secrets, or other intellectual property to any third party. To the extent assignable, Grunt assigns to Customer all warranties, representations, and indemnities granted to Grunt by third parties whose components are incorporated into the Service, together with all remedies for breach of those warranties; where assignment is not permitted, Grunt will enforce those protections on Customer's behalf to the extent permitted by the applicable third-party agreement.
+
+Except for the express warranties in this Section, the Service is provided "AS IS" and Grunt disclaims all other warranties, whether express, implied, or statutory, including warranties of merchantability, fitness for a particular purpose, and non-infringement, to the maximum extent permitted by applicable law.
+
+### 10. Indemnification
+
+Grunt will defend Customer against any third-party claim alleging that Customer's authorized use of the Service infringes a third party's intellectual property rights, and will pay damages and reasonable costs finally awarded against Customer or agreed in settlement, provided that Customer promptly notifies Grunt of the claim, gives Grunt sole control of the defense and settlement, and reasonably cooperates with Grunt.
+
+If the Service is, or in Grunt's opinion is likely to become, the subject of an infringement claim, Grunt may, at its option: procure a right for Customer to continue using the Service; modify the Service to make it non-infringing while preserving substantially equivalent functionality; or terminate the affected subscription and refund any pre-paid fees for the unused portion of the then-current term.
+
+Grunt has no obligation under this Section to the extent a claim arises from Customer Content, from Customer's use of the Service in combination with materials not provided by Grunt where the claim would not have arisen but for such combination, or from Customer's use of the Service in violation of this Agreement.
+
+### 11. Limitation of liability
+
+To the maximum extent permitted by applicable law, neither party will be liable for any indirect, special, incidental, consequential, or punitive damages, or for any loss of profits, revenue, data, or business opportunity, arising out of or in connection with the Agreement, even if the party has been advised of the possibility of such damages. The foregoing exclusion does not apply to amounts payable to a third party in connection with a claim subject to indemnification under Section 10.
+
+Subject to the next paragraph, each party's total cumulative liability arising out of or in connection with the Agreement, regardless of the form of action, will not exceed the fees paid or payable by Customer to Grunt under the Agreement during the 12 months preceding the event giving rise to the liability.
+
+Grunt's total cumulative liability under Section 10 (Indemnification) will not exceed two times the annual fees payable by Customer for the Service under the applicable Order.
+
+Grunt will not be liable for any damages, losses, or expenses resulting from cyber incidents — including data breaches, cyber-attacks, or other unauthorised access or use of Customer's data or systems — that Grunt did not detect or could not have reasonably mitigated. Grunt maintains commercially reasonable security measures for the Service, but no service can guarantee complete prevention of all cyber threats, and Customer remains responsible for maintaining the security of its own data and systems beyond the Service.
+
+The limitations in this Section do not apply to Customer's payment obligations; a party's failure to comply with applicable law; fraud, gross negligence, or willful misconduct; or liability that cannot be limited or excluded under applicable mandatory law.
+
+### 12. Service availability
+
+Grunt will use commercially reasonable efforts to make the Service available, subject to scheduled maintenance and events beyond Grunt's reasonable control. Where Grunt offers a separate service level agreement applicable to Customer's subscription, that SLA is incorporated by reference and sets out Customer's sole remedies for service unavailability.
+
+### 13. Confidentiality
+
+Each party may disclose Confidential Information to the other in connection with the Agreement. The receiving party will protect the disclosing party's Confidential Information using at least the same care it uses to protect its own confidential information of similar sensitivity, and in no event less than reasonable care, and will use it only to perform its obligations or exercise its rights under the Agreement. "Confidential Information" does not include information that is or becomes publicly available without breach of this Section, was rightfully known to the receiving party without a confidentiality obligation, or is independently developed without use of the other party's Confidential Information. Customer Content is treated as Customer's Confidential Information.
+
+### 14. Marketing and publicity
+
+Grunt may use Customer's name and logo to identify Customer as a user of the Service on Grunt's website and in marketing materials. Grunt will not imply Customer's endorsement of the Service and will not disclose any of Customer's Confidential Information.
+
+### 15. Privacy
+
+Grunt's processing of personal data in connection with the Service is described in the [Privacy Policy](/privacy-policy/). Where Grunt processes personal data on Customer's behalf, the parties will enter into a Data Processing Addendum on Grunt's standard form, available at [trust.grunt.pro](https://trust.grunt.pro).
+
+### 16. Governing law and dispute resolution
+
+The Agreement is governed by the laws of Norway, without regard to its conflict of laws principles. The parties submit to the exclusive jurisdiction of the Oslo District Court (Oslo tingrett) for any dispute arising out of or in connection with the Agreement, subject to mandatory consumer-protection rules of the customer's country of residence where applicable.
+
+### 17. General
+
+**Amendments.** Grunt may amend this Agreement from time to time. Material changes will be communicated to Customer at least 30 days before they take effect; continued use of the Service after that date constitutes acceptance. Customer may terminate the affected subscription by written notice during the 30-day period if it does not accept a material change.
+
+**Notices.** Notices to Grunt should be sent to [support@grunt.pro](mailto:support@grunt.pro). Notices to Customer will be sent to the email address most recently provided by Customer.
+
+**Assignment.** Neither party may assign the Agreement without the other party's prior written consent. Either party may, however, assign it without consent to an affiliate or in connection with a merger, acquisition, or sale of all or substantially all of its assets.
+
+**Force majeure.** Neither party will be liable for any delay or failure to perform (other than payment obligations) caused by events beyond its reasonable control, including acts of God, natural disasters, war, terrorism, civil unrest, labor disputes, internet or telecommunications failures, or government action.
+
+**Severability.** If any provision of this Agreement is held to be unenforceable, the remaining provisions will continue in full force and effect.
+
+**Entire agreement.** This Agreement, together with the Order, the Privacy Policy, and any other documents expressly incorporated by reference, constitutes the entire agreement between the parties and supersedes all prior agreements and understandings concerning its subject matter.
+
+### 18. Contact
+
+Questions about this Agreement can be sent to [support@grunt.pro](mailto:support@grunt.pro).
+
+Grunt AS  
+Lilleakerveien 2D  
+0283 Oslo  
+Norway
+
+### Related policies
+
+- [Privacy Policy](/privacy-policy/)
+- [Cookie Policy](/cookie-policy/)
