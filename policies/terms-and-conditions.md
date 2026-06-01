@@ -148,7 +148,7 @@ Grunt may use Customer's name and logo to identify Customer as a user of the Ser
 
 ### 15. Privacy
 
-Grunt's processing of personal data in connection with the Service is described in the [Privacy Policy](/privacy-policy/). Where Grunt processes personal data on Customer's behalf, the parties will enter into a Data Processing Addendum on Grunt's standard form, available at [trust.grunt.pro](https://trust.grunt.pro).
+Grunt's processing of personal data in connection with the Service is described in the [Privacy Policy](/privacy-policy/).
 
 ### 16. Governing law and dispute resolution
 
