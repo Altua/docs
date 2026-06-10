@@ -128,11 +128,13 @@ To the maximum extent permitted by applicable law, neither party will be liable 
 
 Subject to the next paragraph, each party's total cumulative liability arising out of or in connection with the Agreement, regardless of the form of action, will not exceed the fees paid or payable by Customer to Grunt under the Agreement during the 12 months preceding the event giving rise to the liability.
 
+Notwithstanding the foregoing, each party's total cumulative liability arising out of or relating to a breach of applicable data protection laws (including the GDPR) will not exceed two (2) times the fees paid or payable by Customer to Grunt during the twelve (12) months preceding the first event giving rise to liability.
+
 Grunt's total cumulative liability under Section 10 (Indemnification) will not exceed two times the annual fees payable by Customer for the Service under the applicable Order.
 
-Grunt will not be liable for any damages, losses, or expenses resulting from cyber incidents — including data breaches, cyber-attacks, or other unauthorised access or use of Customer's data or systems — that Grunt did not detect or could not have reasonably mitigated. Grunt maintains commercially reasonable security measures for the Service, but no service can guarantee complete prevention of all cyber threats, and Customer remains responsible for maintaining the security of its own data and systems beyond the Service.
+Grunt will not be liable for any damages, losses, or expenses resulting from cyber incidents — including data breaches, cyber-attacks, or other unauthorised access or use of Customer's data or systems — that Grunt did not detect or could not have reasonably mitigated, except to the extent the incident results from Grunt's failure to maintain the security measures required under this Agreement or applicable law. Grunt maintains commercially reasonable security measures for the Service, but no service can guarantee complete prevention of all cyber threats, and Customer remains responsible for maintaining the security of its own data and systems beyond the Service.
 
-The limitations in this Section do not apply to Customer's payment obligations; a party's failure to comply with applicable law; fraud, gross negligence, or willful misconduct; or liability that cannot be limited or excluded under applicable mandatory law.
+The limitations in this Section do not apply to Customer's payment obligations; fraud, gross negligence, or willful misconduct; or liability that cannot be limited or excluded under applicable mandatory law.
 
 ### 12. Service availability
 
