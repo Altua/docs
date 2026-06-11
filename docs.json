@@ -81,6 +81,7 @@
                 "pages": [
                   "powerpoint-add-in/it/deployment-and-installation",
                   "powerpoint-add-in/it/windows-installation",
+                  "powerpoint-add-in/it/patchmypc",
                   "powerpoint-add-in/it/upgrading-from-dotnet-framework",
                   "powerpoint-add-in/it/mac-uninstall",
                   "powerpoint-add-in/it/windows-uninstall",
