@@ -19,8 +19,9 @@ Grunt is moving from the .NET Framework 4.7.2 VSTO add-in to a .NET 9 native COM
 | **Add-in type** | VSTO add-in | COM add-in |
 | **Runtime dependencies** | .NET Framework 4.7.2 + VSTO Runtime | Self-contained (no external runtime) |
 | **Primary binary** | `Altua.Grunt.PowerPoint.dll` + `.vsto` manifest | `Grunt.PowerPoint.ComAddinNE.dll` |
-| **Architecture** | x64 and x86 | x64 and arm64 |
-| **Add-in ProgID** | `Grunt` | `Grunt` |
+| **Architecture** | x64 and x86 | x64, x86, and arm64 |
+| **Add-in registration key** | `Software\Microsoft\Office\PowerPoint\AddIns\Grunt` | `Software\Microsoft\Office\PowerPoint\AddIns\GruntCom` |
+| **Add-in ProgID** | `Grunt` | `GruntCom` |
 | **Add-in FriendlyName** | `Grunt` | `Grunt` |
 
 ## Runtime prerequisites removed
@@ -33,13 +34,21 @@ Once you have migrated to the .NET 9 version, the VSTO Runtime and .NET Framewor
 
 ### Add-in registration
 
-The PowerPoint add-in registration path will remain the same:
+The PowerPoint add-in registration key changes from the VSTO add-in key to the COM add-in key:
+
+Current .NET Framework key:
 
 ```text
 Software\Microsoft\Office\PowerPoint\AddIns\Grunt
 ```
 
-However, some keys will change:
+New .NET 9 key:
+
+```text
+Software\Microsoft\Office\PowerPoint\AddIns\GruntCom
+```
+
+The values under the add-in registration key also change:
 
 | Key | Current value | New value (.NET 9) |
 |-----|----------------|---------------|
@@ -48,7 +57,7 @@ However, some keys will change:
 | `LoadBehavior` | `3` | `3` |
 | `Manifest` | `<path>\Altua.Grunt.PowerPoint.vsto\|vstolocal` | *(removed)* |
 
-The `Manifest` key points to the VSTO manifest and will no longer be used. The COM add-in is located through CLSID registration instead.
+The `Manifest` key points to the VSTO manifest and will no longer be used. PowerPoint loads the .NET 9 add-in through the `GruntCom` ProgID and CLSID registration instead.
 
 ### VSTO security entries removed
 
@@ -68,8 +77,8 @@ The .NET 9 version registers a COM class so PowerPoint can load the add-in:
 Software\Classes\CLSID\{AAF65EB4-AFBA-4B65-98AD-381C670B6461}
 Software\Classes\CLSID\{AAF65EB4-AFBA-4B65-98AD-381C670B6461}\InprocServer32
 Software\Classes\CLSID\{AAF65EB4-AFBA-4B65-98AD-381C670B6461}\ProgID
-Software\Classes\Grunt
-Software\Classes\Grunt\CLSID
+Software\Classes\GruntCom
+Software\Classes\GruntCom\CLSID
 ```
 
 These will be created automatically by the MSI installer.
@@ -80,7 +89,7 @@ A new registry key will store add-in metadata:
 
 ```text
 Software\Grunt
-    architecture = <x64 or arm64>
+    architecture = <WinX86, WinX64, or WinArm64>
     Version      = <semantic version>
     Revision     = <revision identifier>
     content      = <content directory path>
@@ -98,9 +107,17 @@ HKEY_LOCAL_MACHINE\SOFTWARE\MICROSOFT\.NETFramework\Security\TrustManager\Prompt
 
 This will no longer be relevant after the migration. If your deployment includes this fix specifically for Grunt, it can be removed once you are on the .NET 9 version.
 
-## 32-bit support dropped
+## 32-bit support
 
-The current version ships both `x64` and `x86` installers. The .NET 9 version will ship `x64` and `arm64` only. Organizations still running 32-bit Office should upgrade to 64-bit Office before deploying the .NET 9 version.
+32-bit support is not being dropped as part of the .NET 9 migration. The .NET 9 Windows installers include builds for `x64`, `x86`, and `arm64`.
+
+Use the installer that matches the Office architecture:
+
+- Use `grunt-<version>-winx86.msi` for 32-bit Office
+- Use `grunt-<version>-winx64.msi` for 64-bit Office on Intel or AMD devices
+- Use `grunt-<version>-winarm64.msi` for Windows on ARM
+
+If the public download page only shows the standard 64-bit package, use your managed deployment source or contact support for the 32-bit package.
 
 ## Upgrade path
 
@@ -108,7 +125,7 @@ The MSI installer will handle the upgrade in place. No manual uninstall of the p
 
 For managed deployments:
 
-1. Download the .NET 9 MSI from [app.grunt.pro/download](https://app.grunt.pro/download) once it is available in 2026.2.
+1. Download the .NET 9 MSI that matches the target Office architecture from [app.grunt.pro/download](https://app.grunt.pro/download) once it is available in 2026.2.
 2. Deploy it through your existing software distribution tooling (Intune, SCCM, etc.) using the same flags as before.
 3. The installer will remove the old VSTO-based version and install the new COM add-in.
 4. Validate by opening PowerPoint and confirming the **Grunt** tab appears.
@@ -125,4 +142,4 @@ See [Network and security](/powerpoint-add-in/it/network-and-security) for the f
 
 ## COM add-in policy
 
-If your organization uses Office Group Policy to manage COM add-ins, ensure the Grunt ProgID (`Grunt`) or CLSID (`{AAF65EB4-AFBA-4B65-98AD-381C670B6461}`) is allowed. The current VSTO-based add-in does not require COM add-in policy configuration, but the .NET 9 COM add-in will.
+If your organization uses Office Group Policy to manage COM add-ins, ensure the Grunt ProgID (`GruntCom`) or CLSID (`{AAF65EB4-AFBA-4B65-98AD-381C670B6461}`) is allowed. The current VSTO-based add-in does not require COM add-in policy configuration, but the .NET 9 COM add-in will.
