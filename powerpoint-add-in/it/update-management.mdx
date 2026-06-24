@@ -7,6 +7,83 @@ description: "Control release cadence and keep users on approved Grunt versions"
 
 Grunt supports both automatic and manual updates. Which mode applies depends on how Grunt was installed and whether your organization has disabled auto-updates.
 
+For per-user Windows installs, Grunt reads the update mode from the current user's registry settings:
+
+```text
+HKEY_CURRENT_USER\Software\Grunt
+    updateStrategy = <DWORD>
+```
+
+Use these values:
+
+| Value | Mode | Behavior |
+| --- | --- | --- |
+| `0` | Disabled | Grunt does not prompt the user or install updates automatically. |
+| `1` | Automatic | Grunt checks for updates and installs them automatically. This is the default when the value is missing. |
+| `2` | Manual | Grunt checks for updates and notifies the user. The user or IT installs the update manually. |
+
+## Disable auto-updates for a per-user install
+
+To stop automatic updates for a per-user install, set `updateStrategy` to `2` for the signed-in Windows user:
+
+```powershell
+reg add HKCU\Software\Grunt /v updateStrategy /t REG_DWORD /d 2 /f
+```
+
+Then restart PowerPoint.
+
+This keeps update discovery and user notification available, but prevents Grunt from automatically downloading and installing the update. Use this mode when IT wants users on the per-user install but still wants to control the final rollout.
+
+Run this command in the affected user's Windows context. If you deploy it with Intune, Group Policy, or a login script, make sure it writes to that user's `HKEY_CURRENT_USER` hive.
+
+<Tip>
+Use `2` for manual updates in most managed per-user environments. Use `0` only when you want Grunt to keep update availability silent and never start installation.
+</Tip>
+
+To restore automatic updates, set the value back to `1` or remove the `updateStrategy` value:
+
+```powershell
+reg add HKCU\Software\Grunt /v updateStrategy /t REG_DWORD /d 1 /f
+```
+
+## Disable update checks with Configuration.xml
+
+You can also turn off version checks with a local XML configuration file. This is different from `updateStrategy`.
+
+When the `CheckVersion` flag is `false`, Grunt treats the installed version as up to date. It does not receive update availability information, so it does not notify the user or start an automatic update.
+
+Create or update `Configuration.xml` with:
+
+```xml
+<Configuration>
+  <CheckVersion>false</CheckVersion>
+</Configuration>
+```
+
+Grunt reads `Configuration.xml` from these locations:
+
+| Priority | Location |
+| --- | --- |
+| 1 | `%APPDATA%\Grunt\Configuration.xml` |
+| 2 | `%LOCALAPPDATA%\Grunt\Configuration.xml` |
+| 3 | `<install directory>\Configuration.xml` |
+
+The XML file can include only the flags you want to override. Use these XML flags when you need a local override:
+
+| Flag | Default | Purpose |
+| --- | --- | --- |
+| `CheckVersion` | `true` | Set to `false` to suppress version checks and update availability. |
+| `LogErrorsToWeb` | `true` | Set to `false` to stop sending error logs to the Grunt web service. |
+| `MetricsTracking` | `false` | Set to `true` only if your organization wants to enable metrics tracking locally. |
+
+Cloud-managed values for the same flags take precedence over local XML.
+
+Restart PowerPoint after changing the file.
+
+<Note>
+Use `CheckVersion=false` when you want to suppress update checks entirely. Use `updateStrategy=2` when you still want Grunt to detect updates and notify the user, but not install automatically.
+</Note>
+
 ## How to tell which mode a device uses
 
 Check the install location:
@@ -31,11 +108,12 @@ For controlled environments:
 
 ## Release channels
 
-Grunt offers three channels:
+Users can choose a release channel only when your organization allows user-managed channel selection. In that mode, Grunt shows these options:
 
 - **Stable** for broadly tested releases
 - **Early** for earlier access to newer changes
-- **Managed** for organizations that want IT-led rollouts
+
+For IT-led rollouts, keep users on the approved channel and distribute approved installers through your deployment tooling.
 
 Grunt typically aims for about four stable releases per year, with occasional hotfixes when needed.
 
@@ -50,7 +128,7 @@ Our preferred response to issues after an update is a quick hotfix rolling forwa
 - **Minor version updates:** Rollback is possible.
 - **Major version updates:** Staying on the Stable channel and waiting for a hotfix is preferable to rolling back.
 
-Larger organizations should subscribe to the Stable or Managed channel so that new functionality has been validated with other organizations before it reaches their users.
+Larger organizations should stay on the Stable channel and use a managed rollout so new functionality has been validated before it reaches all users.
 
 ## User communication
 

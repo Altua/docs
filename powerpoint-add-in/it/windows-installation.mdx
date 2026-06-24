@@ -6,7 +6,7 @@ description: "Install Grunt on Windows with either the default per-user model or
 This page covers the Windows-specific installation details for the current release.
 
 <Info>
-Starting with 2026.2, Grunt will ship as a self-contained .NET 9 COM add-in that no longer requires the VSTO Runtime or .NET Framework. See [Upgrading from .NET Framework](/powerpoint-add-in/it/upgrading-from-dotnet-framework) for the migration timeline.
+Grunt is a self-contained .NET 9 COM add-in. It bundles its own runtime and has no external runtime prerequisites.
 </Info>
 
 ## Recommended baseline
@@ -98,7 +98,10 @@ Software\Grunt
     content      = <content directory path>
     variant      = <variant>
     ClientId     = <client identifier>
+    updateStrategy = <optional update mode>
 ```
+
+For per-user installs, set `updateStrategy` under `HKEY_CURRENT_USER\Software\Grunt` to control updates. Use `1` for automatic updates, `2` for manual updates, and `0` to keep update availability silent and prevent automatic installation. See [Update management](/powerpoint-add-in/it/update-management) for the recommended per-user command.
 
 <Info>
 On 64-bit systems, the installer also mirrors the registry entries under `Software\Wow6432Node\` for compatibility with 32-bit Office.

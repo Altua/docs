@@ -6,7 +6,7 @@ description: "Deploy the Grunt PowerPoint add-in with the right install model fo
 Use this guide when you deploy Grunt in a managed environment.
 
 <Info>
-Starting with the 2026.2 release, Grunt will begin shipping as a self-contained .NET 9 COM add-in that no longer requires the VSTO Runtime or .NET Framework on the target machine. The 2026.3 release will be .NET 9 only. See [Upgrading from .NET Framework](/powerpoint-add-in/it/upgrading-from-dotnet-framework) for migration details.
+The current Grunt release is a self-contained .NET 9 COM add-in. It bundles its own runtime and has no external runtime prerequisites.
 </Info>
 
 ## Installation models
@@ -39,6 +39,8 @@ This mode:
 - Registers the Grunt COM add-in with PowerPoint
 - Enables automatic updates by default unless your organization disables them centrally
 
+To keep this install model but disable automatic installation, set the per-user `updateStrategy` registry value. See [Update management](/powerpoint-add-in/it/update-management).
+
 ## Command-line installation
 
 Use per-machine installation when your environment blocks per-user installs or when IT wants to control updates through deployment tooling.
@@ -66,11 +68,11 @@ This mode:
 
 You can deploy Grunt with common software distribution platforms such as Intune, SCCM, or similar tooling. These rollouts normally use the per-machine model above.
 
+You can also deploy the default per-user installer through Intune or another MDM tool when the assignment runs in the user's Windows context. This keeps Grunt under `%LOCALAPPDATA%`, writes settings to `HKEY_CURRENT_USER`, and preserves the per-user update model.
+
 ## Prerequisites
 
 Grunt is self-contained and bundles its own .NET runtime. There are no external runtime prerequisites to install on the target machine.
-
-Previous versions required the VSTO Runtime and .NET Framework 4.7.2. These are no longer needed for the current release.
 
 ## Common blockers
 
