@@ -14,6 +14,38 @@ Allow outbound HTTPS on port `443` to the required Grunt service endpoints:
 
 If users are behind a proxy, make sure proxy policy allows Grunt API communication. In affected environments, users may also need to enable **Use default proxy for API communication** in Grunt.
 
+### Enable proxy mode during silent install
+
+You can enable **Use default proxy for API communication** as part of a silent deployment by setting the Grunt proxy preference in the Windows registry.
+
+Run the registry step in the Windows user context for each user who will run PowerPoint. The setting uses `HKEY_CURRENT_USER`, so a script running as `SYSTEM` or as an administrator sets the preference for that account only.
+
+For current builds, set:
+
+```cmd
+reg add "HKCU\SOFTWARE\Grunt" /v settingUseProxy /t REG_DWORD /d 1 /f
+```
+
+For compatibility with older builds, you can also set the legacy path:
+
+```cmd
+reg add "HKCU\SOFTWARE\Altua\Grunt" /v settingUseProxy /t REG_DWORD /d 1 /f
+```
+
+You can also deploy the same values with a `.reg` file:
+
+```reg
+Windows Registry Editor Version 5.00
+
+[HKEY_CURRENT_USER\SOFTWARE\Grunt]
+"settingUseProxy"=dword:00000001
+
+[HKEY_CURRENT_USER\SOFTWARE\Altua\Grunt]
+"settingUseProxy"=dword:00000001
+```
+
+Apply this before the user's first Grunt launch, or before you ask the user to retry network, sign-in, license, or template operations.
+
 For Microsoft sign-in, SSO, and SharePoint-backed Excel refresh, also allow outbound HTTPS on port `443` to Microsoft services:
 
 - `login.microsoftonline.com`
