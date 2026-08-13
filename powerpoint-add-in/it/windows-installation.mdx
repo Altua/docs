@@ -112,3 +112,22 @@ On 64-bit systems, the installer also mirrors the registry entries under `Softwa
 The same per-machine model is intended for SCCM, Intune, and similar systems.
 
 Use [Update management](/powerpoint-add-in/it/update-management) if you also need rollout and release-channel guidance.
+
+## Troubleshoot the installer
+
+If the installer fails, rerun the per-user installation with verbose logging:
+
+```powershell
+msiexec.exe /i "grunt-<version>-x64.msi" MSIINSTALLPERUSER=1 /L*V "$env:USERPROFILE\Downloads\grunt-install.log"
+```
+
+Run the command as the affected user. Do not run it from an elevated administrator prompt. For Windows on ARM, replace `x64` with `arm64`.
+
+Before retrying the installation:
+
+- Close PowerPoint and other Microsoft Office applications.
+- Confirm that the MSI file is available locally and matches the device architecture.
+- Check whether endpoint protection blocked or quarantined the installer.
+- Record any error message or installer exit code.
+
+If the installation still fails, send `grunt-install.log` from the user's **Downloads** folder to Grunt support. Include the error message, exit code, Windows version, and Office architecture.
