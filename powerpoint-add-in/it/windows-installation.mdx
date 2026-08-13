@@ -118,7 +118,7 @@ Use [Update management](/powerpoint-add-in/it/update-management) if you also nee
 If the installer fails, rerun the per-user installation with verbose logging:
 
 ```powershell
-msiexec.exe /i "grunt-<version>-x64.msi" MSIINSTALLPERUSER=1 /L*V "$env:USERPROFILE\Downloads\grunt-install.log"
+msiexec.exe /i "grunt-<version>-x64.msi" /L*V "$env:USERPROFILE\Downloads\grunt-install.log"
 ```
 
 Run the command as the affected user. Do not run it from an elevated administrator prompt. For Windows on ARM, replace `x64` with `arm64`.
