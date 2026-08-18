@@ -5,12 +5,27 @@ description: "Allow required endpoints and reduce false-positive security blocks
 
 ## Firewall and proxy requirements
 
-Allow outbound HTTPS on port `443` to the required Grunt service endpoints:
+Allow outbound HTTPS on port `443` to the required Grunt service endpoints.
+
+### Current endpoints
+
+Add these domains to your network allowlist:
+
+- `api.grunt.io`
+- `cdn.grunt.io`
+
+### Legacy endpoints during transition
+
+Keep these existing domains on your network allowlist during the transition:
 
 - `api.grunt.pro`
 - `api.altua.no`
 - `files.altua.no`
 - `app.grunt.pro`
+
+Do not remove the legacy domains yet. Grunt supports both endpoint sets during the transition.
+
+The legacy domains will eventually be discontinued. We will notify you before you can remove them from your network configuration.
 
 If users are behind a proxy, make sure proxy policy allows Grunt API communication. In affected environments, users may also need to enable **Use default proxy for API communication** in Grunt.
 
@@ -59,7 +74,9 @@ Grunt uses a local browser redirect during Microsoft authentication. Security so
 
 ## Endpoint allowlisting
 
-Use your organization's standard allowlist process for the domains above.
+Use your organization's standard allowlist process for all Grunt domains listed above.
+
+Allow both the current and legacy Grunt endpoints during the transition.
 
 When troubleshooting blocked license checks, sign-in, templates, SharePoint Excel refresh, or updates, start by testing endpoint reachability from affected devices.
 
