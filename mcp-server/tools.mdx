@@ -1,74 +1,74 @@
 ---
 title: "Tool reference"
-description: "Public, private, and unavailable tools in the Grunt MCP Server"
+description: "Tools available from the Grunt MCP Server"
 ---
 
-Tool names are exposed as snake case (for example `bar_chart`).
+This page lists the tools available from the production Grunt MCP Server. Tool names use snake case, such as `bar_chart`.
 
-## Public chart tools
+Your MCP client retrieves each tool's current input schema when it connects. Use that schema for the complete set of fields and supported values.
 
-| Tool | Purpose | Status |
-| --- | --- | --- |
-| `bar_chart` | Create or update bar/column charts | Available |
-| `line_chart` | Create or update line/index charts | Available |
-| `area_chart` | Create or update area/100% area charts | Available |
-| `waterfall_chart` | Create or update waterfall charts | Available |
-| `combined_chart` | Create or update combined bar/line charts | Available |
-| `pie_donut_chart` | Create or update pie/donut charts | Available |
-| `scatter_bubble_chart` | Create or update scatter/bubble charts | Available |
-| `mekko_chart` | Create or update mekko/marimekko charts | Available |
-| `dumbbell_chart` | Create or update dumbbell charts | Available |
+## Chart tools
 
-## Public modification and asset tools
+| Tool | Purpose |
+| --- | --- |
+| `bar_chart` | Create or update bar and column charts |
+| `line_chart` | Create or update line and index charts |
+| `area_chart` | Create or update area and 100% area charts |
+| `waterfall_chart` | Create or update waterfall charts |
+| `combined_chart` | Create or update charts that combine bar, column, and line series |
+| `pie_donut_chart` | Create or update pie and donut charts |
+| `scatter_bubble_chart` | Create or update scatter and bubble charts |
+| `mekko_chart` | Create or update Mekko and Marimekko charts |
+| `dumbbell_chart` | Create or update dumbbell charts |
 
-| Tool | Purpose | Status |
-| --- | --- | --- |
-| `change_active_chart_rules` | Replace all chart rules for an asset | Available |
-| `change_active_chart_annotations` | Replace all chart annotations for an asset | Available |
-| `fetch_latest_asset` | Fetch latest asset state from an `assetId` | Available |
-| `get_project_changes` | Get commit diff from `assetCommit` to latest | Available |
-| `submit_feedback` | Send tool/user feedback metadata | Available |
+Each chart tool accepts a chart definition and an optional `assetId`:
 
-## Public but not implemented
+- Omit `assetId` to create an asset.
+- Include `assetId` to update the existing asset.
+- Pass rules and annotations as part of the chart definition.
 
-| Tool | Purpose | Status |
-| --- | --- | --- |
-| `table` | Create table assets | Not implemented |
-| `gantt` | Create gantt assets | Not implemented |
+<Warning>
+Create a new asset when you change the core chart family, orientation, or arrangement. Do not reuse the existing `assetId` for that change.
+</Warning>
 
-## Private tool
+## Table tools
 
-| Tool | Purpose | Status |
-| --- | --- | --- |
-| `push_asset` | Internal fullscreen editor push/update flow | Private (not for normal agent usage) |
+| Tool | Purpose |
+| --- | --- |
+| `table` | Create or update formatted tables and visual grids |
+| `search_visual_assets` | Find valid built-in icons and flag country codes for table settings |
 
-## Not currently exposed
+The `table` tool supports formatting, conditional rules, merged cells, row and column sizing, icons, gauges, shapes, flags, images, logos, and in-cell charts. Include an `assetId` to update an existing table.
 
-These methods exist in code but are not registered as MCP tools:
+Use `search_visual_assets` before adding built-in icons or flags. It accepts a query, an asset type of `all`, `icon`, or `flag`, and a result limit from 1 to 50.
 
-- `create_default_chart_with_data`
-- `update_sheet_data`
-- `update_chart_data`
-- `update_theme`
-- `get_chart_as_png`
+## Asset tools
 
-## Response pattern for chart tools
+| Tool | Purpose |
+| --- | --- |
+| `fetch_latest_asset` | Load the latest version and preview of a chart or table |
+| `inspect_object` | Read an asset's data, structure, settings, rules, and styles |
+| `get_project_changes` | Compare a known `assetCommit` with the latest asset version |
 
-Most chart creation/update tools return:
+Use `inspect_object` before an exact update when you need the current data values, indexes, settings, or rule configuration.
+
+## Common response fields
+
+Chart and table creation or update tools return:
 
 - `structuredContent.assetId`
 - `structuredContent.assetCommit`
 - `structuredContent.exportGuideUrl`
 - `structuredContent.warnings` (when present)
 
-They also return a chart screenshot and chart project payload metadata.
+They also return a PNG preview of the rendered asset.
+
+`fetch_latest_asset` returns the current `assetId`, `assetCommit`, `exportGuideUrl`, and preview.
+
+`inspect_object` returns the inspected components and, when available, workbook data. `get_project_changes` returns a structured description of changes since the supplied `assetCommit`.
 
 ## Input validation rules
 
 - Tool schemas reject unknown properties
-- Discriminated unions must use valid type fields such as `annotationType`, `ruleType`, and chart-specific union type values
+- Typed settings must use a supported discriminator, such as `annotationType`, `ruleType`, or `axisType`
 - Invalid schemas return MCP tool errors
-
-<Warning>
-If you change core chart type families or orientation, create a new asset instead of reusing the same `assetId`.
-</Warning>

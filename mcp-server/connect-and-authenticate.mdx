@@ -1,48 +1,60 @@
 ---
 title: "Connect and authenticate"
-description: "Connect an MCP client to the Grunt MCP endpoint and configure auth"
+description: "Connect an MCP client to Grunt and sign in"
 ---
 
-Use the Grunt MCP endpoint at `/mcp` over streamable HTTP.
+The Grunt MCP Server uses streamable HTTP and OAuth authentication.
 
-## 1. Choose your base URL
+## Add the server to your client
 
-- Local development: `http://localhost:5044`
-- Production example: `https://mcp.grunt.io`
+<Steps>
+<Step title="Open your client's MCP settings">
+Add a remote MCP server. The exact name of this setting depends on your client.
+</Step>
 
-Your MCP URL is always:
-
-```text
-{baseUrl}/mcp
-```
-
-## 2. Understand auth behavior
-
-| Environment | `/mcp` auth requirement |
-| --- | --- |
-| `Development` | No auth required |
-| Non-development | Bearer token required |
-
-In non-development environments, the server validates JWTs against Auth0 and resolves an internal user claim used by tool calls.
-
-## 3. Discover OAuth metadata
-
-The server exposes:
+<Step title="Enter the Grunt MCP URL">
 
 ```text
-/.well-known/oauth-protected-resource
+https://mcp.grunt.io/mcp
+```
+</Step>
+
+<Step title="Sign in to Grunt">
+Connect the server. Your client opens the authorization flow and prompts you to sign in.
+</Step>
+
+<Step title="Approve access">
+Complete the authorization flow. Your client can then discover and call the available tools.
+</Step>
+</Steps>
+
+<Info>
+Your MCP client must support OAuth for remote MCP servers.
+</Info>
+
+## OAuth metadata
+
+Clients can discover the server's protected resource metadata at:
+
+```text
+https://mcp.grunt.io/.well-known/oauth-protected-resource
 ```
 
-It returns protected resource metadata including:
+The response includes:
 
-- `resource` (configured client/resource ID)
+- `resource`
 - `authorization_servers`
-- supported scopes
+- `scopes_supported`
 
-## 4. Verify connectivity with `tools/list`
+The server currently advertises the `openid`, `profile`, and `email` scopes.
+
+## Test an authenticated connection
+
+If you already have a valid access token, you can request the current tool list directly:
 
 ```bash
-curl -X POST "http://localhost:5044/mcp" \
+curl -X POST "https://mcp.grunt.io/mcp" \
+  -H "Authorization: Bearer <access-token>" \
   -H "Content-Type: application/json" \
   -H "Accept: application/json, text/event-stream" \
   -d '{
@@ -52,12 +64,12 @@ curl -X POST "http://localhost:5044/mcp" \
   }'
 ```
 
-For non-development environments, add:
-
-```bash
--H "Authorization: Bearer <token>"
-```
-
 <Info>
 Include both `application/json` and `text/event-stream` in the `Accept` header when calling the MCP endpoint directly.
 </Info>
+
+## Troubleshooting
+
+- A `401 Unauthorized` response means the request does not include a valid access token. Reconnect the server and complete sign-in.
+- If the server does not appear in your client, confirm that the client supports remote MCP servers over streamable HTTP.
+- If tool discovery fails after sign-in, remove the connection and add it again to refresh authorization.
