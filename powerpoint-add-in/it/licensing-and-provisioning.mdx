@@ -18,7 +18,7 @@ If a user reports activation issues, verify:
 
 ## Automated provisioning with Microsoft Entra ID
 
-Legacy support guidance documents SCIM-based provisioning through Azure AD, now Microsoft Entra ID.
+Use SCIM to manage Grunt user access through Microsoft Entra ID. Entra provisions assigned users and removes their Grunt license assignments when they are deprovisioned.
 
 Benefits include:
 
@@ -26,18 +26,9 @@ Benefits include:
 - Reuse of your existing directory groups for Grunt access control
 - Less manual license administration
 
-### Prerequisites
-
-- A Microsoft Entra ID tenant
-- A tenant admin with global administrator rights
-- A SCIM-enabled Grunt organization and Grunt admin contact
-
-### Typical setup flow
-
-1. Configure the Grunt enterprise app in Entra.
-2. Add the provisioning credentials supplied for your Grunt organization.
-3. Map the users or groups that should receive access.
-4. Enable provisioning and monitor the first sync.
+<Card title="Set up SCIM provisioning" icon="users-gear" href="/powerpoint-add-in/it/scim">
+  Connect your organization, configure Entra mappings, test your rollout, and renew your provisioning key.
+</Card>
 
 ## Operational notes
 

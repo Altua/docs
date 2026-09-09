@@ -1,0 +1,149 @@
+---
+title: "Set up SCIM provisioning"
+description: "Automatically assign and remove Grunt access with Microsoft Entra ID"
+---
+
+Connect Microsoft Entra ID to Grunt so your IT team can manage PowerPoint license assignments through your directory. SCIM creates or updates users and assigns access when they enter scope. When Entra sends a deactivation or deletion, Grunt removes their license assignment for the connected organization and subscription.
+
+<Info>
+SCIM manages user access. [Single sign-on (SSO)](/powerpoint-add-in/it/sso) manages how users sign in. You can configure them separately.
+</Info>
+
+## Before you start
+
+Have the following ready:
+
+- A Grunt organization with SCIM enabled and an active PowerPoint subscription.
+- Permission to manage your organization's **Settings** in the [Grunt portal](https://portal.grunt.io).
+- An Entra administrator who can manage enterprise applications and provisioning, such as an **Application Administrator**.
+- A pilot user whose company email address matches the address they use in Grunt.
+
+If **SCIM provisioning** is missing from your organization's settings, contact [Grunt support](mailto:support@grunt.pro) to check that it is enabled.
+
+## Connection details
+
+| Entra field | Value |
+| --- | --- |
+| **Tenant URL** | `https://api.grunt.io/scim` |
+| **Secret Token** | Your organization's Grunt SCIM key |
+
+Use the base URL exactly as shown. Do not add `/Users` or `/ping`. Paste only the key into **Secret Token**, without a `Bearer ` prefix.
+
+## Set up provisioning
+
+<Steps>
+  <Step title="Get your organization's SCIM key">
+    Open the [Grunt portal](https://portal.grunt.io), select your organization, and open **Settings**.
+
+    Under **SCIM provisioning**, click **Rotate key**, then **Confirm rotate**. Copy the new **SCIM key** before leaving the page; it is displayed only once. Store it in your organization's password manager.
+
+    <Warning>
+    Rotating a key replaces the current portal-issued key. If you already use it in an integration, update that integration immediately. A hidden key does not mean that no integration exists.
+    </Warning>
+  </Step>
+
+  <Step title="Create an enterprise application">
+    In the [Microsoft Entra admin center](https://entra.microsoft.com), open **Entra ID** > **Enterprise apps** > **New application** > **Create your own application**.
+
+    Name it **Grunt SCIM** and choose **Integrate any other application you don't find in the gallery**. Create the application. If you already have a Grunt provisioning application, open that application instead.
+  </Step>
+
+  <Step title="Connect to Grunt">
+    Open **Provisioning** > **New configuration**. Enter the **Tenant URL** and **Secret Token** from the connection details above.
+
+    Click **Test Connection**, then **Create** after it succeeds.
+
+    <Note>
+    In the older Entra interface, select **Provisioning Mode** > **Automatic**, enter the values under **Admin Credentials**, test the connection, and click **Save**.
+    </Note>
+  </Step>
+
+  <Step title="Configure user mappings">
+    Open **Attribute mapping** (or **Mappings** in the older interface). Enable user provisioning and review the [user attribute mappings](#user-attribute-mappings). Keep **Create**, **Update**, and **Delete** enabled for users.
+
+    **Disable the group mapping.** Grunt provisions users; it does not create or synchronize SCIM group objects. You can still assign an Entra group to select which users receive Grunt access.
+  </Step>
+
+  <Step title="Choose who gets access">
+    Under **Users and groups**, assign your pilot user or a small pilot group. Set the provisioning **Scope** to **Sync only assigned users and groups**.
+
+    Review the group's members before expanding the rollout: each active user provisioned to Grunt receives a PowerPoint seat assignment when subscription inventory is available.
+  </Step>
+
+  <Step title="Verify your pilot and start provisioning">
+    Use **Provision on-demand** for the pilot user. Review each result, then confirm their license assignment in the Grunt portal and ask them to sign in to the add-in.
+
+    Configure a notification email for provisioning failures and enable accidental deletion protection. Select **Start provisioning** with only the pilot users assigned.
+
+    Test removal with the pilot account too: remove its assignment to the Entra application and confirm that the next provisioning cycle removes its Grunt license assignment. Reassign the account to test restoring access.
+
+    Once both tests succeed, add the remaining users and monitor **Provisioning logs**.
+  </Step>
+</Steps>
+
+Microsoft's [SCIM connection guide](https://learn.microsoft.com/en-us/entra/identity/app-provisioning/use-scim-to-provision-users-and-groups#integrate-your-scim-endpoint-with-the-microsoft-entra-provisioning-service) covers the Entra connection screens. See also [on-demand provisioning](https://learn.microsoft.com/en-us/entra/identity/app-provisioning/provision-on-demand) for testing an individual user.
+
+## User attribute mappings
+
+Grunt identifies users by email address. Choose one Entra attribute that contains the email address your users use in Grunt, and use it consistently.
+
+| Entra source | Grunt target | Configuration |
+| --- | --- | --- |
+| `mail` | `userName` | Required. Use as the matching attribute, with precedence **1**. |
+| `displayName` | `displayName` | Optional display name. |
+| `givenName` | `name.givenName` | Optional first name. |
+| `surname` | `name.familyName` | Optional last name. |
+| Default Entra deactivation expression using `IsSoftDeleted` | `active` | Keep the expression that sends `false` when a user is deprovisioned. Do not replace it with a constant `true`. |
+
+If your tenant's `userPrincipalName` is the email address used in Grunt, you can map it to `userName` instead of `mail`. Check that the chosen attribute is populated for every assigned user, including guests.
+
+Use this minimal mapping set. Remove other default mappings, including `externalId`, unless Grunt support has asked you to configure them. Grunt supplies its own identifiers; do not map Entra's object ID to `id` or `externalId`.
+
+Grunt does not support changing a provisioned user's email identifier through SCIM. Contact support before rolling out an email-domain change or renaming provisioned accounts.
+
+For the Entra mapping controls, see Microsoft's [attribute mapping guide](https://learn.microsoft.com/en-us/entra/identity/app-provisioning/customize-application-attributes).
+
+## What happens after setup
+
+| Directory change sent by Entra | Result in Grunt |
+| --- | --- |
+| A user is provisioned with `active: true` | Grunt creates or matches the user by email and assigns a PowerPoint seat from the connected subscription's inventory. |
+| A user's name changes | Grunt updates their name from the mapped attributes. |
+| Entra sends `active: false` or deletes the SCIM user | Grunt removes the corresponding license assignment. The Grunt account itself is retained. |
+
+Changes follow Entra's provisioning schedule. Allow the sync to complete and the add-in to refresh its license; do not use SCIM as an immediate session-termination mechanism.
+
+## Renew the SCIM key
+
+New keys generated in the Grunt portal expire **365 days after creation**. Record the creation date and schedule renewal before expiry.
+
+1. In your organization's **Settings**, click **Rotate key** and copy the replacement.
+2. Replace **Secret Token** in the existing Entra provisioning configuration.
+3. Test the connection and save the configuration.
+4. Confirm that provisioning resumes successfully in **Provisioning logs**.
+
+Keep the same enterprise application and assignments when renewing. If you have an older key supplied by Grunt, contact support to confirm its expiry and renewal plan.
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="Test Connection returns 401 or Unauthorized">
+    Check that **Secret Token** contains the full SCIM key for the correct organization, without quotes or a `Bearer ` prefix. Confirm that SCIM is enabled and that the key has not expired or been replaced.
+
+    If an existing connection stopped working without a configuration change, contact Grunt support before rotating keys. Include the failure time, organization name, and Entra error message. Never include the secret token.
+  </Accordion>
+  <Accordion title="The connection succeeds, but no users appear">
+    Check that provisioning is running, the user or group is assigned to the application, and the user passes any scoping filters. Use **Provision on-demand** to see why a pilot user is skipped. Confirm that the mapped email is populated.
+  </Accordion>
+  <Accordion title="Provisioning fails on Groups">
+    Disable group-object provisioning under **Attribute mapping**. Keep your group assigned under **Users and groups** if you use its membership to select users.
+  </Accordion>
+  <Accordion title="A user is provisioned but has no active license">
+    Confirm that SCIM is connected to the intended organization and an active PowerPoint subscription. Compare the provisioned email with the email used in the add-in, then check the user's seat assignment in the Grunt portal. Contact support if the assignment is missing after a successful sync.
+  </Accordion>
+  <Accordion title="An update reports that an identifier cannot be changed">
+    Review mappings for `userName`, `id`, and `externalId`. Grunt uses the user's email as its SCIM identity. Remove unsupported default identifier mappings and contact support if the user's email has changed.
+  </Accordion>
+</AccordionGroup>
+
+For add-in activation and connectivity issues, see [Licensing and provisioning](/powerpoint-add-in/it/licensing-and-provisioning) and [Network and security](/powerpoint-add-in/it/network-and-security).
