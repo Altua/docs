@@ -43,7 +43,7 @@ Use the base URL exactly as shown. Do not add `/Users` or `/ping`. Paste only th
   </Step>
 
   <Step title="Create an enterprise application">
-    In the [Microsoft Entra admin center](https://entra.microsoft.com), open **Entra ID** > **Enterprise apps** > **New application** > **Create your own application**.
+    In the [Microsoft Entra admin center](https://entra.microsoft.com), open **Entra ID** > **Enterprise applications** > **New application** > **Create your own application**.
 
     Name it **Grunt SCIM** and choose **Integrate any other application you don't find in the gallery**. Create the application. If you already have a Grunt provisioning application, open that application instead.
   </Step>
@@ -59,15 +59,36 @@ Use the base URL exactly as shown. Do not add `/Users` or `/ping`. Paste only th
   </Step>
 
   <Step title="Configure user mappings">
-    Open **Attribute mapping** (or **Mappings** in the older interface). Enable user provisioning and review the [user attribute mappings](#user-attribute-mappings). Keep **Create**, **Update**, and **Delete** enabled for users.
+    Choose which user details Entra sends to Grunt.
 
-    **Disable the group mapping.** Grunt provisions users; it does not create or synchronize SCIM group objects. You can still assign an Entra group to select which users receive Grunt access.
+    1. Open your Grunt provisioning configuration. Under **Manage**, select **Attribute Mapping**, then **Users**.
+    2. Find the mapping whose target attribute is `userName`. Click its pencil icon and set the source to `mail`, or to `userPrincipalName` if that contains the email address your users use in Grunt. Use this as the matching attribute with precedence **1**.
+    3. Review the remaining mappings against the [user attribute mappings](#user-attribute-mappings) below. Keep the default deactivation expression for `active` so Entra can remove access. Remove unsupported default mappings as described below.
+    4. Save your changes.
+
+    <Note>
+    In the older Entra interface, open **Provisioning** > **Mappings** > **Provision Microsoft Entra ID Users** to edit these attributes. Set **Enabled** to **Yes**. If you see **Target Object Actions**, keep **Create**, **Update**, and **Delete** selected. You do not need to find these checkboxes in the new attribute editor.
+    </Note>
   </Step>
 
   <Step title="Choose who gets access">
-    Under **Users and groups**, assign your pilot user or a small pilot group. Set the provisioning **Scope** to **Sync only assigned users and groups**.
+    Limit provisioning to a pilot user or small pilot group before starting the sync.
 
-    Review the group's members before expanding the rollout: each active user provisioned to Grunt receives a PowerPoint seat assignment when subscription inventory is available.
+    1. In the provisioning configuration, open **Manage** > **Scoping filters**. Select **Users**, then click the pencil icon to open **Configure Scoping Filters**.
+    2. In **Scope Settings**, keep user provisioning enabled. In **Scope by assignment**, choose to provision only assigned users and groups.
+    3. In **Users and groups**, assign your pilot user or pilot group to the application. Review any existing assignments so the pilot includes only the intended users.
+    4. Leave **Scope by attribute** without additional rules for this pilot. On **Review**, check your choices and click **Save**.
+    5. Return to **Scoping filters** and select **Groups**. If group provisioning is enabled, edit its configuration, disable it in **Scope Settings**, and save.
+
+    Grunt provisions user accounts only. Assigning an Entra group selects its members for user provisioning; disabling group provisioning prevents Entra from sending the group object itself to Grunt.
+
+    <Note>
+    In the older interface, assign your pilot from the enterprise application's **Users and groups** > **Add user/group**, then click **Assign**. Under **Provisioning** > **Settings**, set **Scope** to **Sync only assigned users and groups** and save. Under **Mappings** > **Provision Microsoft Entra ID Groups**, set **Enabled** to **No** and save.
+    </Note>
+
+    Group assignment requires Microsoft Entra ID P1 or P2. Only direct user members are included; nested groups are not supported. You can assign the pilot user directly instead. See Microsoft's [assignment guide](https://learn.microsoft.com/en-us/entra/identity/enterprise-apps/assign-user-or-group-access-portal).
+
+    Review the selected users before continuing: each active user provisioned to Grunt receives a PowerPoint seat assignment when subscription inventory is available. See Microsoft's [scoping guide](https://learn.microsoft.com/en-us/entra/identity/app-provisioning/define-conditional-rules-for-provisioning-user-accounts) for the current wizard.
   </Step>
 
   <Step title="Verify your pilot and start provisioning">
@@ -136,7 +157,7 @@ Keep the same enterprise application and assignments when renewing. If you have 
     Check that provisioning is running, the user or group is assigned to the application, and the user passes any scoping filters. Use **Provision on-demand** to see why a pilot user is skipped. Confirm that the mapped email is populated.
   </Accordion>
   <Accordion title="Provisioning fails on Groups">
-    Disable group-object provisioning under **Attribute mapping**. Keep your group assigned under **Users and groups** if you use its membership to select users.
+    Disable group provisioning under **Scoping filters** (or disable the group mapping under **Mappings** in the older interface). Keep your group assigned under **Users and groups** if you use its membership to select users.
   </Accordion>
   <Accordion title="A user is provisioned but has no active license">
     Confirm that SCIM is connected to the intended organization and an active PowerPoint subscription. Compare the provisioned email with the email used in the add-in, then check the user's seat assignment in the Grunt portal. Contact support if the assignment is missing after a successful sync.
