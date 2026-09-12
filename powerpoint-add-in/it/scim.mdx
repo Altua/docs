@@ -111,6 +111,7 @@ Grunt identifies users by email address. Choose one Entra attribute that contain
 | Entra source | Grunt target | Configuration |
 | --- | --- | --- |
 | `mail` | `userName` | Required. Use as the matching attribute, with precedence **1**. |
+| `objectId` | `externalId` | Optional. Stores the user's Entra object ID as an external reference. Keep `userName` as the matching attribute. |
 | `displayName` | `displayName` | Optional display name. |
 | `givenName` | `name.givenName` | Optional first name. |
 | `surname` | `name.familyName` | Optional last name. |
@@ -118,7 +119,9 @@ Grunt identifies users by email address. Choose one Entra attribute that contain
 
 If your tenant's `userPrincipalName` is the email address used in Grunt, you can map it to `userName` instead of `mail`. Check that the chosen attribute is populated for every assigned user, including guests.
 
-Use this minimal mapping set. Remove other default mappings, including `externalId`, unless Grunt support has asked you to configure them. Grunt supplies its own identifiers; do not map Entra's object ID to `id` or `externalId`.
+Use the mappings above. You can keep or add the `objectId` to `externalId` mapping. Grunt stores this reference separately for the connected SCIM organization and subscription; updating it does not change the user's email or sign-in identity. Remove other default mappings unless Grunt support has asked you to configure them.
+
+Grunt supplies the SCIM resource `id`. Do not map Entra's object ID to `id`. Updates can repeat the existing `id` or `userName`, but cannot change or remove them.
 
 Grunt does not support changing a provisioned user's email identifier through SCIM. Contact support before rolling out an email-domain change or renaming provisioned accounts.
 
@@ -163,7 +166,7 @@ Keep the same enterprise application and assignments when renewing. If you have 
     Confirm that SCIM is connected to the intended organization and an active PowerPoint subscription. Compare the provisioned email with the email used in the add-in, then check the user's seat assignment in the Grunt portal. Contact support if the assignment is missing after a successful sync.
   </Accordion>
   <Accordion title="An update reports that an identifier cannot be changed">
-    Review mappings for `userName`, `id`, and `externalId`. Grunt uses the user's email as its SCIM identity. Remove unsupported default identifier mappings and contact support if the user's email has changed.
+    Check that `userName` still contains the email address already used in Grunt, and remove any mapping to `id`. Repeating an unchanged `userName` or `id` is supported. Updating `externalId` is also supported and does not change the user's SCIM identity. Contact support if the user's email has changed.
   </Accordion>
 </AccordionGroup>
 
