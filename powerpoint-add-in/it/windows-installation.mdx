@@ -32,7 +32,7 @@ Key characteristics:
 - Registry changes under `HKEY_CURRENT_USER`
 - Auto-updates on by default unless disabled for the organization
 
-This is the recommended mode for most users.
+This is the recommended mode for users installing Grunt themselves. For Intune deployments, use per-machine installation in most cases. Choose per-user when you want Intune to handle only the initial deployment and Grunt to handle automatic updates.
 
 ## Command-line installation
 
@@ -109,7 +109,9 @@ On 64-bit systems, the installer also mirrors the registry entries under `Softwa
 
 ## Software deployment systems
 
-The same per-machine model is intended for SCCM, Intune, and similar systems.
+For fully managed deployments through Intune, SCCM, or similar systems, use per-machine installation and distribute all updates through your deployment tooling.
+
+If you use Intune for the initial deployment and want Grunt to handle updates, use per-user installation in the user's Windows context and leave automatic updates enabled. See [Deployment and installation](/powerpoint-add-in/it/deployment-and-installation) for help choosing an installation model.
 
 Use [Update management](/powerpoint-add-in/it/update-management) if you also need rollout and release-channel guidance.
 
