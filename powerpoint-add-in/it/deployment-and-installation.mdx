@@ -16,7 +16,14 @@ Grunt supports two main Windows deployment models:
 - Per-user installation in the user's local profile
 - Per-machine installation in `Program Files`
 
-The default per-user install is the standard choice for most users and organizations. It does not usually require admin rights and enables auto-updates by default.
+For Intune deployments, we recommend per-machine installation in most cases. Choose the model based on how you want to manage updates:
+
+| Update ownership | Recommended installation model |
+| --- | --- |
+| You manage the initial deployment and all updates through Intune. | Per-machine. Grunt auto-updates are disabled, so you deploy each update through Intune. |
+| You use Intune for the initial deployment and want Grunt to handle updates automatically. | Per-user. Run the installation in the user's Windows context and leave automatic updates enabled. |
+
+For users installing Grunt themselves, the default per-user install is the standard choice. It does not usually require admin rights and enables auto-updates by default.
 
 ## Recommended baseline
 
@@ -66,9 +73,9 @@ This mode:
 
 ## Managed deployment tools
 
-You can deploy Grunt with common software distribution platforms such as Intune, SCCM, or similar tooling. These rollouts normally use the per-machine model above.
+You can deploy Grunt with common software distribution platforms such as Intune, SCCM, or similar tooling. Use the per-machine model for a fully managed rollout where you distribute both the initial installation and subsequent updates.
 
-You can also deploy the default per-user installer through Intune or another MDM tool when the assignment runs in the user's Windows context. This keeps Grunt under `%LOCALAPPDATA%`, writes settings to `HKEY_CURRENT_USER`, and preserves the per-user update model.
+If you want Grunt to handle updates after the initial deployment, deploy the default per-user installer through Intune or another MDM tool in the user's Windows context. This keeps Grunt under `%LOCALAPPDATA%` and writes settings to `HKEY_CURRENT_USER`. Leave automatic updates enabled so Grunt can install subsequent updates.
 
 ## Prerequisites
 
