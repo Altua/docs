@@ -9,19 +9,51 @@ Common questions we receive from IT departments during vendor assessments and se
 
 <AccordionGroup>
   <Accordion title="Can Grunt read or access data in our Excel and PowerPoint?">
-    The local Grunt add-in reads the selected Excel ranges needed to create and refresh Grunt objects. For SharePoint and OneDrive workbooks, it can read those ranges through Microsoft Graph with the signed-in user's delegated `Files.Read` permission. Workbook contents are not sent to or stored in Grunt cloud services. We store only the items listed in our [data policy](https://app.grunt.pro/legal), which are necessary for account creation, login, and tracking error metrics needed to provide support.
+    The local Grunt add-in reads the selected or previously linked Excel ranges needed to create and refresh Grunt objects. Standard Excel/PowerPoint functionality processes workbook contents locally. Optional AI and Content Distribution features have separate data handling, described below. See our [data policy](https://app.grunt.pro/legal) for details.
+  </Accordion>
+
+  <Accordion title="Does the add-in read only active workbooks or all open workbooks?">
+    The add-in is not restricted to the active workbook. It can list open workbooks so you can select a data source, and reads the selected or previously linked ranges needed to create or refresh Grunt objects. It can also open a linked workbook when required for a refresh.
+  </Accordion>
+
+  <Accordion title="Can it access network drives?">
+    Yes. The desktop add-in can read linked or user-selected files on network drives and shared folders, subject to your existing Windows and network permissions.
+  </Accordion>
+
+  <Accordion title="Can it access SharePoint or OneDrive data?">
+    Yes, when you use the Microsoft 365 integration. The add-in can read selected ranges from SharePoint and OneDrive workbooks through Microsoft Graph using your delegated `Files.Read` permission. Access occurs in response to your actions; files are not browsed or scanned in the background.
+  </Accordion>
+
+  <Accordion title="Does it upload workbook contents to Grunt services?">
+    For standard Excel/PowerPoint functionality, workbook contents are not sent to or stored in Grunt's cloud services. When you enable and use AI functionality, relevant content is sent through Grunt's AI service for processing. Grunt's Content Distribution feature also stores content explicitly published for distribution in Grunt's private cloud, or in your own Azure environment for self-hosted deployments.
+  </Accordion>
+
+  <Accordion title="What AI model is used for the AI functionality?">
+    Grunt uses OpenAI's GPT models. We are moving to OpenAI models hosted on Microsoft Azure. The specific model version may change as the functionality develops.
+  </Accordion>
+
+  <Accordion title="Is customer data sent to OpenAI, Anthropic, Azure OpenAI, or another model provider?">
+    Yes, but only when you enable and use AI functionality. Content needed to fulfil your request is sent to the model provider through Grunt's AI service.
+  </Accordion>
+
+  <Accordion title="Are prompts, spreadsheets, presentations, and uploaded documents retained?">
+    Content submitted to AI functionality is retained on Grunt's servers only for as long as necessary to deliver the requested output, then deleted. AI conversation history is stored locally on your device to support continued conversations and can be deleted by you. Retention by the model provider is governed by the applicable service agreement and configuration.
+  </Accordion>
+
+  <Accordion title="Is customer data used for model training?">
+    No. Customer content submitted to AI functionality is not used to train AI models, and our subprocessors are prohibited from using customer data for model training.
   </Accordion>
 
   <Accordion title="Does the supplier process any personal data on behalf of the client?">
     Yes. We process name and email addresses in order to grant licenses to users of our software. These licenses are linked to an email address. In addition, we register telephone numbers for a small number of contact persons, for example for inquiries related to technical questions, invoices, or user administration.
   </Accordion>
 
-  <Accordion title="Is data stored or made available outside the EU/EEA?">
-    No. All data centers for our subprocessors are located in the EU/EEA. Specifically, data is retained and processed in Northern Europe on servers controlled by Microsoft Azure.
+  <Accordion title="Is data processed within the UK/EU?">
+    Grunt's cloud services retain and process data in Northern Europe on Microsoft Azure. We are migrating AI functionality to Azure-hosted OpenAI models, with EU processing as a requirement of that deployment. The migration is in progress.
   </Accordion>
 
   <Accordion title="What is the retention period for the storage of data?">
-    Data is retained for as long as the subscription is valid, and for a period after to allow for resubscription or other inquiries (normally 1 year). Data may be stored longer if required to comply with applicable laws or regulatory requirements.
+    Account and subscription data is retained for as long as the subscription is valid, and for a period after to allow for resubscription or other inquiries (normally 1 year). Data may be stored longer if required to comply with applicable laws or regulatory requirements. AI content and local conversation history are covered in the AI retention answer above.
   </Accordion>
 
   <Accordion title="What type of cloud or hosting service does Grunt use?">
@@ -33,13 +65,33 @@ Common questions we receive from IT departments during vendor assessments and se
   </Accordion>
 
   <Accordion title="Which components of the service are shared with other customers?">
-    The cloud infrastructure is shared with other customers but does not store any customer proprietary data except data used to validate software licenses.
+    Grunt-operated cloud infrastructure is shared with other customers and supports licensing and optional services such as AI and Content Distribution. The data handled depends on the features you use, as described above. For self-hosted Content Distribution, distributed content resides in your own Azure environment.
+  </Accordion>
+
+  <Accordion title="Are any subprocessors used?">
+    Yes. We use third-party subprocessors. The current list is maintained in our [Trust Center](https://trust.grunt.pro). Click **Overview** and scroll down to the subprocessor list.
   </Accordion>
 </AccordionGroup>
 
 ## Security
 
 <AccordionGroup>
+  <Accordion title="How are updates signed?">
+    All software is digitally signed with an Extended Validation (EV) code-signing certificate.
+  </Accordion>
+
+  <Accordion title="Are updates validated cryptographically?">
+    Yes. The automatic updater verifies downloaded installer and updater packages against their expected SHA-256 checksums before proceeding. If a checksum does not match, the update does not proceed.
+  </Accordion>
+
+  <Accordion title="What privileges do update processes run under?">
+    For the default per-user installation, updates normally run without elevated privileges. A per-machine installation under Program Files requires administrator rights and has automatic updates disabled by design; updates are then distributed by IT through its deployment tooling. See [update management](/powerpoint-add-in/it/update-management) for details.
+  </Accordion>
+
+  <Accordion title="Are software integrity checks performed?">
+    Yes. The release process validates digital signatures on packaged executables and libraries, and the automatic updater checks downloaded package integrity using SHA-256 checksums.
+  </Accordion>
+
   <Accordion title="Who is the responsible point of contact for information security?">
     Our CTO is responsible for information security in the company.
   </Accordion>
