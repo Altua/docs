@@ -56,7 +56,8 @@ After [connecting and authenticating](/mcp-server/connect-and-authenticate), sen
           ]
         },
         "orientation": "vertical",
-        "stackingMode": "clustered"
+        "stackingMode": "clustered",
+        "settings": {}
       }
     }
   }
@@ -64,6 +65,8 @@ After [connecting and authenticating](/mcp-server/connect-and-authenticate), sen
 ```
 
 Pass the matrix inside `chart.data.values`. The first row names the categories. Each following row contains a series name and its values. For a new bar or column chart, supply `data`, `orientation`, and `stackingMode`. To update this chart later, add the returned `assetId` to `arguments` alongside `chart`.
+
+Include `settings: {}` when you want the default chart settings. This avoids a current server validation issue that can report an internal error when `settings` is omitted.
 
 ## Table tools
 
