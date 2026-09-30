@@ -49,10 +49,12 @@ After [connecting and authenticating](/mcp-server/connect-and-authenticate), sen
     "arguments": {
       "assetName": "Quarterly revenue",
       "chart": {
-        "data": [
-          ["", "Q1", "Q2"],
-          ["Revenue", 120, 150]
-        ],
+        "data": {
+          "values": [
+            ["", "Q1", "Q2"],
+            ["Revenue", 120, 150]
+          ]
+        },
         "orientation": "vertical",
         "stackingMode": "clustered"
       }
@@ -61,7 +63,7 @@ After [connecting and authenticating](/mcp-server/connect-and-authenticate), sen
 }
 ```
 
-The first row names the categories. Each following row contains a series name and its values. For a new bar or column chart, supply `data`, `orientation`, and `stackingMode`. To update this chart later, add the returned `assetId` to `arguments` alongside `chart`.
+Pass the matrix inside `chart.data.values`. The first row names the categories. Each following row contains a series name and its values. For a new bar or column chart, supply `data`, `orientation`, and `stackingMode`. To update this chart later, add the returned `assetId` to `arguments` alongside `chart`.
 
 ## Table tools
 
