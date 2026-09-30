@@ -17,8 +17,8 @@ You can use it to:
 
 You need:
 
-- A Grunt account
-- An MCP client that supports remote servers, streamable HTTP, and OAuth
+- A Grunt account for user sign-in, or organization credentials with **MCP server** access for an M2M integration
+- An MCP client that supports remote servers over Streamable HTTP and your chosen authentication flow
 
 Connect your client to:
 
@@ -26,7 +26,9 @@ Connect your client to:
 https://mcp.grunt.io/mcp
 ```
 
-Your client prompts you to sign in before it can call Grunt tools.
+For personal use, your client prompts you to sign in. For an M2M integration, exchange your organization's client credentials for an access token with the `mcp.access` scope. Follow [Connect and authenticate](/mcp-server/connect-and-authenticate) for both flows and environment-specific connection details.
+
+After connecting, use `tools/list` to discover exact tool names and input schemas. Creation tools use names such as `create_or_update_bar_chart` and `create_or_update_table`.
 
 ## Core capabilities
 
@@ -54,11 +56,15 @@ Create and update tools return an `assetId` and an `assetCommit`:
 
 These tools also return a preview and an `exportGuideUrl` you can use to open the asset in Grunt.
 
+New assets also include a permanent view link in `assetUrl` when link creation succeeds. It returns a manifest with links to the image, export, and underlying data. See [Share an asset](/mcp-server/tools#share-an-asset) for link permissions and edit links.
+
+Assets created through user sign-in belong to that user. Assets created with organization credentials belong to the organization and are available to its other MCP clients.
+
 ## Next steps
 
 <CardGroup cols={2}>
   <Card title="Connect and authenticate" icon="arrow-pointer" href="/mcp-server/connect-and-authenticate">
-    Add the server to your MCP client and sign in.
+    Connect through user sign-in or organization client credentials.
   </Card>
   <Card title="Tool reference" icon="file-code" href="/mcp-server/tools">
     See the tools available from the production server.
