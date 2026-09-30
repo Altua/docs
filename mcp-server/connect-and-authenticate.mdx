@@ -1,9 +1,9 @@
 ---
 title: "Connect and authenticate"
-description: "Connect an MCP client to Grunt and sign in"
+description: "Connect an MCP client with user sign-in or organization credentials"
 ---
 
-The Grunt MCP Server uses streamable HTTP and OAuth authentication.
+The Grunt MCP Server uses Streamable HTTP and OAuth authentication. Connect with user sign-in for personal assets, or use organization credentials for a machine-to-machine (M2M) integration.
 
 ## Add the server to your client
 
@@ -29,7 +29,7 @@ Complete the authorization flow. Your client can then discover and call the avai
 </Steps>
 
 <Info>
-Your MCP client must support OAuth for remote MCP servers.
+For user sign-in, your MCP client must support OAuth for remote MCP servers. For an M2M integration, it must support client credentials or let your application supply an access token.
 </Info>
 
 ## OAuth metadata
@@ -46,15 +46,54 @@ The response includes:
 - `authorization_servers`
 - `scopes_supported`
 
-The server currently advertises the `openid`, `profile`, and `email` scopes.
+Production advertises the `mcp.access` scope. Read the metadata from the endpoint you use, then retrieve the authorization server's `/.well-known/openid-configuration` for its authorization and token endpoints. Production uses `https://auth.grunt.io/`.
+
+Use the exact advertised `resource` value when requesting a token. For production, it is `https://mcp.grunt.io/mcp`. Staging or another environment can use a different resource. Identity scopes such as `openid` and `email` do not replace `mcp.access`.
+
+## Connect with organization credentials
+
+Use the OAuth `client_credentials` grant when your integration runs without a signed-in user.
+
+<Steps>
+<Step title="Create an MCP client">
+In the Grunt client portal, open your organization's **Integrations** page and select **Create client**. Choose **MCP server** under **Access**. You need permission to manage organization clients.
+
+If **Integrations** is unavailable, contact your organization administrator or Grunt support to check whether it is enabled for your organization.
+</Step>
+
+<Step title="Save the connection details">
+Copy the client ID and the one-time client secret. Under **MCP connection details**, copy the **MCP server URL**, **Token endpoint**, **Resource**, and **Scope**. Keep the secret in your backend's secret store.
+</Step>
+
+<Step title="Request an access token">
+Set `GRUNT_CLIENT_ID` and `GRUNT_CLIENT_SECRET` from your secret store. Set `GRUNT_TOKEN_ENDPOINT`, `GRUNT_MCP_RESOURCE`, and `GRUNT_MCP_URL` to the connection details for your environment. Then request a token:
+
+```bash
+curl --fail-with-body --request POST "$GRUNT_TOKEN_ENDPOINT" \
+  --data-urlencode "grant_type=client_credentials" \
+  --data-urlencode "client_id=$GRUNT_CLIENT_ID" \
+  --data-urlencode "client_secret=$GRUNT_CLIENT_SECRET" \
+  --data-urlencode "scope=mcp.access" \
+  --data-urlencode "resource=$GRUNT_MCP_RESOURCE"
+```
+
+Read `access_token` from the JSON response. Send it as `Authorization: Bearer <access-token>` when calling the MCP server.
+</Step>
+</Steps>
+
+Access tokens currently last five minutes. Use the returned `expires_in` to schedule renewal. This grant does not issue a refresh token; request another access token with the client credentials when needed.
+
+`mcp.access` covers the available chart and table creation, update, and read tools. There is no separate chart-write or asset-create scope. Public API access uses a different resource and token; do not combine Public API scopes with MCP access in one token.
+
+Assets created with organization credentials belong to that organization and can be accessed by its other MCP clients. They do not automatically appear among a user's personal assets. Use an asset ID owned by the same organization when reading or updating it.
 
 ## Test an authenticated connection
 
-If you already have a valid access token, you can request the current tool list directly:
+Use an MCP SDK for normal connections so it handles initialization and protocol negotiation. With a valid access token, you can also inspect the current tool list directly. Set `GRUNT_MCP_URL` to your server URL and `GRUNT_ACCESS_TOKEN` to the returned access token:
 
 ```bash
-curl -X POST "https://mcp.grunt.io/mcp" \
-  -H "Authorization: Bearer <access-token>" \
+curl --fail-with-body --request POST "$GRUNT_MCP_URL" \
+  -H "Authorization: Bearer $GRUNT_ACCESS_TOKEN" \
   -H "Content-Type: application/json" \
   -H "Accept: application/json, text/event-stream" \
   -d '{
@@ -68,8 +107,14 @@ curl -X POST "https://mcp.grunt.io/mcp" \
 Include both `application/json` and `text/event-stream` in the `Accept` header when calling the MCP endpoint directly.
 </Info>
 
+Use the exact tool `name` and `inputSchema` returned by this endpoint. For example, the bar-chart tool is `create_or_update_bar_chart`. See the [tool reference](/mcp-server/tools#example-create-a-column-chart) for a complete `tools/call` request body. Send it to the same URL with the same headers.
+
 ## Troubleshooting
 
-- A `401 Unauthorized` response means the request does not include a valid access token. Reconnect the server and complete sign-in.
-- If the server does not appear in your client, confirm that the client supports remote MCP servers over streamable HTTP.
-- If tool discovery fails after sign-in, remove the connection and add it again to refresh authorization.
+- **Token request fails:** confirm that the client and its secret are enabled and unexpired, that the client has **MCP server** access, and that `scope` is `mcp.access`. Use the exact resource and token endpoint for the target environment.
+- **MCP returns `401 Unauthorized`:** obtain a fresh access token and check its target resource. For user sign-in, reconnect and complete authorization.
+- **Reads work but chart or table creation reports an unknown tool or internal error:** refresh `tools/list` and compare the exact tool name in your outgoing `tools/call`. Older names such as `bar_chart` and `table` are not aliases. Use `create_or_update_bar_chart` and `create_or_update_table`. This naming mismatch does not require an additional write scope.
+- **An asset cannot be read or updated:** confirm that the asset belongs to the authenticated user or organization. Personal assets and organization assets have separate ownership.
+- **The tool reports invalid arguments:** check the current `inputSchema`, including required properties and supported values.
+- **The server does not appear in your client:** confirm that the client supports remote MCP servers over Streamable HTTP and your chosen authentication flow.
+- **A correctly named call still fails:** send Grunt support the reference ID, MCP URL, approximate UTC time, and tool name. Do not send access tokens or client secrets. For timeouts or transient failures, check whether the asset was created or updated before retrying; repeating a creation call can create another asset.

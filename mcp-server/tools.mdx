@@ -3,23 +3,27 @@ title: "Tool reference"
 description: "Tools available from the Grunt MCP Server"
 ---
 
-This page lists the tools available from the production Grunt MCP Server. Tool names use snake case, such as `bar_chart`.
+This page describes the public chart, table, and asset tools. Call `tools/list` on the MCP endpoint you use to retrieve its available tools and current input schemas.
 
-Your MCP client retrieves each tool's current input schema when it connects. Use that schema for the complete set of fields and supported values.
+Pass the exact `name` from that response as `params.name` in `tools/call`. Use the tool's `inputSchema` for the complete set of fields and supported values. Refresh cached definitions when you reconnect or change endpoints.
+
+<Warning>
+Older documentation used names such as `bar_chart`, `pie_donut_chart`, and `table`. These are not aliases for the current tools. Use `create_or_update_bar_chart`, `create_or_update_pie_or_donut_chart`, and `create_or_update_table`, respectively.
+</Warning>
 
 ## Chart tools
 
 | Tool | Purpose |
 | --- | --- |
-| `bar_chart` | Create or update bar and column charts |
-| `line_chart` | Create or update line and index charts |
-| `area_chart` | Create or update area and 100% area charts |
-| `waterfall_chart` | Create or update waterfall charts |
-| `combined_chart` | Create or update charts that combine bar, column, and line series |
-| `pie_donut_chart` | Create or update pie and donut charts |
-| `scatter_bubble_chart` | Create or update scatter and bubble charts |
-| `mekko_chart` | Create or update Mekko and Marimekko charts |
-| `dumbbell_chart` | Create or update dumbbell charts |
+| `create_or_update_bar_chart` | Create or update bar and column charts |
+| `create_or_update_line_chart` | Create or update line and index charts |
+| `create_or_update_area_chart` | Create or update area and 100% area charts |
+| `create_or_update_waterfall_chart` | Create or update waterfall charts |
+| `create_or_update_combined_chart` | Create or update charts that combine bar, column, and line series |
+| `create_or_update_pie_or_donut_chart` | Create or update pie and donut charts |
+| `create_or_update_scatter_or_bubble_chart` | Create or update scatter and bubble charts |
+| `create_or_update_mekko_chart` | Create or update Mekko and Marimekko charts |
+| `create_or_update_dumbbell_chart` | Create or update dumbbell charts |
 
 Each chart tool accepts a chart definition and an optional `assetId`:
 
@@ -31,14 +35,42 @@ Each chart tool accepts a chart definition and an optional `assetId`:
 Create a new asset when you change the core chart family, orientation, or arrangement. Do not reuse the existing `assetId` for that change.
 </Warning>
 
+### Example: create a column chart
+
+After [connecting and authenticating](/mcp-server/connect-and-authenticate), send this JSON-RPC body to your MCP endpoint with `method` set to `tools/call`:
+
+```json
+{
+  "jsonrpc": "2.0",
+  "id": "2",
+  "method": "tools/call",
+  "params": {
+    "name": "create_or_update_bar_chart",
+    "arguments": {
+      "assetName": "Quarterly revenue",
+      "chart": {
+        "data": [
+          ["", "Q1", "Q2"],
+          ["Revenue", 120, 150]
+        ],
+        "orientation": "vertical",
+        "stackingMode": "clustered"
+      }
+    }
+  }
+}
+```
+
+The first row names the categories. Each following row contains a series name and its values. For a new bar or column chart, supply `data`, `orientation`, and `stackingMode`. To update this chart later, add the returned `assetId` to `arguments` alongside `chart`.
+
 ## Table tools
 
 | Tool | Purpose |
 | --- | --- |
-| `table` | Create or update formatted tables and visual grids |
+| `create_or_update_table` | Create or update formatted tables and visual grids |
 | `search_visual_assets` | Find valid built-in icons and flag country codes for table settings |
 
-The `table` tool supports formatting, conditional rules, merged cells, row and column sizing, icons, gauges, shapes, flags, images, logos, and in-cell charts. Include an `assetId` to update an existing table.
+The `create_or_update_table` tool accepts a `table` definition with required `cells` and optional `settings`. It supports formatting, conditional rules, merged cells, row and column sizing, icons, gauges, shapes, flags, images, logos, and in-cell charts. Include an `assetId` to update an existing table.
 
 Use `search_visual_assets` before adding built-in icons or flags. It accepts a query, an asset type of `all`, `icon`, or `flag`, and a result limit from 1 to 50.
 
@@ -49,8 +81,24 @@ Use `search_visual_assets` before adding built-in icons or flags. It accepts a q
 | `fetch_latest_asset` | Load the latest version and preview of a chart or table |
 | `inspect_object` | Read an asset's data, structure, settings, rules, and styles |
 | `get_project_changes` | Compare a known `assetCommit` with the latest asset version |
+| `create_asset_link` | Create an additional permanent view link or an edit link for an existing asset |
 
 Use `inspect_object` before an exact update when you need the current data values, indexes, settings, or rule configuration.
+
+### Share an asset
+
+Call `create_asset_link` with `assetId` and an optional `permission`:
+
+- `view` (default) allows access to the rendered image, SVG, and underlying data.
+- `edit` grants edit access and allows the Grunt PowerPoint add-in to load the complete model for local editing. It does not convert the asset into a built-in PowerPoint chart or automatically publish deck edits to the cloud.
+
+The tool returns `assetId`, `latestCommit`, `linkId`, `permission`, and `assetUrl` in `structuredContent`. The `assetUrl` returns a JSON manifest. Follow `links.svg.href` for the image, `links.export.href` for object export, or `links.data.href` for data. Edit manifests also include `links.project.href` for the complete Grunt model. Use these returned URLs instead of constructing delivery URLs yourself.
+
+When embedding an asset in PowerPoint, create one fresh edit link per asset per deck. Reuse it for repeated placements within that deck.
+
+<Warning>
+Share links do not expire and cannot currently be revoked. Anyone with a view link can read the underlying data as well as the image. Anyone with an edit link has edit access for as long as the asset exists. Use `view` unless edit access is required.
+</Warning>
 
 ## Common response fields
 
@@ -63,6 +111,8 @@ Chart and table creation or update tools return:
 
 They also return a PNG preview of the rendered asset.
 
+When you create an asset, the tool also attempts to create a permanent view link. On success, `structuredContent` includes `assetUrl`, `linkId`, and `permission`. If link creation fails, it includes `linkError`; the asset has still been created. Updating an existing asset returns its new `assetCommit` without creating another link.
+
 `fetch_latest_asset` returns the current `assetId`, `assetCommit`, `exportGuideUrl`, and preview.
 
 `inspect_object` returns the inspected components and, when available, workbook data. `get_project_changes` returns a structured description of changes since the supplied `assetCommit`.
@@ -72,3 +122,9 @@ They also return a PNG preview of the rendered asset.
 - Tool schemas reject unknown properties
 - Typed settings must use a supported discriminator, such as `annotationType`, `ruleType`, or `axisType`
 - Invalid schemas return MCP tool errors
+
+## Handle tool errors
+
+Check both JSON-RPC errors and the tool result's `isError` field. An HTTP success response does not by itself mean the tool succeeded.
+
+If a call reports an unknown tool, compare `params.name` with the current `tools/list` response from the same endpoint. Unknown-tool failures can also be reported as an internal error with a reference ID. See [troubleshooting](/mcp-server/connect-and-authenticate#troubleshooting) before changing permissions or retrying the request.
