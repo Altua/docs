@@ -1,0 +1,158 @@
+---
+title: "Automate Excel updates with VBA"
+description: "Update Grunt charts and tables from Excel macros with UpdateExcelRange"
+---
+
+Use VBA automation to update Grunt charts and tables as part of an Excel-driven reporting workflow. Your macro can prepare or import data in Excel, open an existing PowerPoint presentation, and pass specific Excel ranges to named Grunt objects. This removes the need to copy and paste each range manually.
+
+VBA automation works best for recurring presentations that keep the same design but use new data for each reporting period. For example, you can use it to produce monthly financial reports, refresh a management dashboard, or update several customer presentations from one workbook. The Grunt objects already contain the layout and formatting. Your macro supplies the latest data.
+
+The `UpdateExcelRange` method updates one existing Grunt chart or table per call. It identifies the object by its PowerPoint shape name and replaces its source range. You can call the method several times to update multiple objects in the same presentation.
+
+Grunt exposes this method through the Windows PowerPoint COM add-in. VBA accesses the add-in object through PowerPoint's `COMAddIns` collection and calls the method with late binding. You do not need to add a Grunt type-library reference to your VBA project.
+
+<Note>
+VBA automation is available in the Windows PowerPoint COM add-in. It is not available on Mac.
+</Note>
+
+## When to use VBA automation
+
+Use VBA automation when:
+
+- An Excel macro already prepares the data for your presentation.
+- You produce the same presentation with new data on a regular schedule.
+- You need to update several named Grunt objects in one automated process.
+- You want to keep the presentation's layout and formatting separate from the workbook data.
+- You are migrating an existing Excel-to-PowerPoint automation workflow to Grunt.
+
+For occasional updates, a manual [Excel connection](/powerpoint-add-in/user/excel-connections) may be simpler. VBA automation is most useful when the macro also handles other repeatable steps, such as opening files, selecting reporting periods, or producing several presentation variants.
+
+## Before you start
+
+Make sure that:
+
+- Grunt is running in PowerPoint.
+- The target presentation is open.
+- The target Grunt chart or table has a unique PowerPoint shape name.
+- The Excel workbook is saved and the source range is available.
+
+You run the macro from Excel. The automation object belongs to the PowerPoint add-in, so you access it through the PowerPoint application.
+
+## Name the Grunt object
+
+Give each object that you want to update a unique name:
+
+1. In PowerPoint, select the entire Grunt chart or table.
+2. Right-click the object.
+3. Click **Rename PowerPoint shape...**.
+4. Enter a unique name, such as `Revenue chart`.
+5. Click **Rename**.
+
+Grunt keeps the custom name when it renders the object again.
+
+<Warning>
+The name must be unique across the presentation. If more than one Grunt object has the same name, the macro stops with an error.
+</Warning>
+
+## Add the macro in Excel
+
+This example updates a Grunt object named `Revenue chart` from cells `A1:D6` on the `Data` worksheet:
+
+```vba
+Sub UpdateGruntChart()
+    Dim ppApp As Object
+    Dim ppPres As Object
+    Dim grunt As Object
+    Dim sourceRange As Range
+
+    Set ppApp = GetObject(, "PowerPoint.Application")
+    Set ppPres = ppApp.ActivePresentation
+    Set sourceRange = ThisWorkbook.Worksheets("Data").Range("A1:D6")
+    Set grunt = ppApp.COMAddIns("GruntCOM").Object
+
+    grunt.UpdateExcelRange ppPres, "Revenue chart", sourceRange, False
+End Sub
+```
+
+Replace the presentation, object name, and range with the values that your workflow uses.
+
+## Example files
+
+Downloadable example files will be added to this section. They will include:
+
+- An Excel workbook with a working `UpdateExcelRange` macro.
+- A PowerPoint presentation with a named Grunt object that the macro updates.
+
+Together, the files will demonstrate how the workbook, PowerPoint shape name, Excel range, and VBA arguments connect.
+
+<!-- Add the example workbook and PowerPoint presentation download links here. -->
+
+## Understand the arguments
+
+`UpdateExcelRange` accepts four arguments:
+
+| Argument | Description |
+| --- | --- |
+| `presentation` | The open PowerPoint presentation that contains the Grunt object. |
+| `objectName` | The PowerPoint shape name of the Grunt chart or table. Matching is not case-sensitive. |
+| `excelRange` | The Excel `Range` that supplies the new data. |
+| `transpose` | Use `True` to treat columns as chart series. Use `False` to treat rows as chart series. This setting applies to charts. |
+
+If the object already has an Excel connection, Grunt changes the connection to the supplied range. If the object contains embedded data, Grunt creates an Excel connection for it.
+
+The call starts the data refresh and then returns control to Excel. The new data may appear shortly after the macro continues. If your macro saves or exports the presentation, wait until the Grunt object has finished updating first.
+
+## Handle errors
+
+Add a VBA error handler when the macro runs as part of a larger process:
+
+```vba
+Sub UpdateGruntChartWithErrorHandling()
+    On Error GoTo UpdateFailed
+
+    Dim ppApp As Object
+    Dim ppPres As Object
+    Dim grunt As Object
+    Dim sourceRange As Range
+
+    Set ppApp = GetObject(, "PowerPoint.Application")
+    Set ppPres = ppApp.ActivePresentation
+    Set sourceRange = ThisWorkbook.Worksheets("Data").Range("A1:D6")
+    Set grunt = ppApp.COMAddIns("GruntCOM").Object
+
+    grunt.UpdateExcelRange ppPres, "Revenue chart", sourceRange, False
+    Exit Sub
+
+UpdateFailed:
+    MsgBox "Grunt could not update the object: " & Err.Description, vbExclamation
+End Sub
+```
+
+Grunt includes a descriptive message in `Err.Description` when the call fails.
+
+## Troubleshoot VBA updates
+
+### The automation object is `Nothing`
+
+Confirm that the current Grunt add-in is installed and loaded in PowerPoint. Close and reopen PowerPoint after updating Grunt.
+
+### Grunt cannot find the object
+
+Check the name in PowerPoint and in the macro. The name can use different capitalization, but it cannot contain spelling differences. Use **Rename PowerPoint shape...** to set the name again if needed.
+
+### Grunt finds multiple objects
+
+Rename each duplicate so that the target name is unique across the presentation.
+
+### Grunt cannot find the presentation session
+
+Open the target presentation in PowerPoint before you run the macro. Make sure `presentation` refers to that open presentation.
+
+### The macro finishes before the object updates
+
+The data refresh continues after `UpdateExcelRange` returns. Wait for the object to update before you save, export, or close the presentation.
+
+## Continue
+
+For manual Excel connections and refresh behavior, see [Excel connections](/powerpoint-add-in/user/excel-connections).
+

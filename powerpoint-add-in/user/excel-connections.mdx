@@ -115,6 +115,12 @@ Grunt enforces these limits per connection:
 
 If your Excel range exceeds these limits, you will see a **"Range has too many rows"** error. This commonly happens when connecting to large pivot tables backed by extensive datasets. Reduce the connected range or summarize the data before connecting.
 
+## Automate updates with VBA
+
+On Windows, you can update a Grunt chart or table from an Excel macro. The macro passes an Excel range to the PowerPoint add-in and targets the Grunt object by its PowerPoint shape name.
+
+See [Automate Excel updates with VBA](/powerpoint-add-in/user/vba-automation) for setup steps, sample code, and error handling.
+
 ## OneDrive-synced files may not auto-detect changes
 
 When working with files synced through OneDrive as local paths, Grunt may not always detect changes automatically after you save in Excel. This depends on how OneDrive handles file synchronization on your machine.
