@@ -1,0 +1,119 @@
+{
+  "checkedOn": "2026-10-14",
+  "mode": "Read-only Azure management-plane and DNS inspection",
+  "subscriptionName": "Altua Old",
+  "scope": "Production add-in API ingress in rg-back-end-prod; production backend PostgreSQL and selected backup resources. This is not an audit of every workload or customer tenant.",
+  "backendDatabase": {
+    "backup": {
+      "backupRetentionDays": 7,
+      "earliestRestoreDate": "2026-10-07T10:03:41.656608+00:00",
+      "geoRedundantBackup": "Disabled"
+    },
+    "highAvailability": {
+      "mode": "Disabled",
+      "standbyAvailabilityZone": null,
+      "state": "NotEnabled"
+    },
+    "location": "Norway East",
+    "name": "gruntbackenddbprod"
+  },
+  "separateBackupStorage": {
+    "immutableStorageWithVersioning": null,
+    "name": "entitiesprodstora",
+    "primaryLocation": "northeurope",
+    "secondaryLocation": "westeurope",
+    "sku": "Standard_RAGRS",
+    "managementLifecyclePolicyObserved": false,
+    "blobSoftDeleteEnabled": false
+  },
+  "backupContainer": {
+    "account": "entitiesprodstora",
+    "container": "backup",
+    "hasImmutabilityPolicy": false,
+    "hasLegalHold": false,
+    "immutabilityPolicy": null,
+    "immutableStorageWithVersioning": null
+  },
+  "backupVault": {
+    "immutability": null,
+    "name": "vault-mt333et1",
+    "redundancy": {
+      "crossRegionRestore": "Disabled",
+      "standardTierStorageRedundancy": "GeoRedundant"
+    },
+    "restore": {
+      "crossSubscriptionRestoreSettings": {
+        "crossSubscriptionRestoreState": "Enabled"
+      }
+    },
+    "securitySettingsKeys": [
+      "softDeleteSettings",
+      "multiUserAuthorization",
+      "sourceScanConfiguration"
+    ],
+    "protectedItemsObserved": 0
+  },
+  "wafResourceInventory": {
+    "matchingAzureWafOrFrontDoorResources": []
+  },
+  "publicApiIngress": {
+    "api.grunt.io": {
+      "resource": "public-api",
+      "target": "public-api.blacktree-72cdf6c7.norwayeast.azurecontainerapps.io",
+      "external": true,
+      "ipSecurityRestrictions": null
+    },
+    "api.grunt.pro": {
+      "resource": "legacy-api",
+      "target": "legacy-api.blacktree-72cdf6c7.norwayeast.azurecontainerapps.io",
+      "external": true,
+      "ipSecurityRestrictions": null
+    },
+    "api.altua.no": {
+      "resource": "legacy-api",
+      "target": "legacy-api.blacktree-72cdf6c7.norwayeast.azurecontainerapps.io"
+    }
+  },
+  "dnsObserved": {
+    "api.grunt.io": "public-api.blacktree-72cdf6c7.norwayeast.azurecontainerapps.io",
+    "api.grunt.pro": "legacy-api.blacktree-72cdf6c7.norwayeast.azurecontainerapps.io",
+    "api.altua.no": "legacy-api.blacktree-72cdf6c7.norwayeast.azurecontainerapps.io"
+  },
+  "endpointProtection": {
+    "productionContainerAppCount": 18,
+    "crowdStrikeOrFalconNamedContainerImagesObserved": false,
+    "limitations": "Image contents and Microsoft-managed hosts were not inspected; absence of a named agent image does not prove universal absence of software."
+  },
+  "limitations": [
+    "Blob data-plane listing was denied for the current identity. No access keys were retrieved and no permissions were changed. Backup contents, dataset coverage, export schedule, and archival retention were not verified.",
+    "Customer organisation settings, CBRE myID/UAA, access reviews, and customer cryptography standards were not accessible from Azure infrastructure metadata."
+  ],
+  "references": [
+    "https://learn.microsoft.com/en-us/azure/postgresql/backup-restore/concepts-backup-restore",
+    "https://learn.microsoft.com/en-us/azure/backup/backup-azure-immutable-vault-concept",
+    "https://learn.microsoft.com/en-us/azure/storage/blobs/immutable-storage-overview",
+    "https://learn.microsoft.com/en-us/azure/container-apps/waf-app-gateway"
+  ],
+  "commands": [
+    "az resource list (resource names/types only; raw tags excluded)",
+    "az postgres flexible-server show (backup/highAvailability fields only)",
+    "az storage account show (location/sku/immutability fields only)",
+    "az storage container-rm show (immutability/legal-hold fields only)",
+    "az backup item list (protected item metadata only)",
+    "az rest GET Recovery Services vault (security/redundancy fields only)",
+    "az containerapp show (ingress fields only)",
+    "az containerapp list (container image references only)",
+    "dig +short api.grunt.io api.grunt.pro api.altua.no"
+  ],
+  "ownerConfirmations": {
+    "confirmedOn": "2026-10-14",
+    "additionalDatabaseExportsOrSeparateRegionalBackups": false,
+    "cloudflareUsedForPublicAddInApis": false,
+    "cloudflareUsedElsewhere": true
+  },
+  "retentionDiscrepancy": {
+    "liveBackendNativeBackupRetentionDays": 7,
+    "documentedBackupRetention": "1 year",
+    "separateDatabaseArchiveConfirmed": false
+  }
+}

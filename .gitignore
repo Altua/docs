@@ -1,4 +1,6 @@
 policies/*.pdf
+questionnaires/*.pdf
+output/pdf/
 node_modules/
 .DS_Store
 
