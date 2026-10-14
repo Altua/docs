@@ -58,6 +58,12 @@ npm run md-to-pdf -- policies/*.md
 
 This writes the PDF next to the source file, using the same name with a `.pdf` extension. The export uses A4 page size and the styling defined in `scripts/md-to-pdf.config.js` and `scripts/md-to-pdf.css`.
 
+## Questionnaire answers
+
+Use [`questionnaires/`](questionnaires/README.md) to store reusable answers to customer security, privacy, AI, and vendor assessments. Keep the original questions, answers, source references, and review status together in standalone Markdown files.
+
+Start with the [customer response](questionnaires/grunt-control-self-assessment-response.md) to reuse the questions and answers. The [combined assessment](questionnaires/grunt-control-self-assessment.md) records supporting references, confirmations, and configuration findings. An [AI-only assessment](questionnaires/ai-control-self-assessment.md) is also available. These files are separate from the Mintlify navigation.
+
 ## Publishing changes
 
 Install our GitHub app from your [dashboard](https://dashboard.mintlify.com/settings/organization/github-app) to propagate changes from your repo to your deployment. Changes are deployed to production automatically after pushing to the default branch.
