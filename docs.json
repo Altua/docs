@@ -34,6 +34,29 @@
         ]
       },
       {
+        "product": "Grunt ONE",
+        "tabs": [
+          {
+            "tab": "Documentation",
+            "groups": [
+              {
+                "group": "Overview",
+                "pages": [
+                  "grunt-one/index"
+                ]
+              },
+              {
+                "group": "Use Grunt ONE",
+                "pages": [
+                  "grunt-one/connected-workflows",
+                  "grunt-one/hosting-and-access"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
         "product": "PowerPoint add-in",
         "tabs": [
           {
