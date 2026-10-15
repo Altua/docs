@@ -70,6 +70,7 @@
                 "pages": [
                   "powerpoint-add-in/user/work-with-data",
                   "powerpoint-add-in/user/excel-connections",
+                  "powerpoint-add-in/user/vba-automation",
                   "powerpoint-add-in/user/data-editor"
                 ]
               },
