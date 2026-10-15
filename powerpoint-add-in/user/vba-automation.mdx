@@ -78,14 +78,19 @@ Replace the presentation, object name, and range with the values that your workf
 
 ## Example files
 
-Downloadable example files will be added to this section. They will include:
+Download both example files to see the complete workflow:
 
-- An Excel workbook with a working `UpdateExcelRange` macro.
-- A PowerPoint presentation with a named Grunt object that the macro updates.
+- [Download the Excel workbook](/files/vba-automation/grunt-vba-example-workbook.xlsm). It contains the `UpdateAllCharts` macro, a Connections table, and sample data for three Grunt charts.
+- [Download the PowerPoint presentation](/files/vba-automation/grunt-vba-example-presentation.pptx). It contains the named Grunt objects that the workbook updates.
 
-Together, the files will demonstrate how the workbook, PowerPoint shape name, Excel range, and VBA arguments connect.
+To run the example:
 
-<!-- Add the example workbook and PowerPoint presentation download links here. -->
+1. Download and open both files.
+2. In PowerPoint, make the example presentation the active presentation.
+3. In Excel, review the Connections table or edit the yellow cells on the data worksheets.
+4. Press **Alt+F8**, select `UpdateAllCharts`, and click **Run**.
+
+The macro reads each row in the Connections table and sends the specified Excel range to the matching named Grunt object in the active presentation.
 
 ## Understand the arguments
 
