@@ -1,0 +1,91 @@
+---
+title: "Connected workflows"
+description: "Move from AI creation to visual refinement, presentations, and reports while keeping track of Grunt objects"
+---
+
+Grunt ONE connects the tools you use to produce charts, tables, presentations, and reports. You can start with AI or visual editing, then choose how each deliverable uses the result.
+
+<Note>
+  This page describes the connected product workflow. Live PowerPoint control, interactive HTML refresh, and continuous synchronization are still in development. Check the [rollout status](/grunt-one/index#rollout-status) for the scope to evaluate.
+</Note>
+
+## Create with your AI assistant
+
+Connect a compatible assistant to Grunt through MCP. Describe the result you need and provide the data it should use.
+
+For example:
+
+```text
+Create a revenue waterfall starting at 120 and ending at 145.
+Show expansion revenue of 18, new customers of 12, and churn of -5.
+Label the values in millions.
+```
+
+Ask for a different visualization or revise an existing asset as your analysis develops. Reusing the asset keeps its identity; saving a version identifies a particular result.
+
+Use the [connection guide](/mcp-server/connect-and-authenticate) to set up access. The [tool reference](/mcp-server/tools) describes chart, table, inspection, and export tools. Your client discovers the tools available from the endpoint you connect to.
+
+## Refine in the Web Editor
+
+Use the editor link offered with an asset to work with its data and presentation in your browser. You can switch from a broad request to direct visual adjustments when you need precise control.
+
+Save your changes before adopting the result in another output. A saved version gives you a specific result to review and reuse.
+
+The conflict-aware editor workflow retains your draft when another editor has saved a newer version. You can decide how to proceed without silently overwriting that newer work. This requires the corresponding editor and save configuration in your environment.
+
+## Use Grunt objects in PowerPoint
+
+There are two PowerPoint workflows:
+
+| Workflow | What happens |
+| --- | --- |
+| Generate a presentation file | An assistant assembles slides containing Grunt assets and their source information. Eligible placements can be imported as editable Grunt objects by a compatible add-in. |
+| Work on an open presentation — in development | Claude for PowerPoint uses Grunt's live connection to read the deck, add slides and text, arrange content, and place Grunt charts. |
+
+Supported editable objects carry Grunt's data and model. You edit them through the Grunt add-in. They use Grunt's editing tools rather than PowerPoint's built-in chart or table model.
+
+Import support depends on the installed add-in, enabled features, object type, and placement format. Unsupported imports retain their visual representation. Confirm these details in the PowerPoint environment you plan to use.
+
+After an asset is imported as a local editable object, changes you make in PowerPoint are saved in the presentation. They are not automatically published back to the web asset. Choosing the latest source at initial import does not enable ongoing synchronization.
+
+See the [PowerPoint guides](/powerpoint-add-in/index) for installation, editing, and sharing.
+
+## Deliver an HTML report
+
+The HTML skill guides your assistant in combining written analysis and page layout with Grunt charts and tables.
+
+The connected report workflow being completed lets you:
+
+- Inspect values and select supported chart elements.
+- Open a chart in the Web Editor.
+- Review and adopt a verified saved revision.
+- Download an updated HTML file with its accepted visuals and interactions.
+
+The saved report supports offline reading of the included visuals and interactions. Editing a chart or retrieving a newer version requires access to the relevant Grunt services.
+
+Refreshing a chart does not rewrite the report's analysis. Review affected commentary when the figures or chart change. A refresh also does not update an already generated PowerPoint file.
+
+## Choose how changes move between outputs
+
+Different outputs need different update behavior. A working report may need a newer revision, while an approved deliverable may need to preserve the version you signed off.
+
+| Connection | What it preserves | How updates happen |
+| --- | --- | --- |
+| Source identity and saved versions | The source asset and the version an output uses. | You can identify the accepted result and compare it with another version. |
+| Explicit refresh or import | A chosen source revision or a local editable copy. | You adopt a revision in a supported report or import an eligible object into PowerPoint. |
+| Saved snapshot | The accepted visual included in a deliverable. | You regenerate or replace the snapshot when you choose to update it. |
+| Live synchronization — planned | A connection between active editing surfaces and open outputs. | Accepted changes are communicated between supported connected surfaces. |
+
+Continuous synchronization between the Web Editor, PowerPoint, and open reports is part of the product roadmap. An asset link or successful import alone does not provide it.
+
+## Evaluate your workflow
+
+Choose a representative report or presentation and agree which parts of the workflow you need. Confirm:
+
+- The assistant, Grunt add-in, and PowerPoint environment you will use.
+- The chart and table types you need to edit across tools.
+- Which outputs preserve an approved version and which should adopt updates.
+- Which connections require an explicit refresh or import.
+- The capabilities enabled for your hosted or customer-hosted environment.
+
+Then demonstrate creation, visual refinement, delivery, and a revision using those choices. Include a review of any commentary affected by the revision.

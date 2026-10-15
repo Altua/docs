@@ -1,0 +1,79 @@
+---
+title: "Hosting and access"
+description: "Plan hosted or customer-hosted Grunt services and manage access through the Client Portal"
+---
+
+Grunt ONE combines connected content workflows with customer administration. Choose the hosting model and access you need for your team, integrations, and supported AI clients.
+
+<Note>
+  Customer-hosted deployment and dedicated deployment management in the Client Portal are still in development. Agree the release scope and evaluation environment with Grunt before planning an installation.
+</Note>
+
+## Grunt-hosted services
+
+Use Grunt-operated services for your connected AI and browser workflows. The Client Portal provides customer administration according to your permissions and product access.
+
+To connect an AI assistant, follow [Connect and authenticate](/mcp-server/connect-and-authenticate). User sign-in and organization integrations use different authentication flows. Select the flow supported by your client and intended use.
+
+Confirm which assistants, PowerPoint environments, and Grunt ONE capabilities your release supports. Product access, Microsoft licensing, and any third-party assistant subscriptions should be agreed as part of your package.
+
+## Customer-hosted deployment
+
+The customer-hosted option is being developed for organizations that need the Grunt MCP server and Web Editor to run on their infrastructure. In this model, Grunt content storage, asset history, rendering, and exports run within your environment.
+
+| Responsibility | Intended location |
+| --- | --- |
+| MCP server and Web Editor | Your infrastructure. |
+| Grunt content storage, history, rendering, and exports | Your infrastructure. |
+| Entitlement verification and aggregate usage reporting | Outbound connections from the installation to Grunt. |
+| Release downloads | An approved connection to the release distribution service. |
+| End-user authentication | The identity configuration selected for your deployment. It may require external access. |
+| External AI processing | The assistant or model provider you choose. |
+
+The initial scope covers the MCP server and Web Editor. Availability of live PowerPoint connectivity in a customer-hosted installation must be agreed separately.
+
+### Connectivity and content
+
+The initial deployment model requires outbound entitlement verification and aggregate usage reporting. A fully disconnected installation is outside the initial scope.
+
+Customer-hosted Grunt services do not change the data path of an external AI provider. Content you send to an external assistant or model follows that provider's data path. An externally hosted assistant also needs an approved way to reach your Grunt endpoint.
+
+### Usage reporting
+
+The two initial usage measurements are:
+
+- **Assets created:** the number of new asset resources created.
+- **Asset commits:** the number of saved asset versions, including each asset's initial version.
+
+For example, creating one asset and saving three changed versions produces one asset created and four asset commits. A save that creates no new version does not add a commit.
+
+These aggregate reports exclude chart values, project content, prompts, asset names, and user identities. The measurements do not establish usage-based pricing; commercial terms must be agreed separately.
+
+### Installation planning
+
+The intended customer setup is to enable the product, obtain release access, create deployment credentials, configure the installation, and activate it. Dedicated setup and status screens are being completed.
+
+Plan the release, infrastructure, URLs, TLS, user authentication, storage, backup, and network access with Grunt for your evaluation. Deployment credentials authenticate the installation to Grunt. End-user sign-in controls access to your content separately.
+
+## Manage access in the Client Portal
+
+Use the Client Portal to manage the Grunt products and connections available to your organization.
+
+Depending on your permissions and product access, you can:
+
+- View subscriptions and manage billing.
+- Assign and remove licenses or seats.
+- Manage organization administrators and their roles.
+- Create organization clients for MCP, Public API, or embedded Web Editor access.
+- Create, rotate, and revoke integration credentials.
+- Review the usage information available for your products.
+
+Integration settings are available only when the product feature and required permissions are enabled. For MCP credentials, open your organization's **Integrations** page and choose **MCP server** under **Access**. Follow the [organization credentials guide](/mcp-server/connect-and-authenticate#connect-with-organization-credentials) for the full connection flow.
+
+Dedicated customer-hosted deployment creation, credentials, and status belong to the planned deployment workflow. General integration credentials do not by themselves activate a customer-hosted installation.
+
+## Confirm your rollout scope
+
+Before your evaluation, agree the supported assistants and Office versions, hosting model, required access, and update behavior. Confirm which setup steps are self-service and which require Grunt assistance.
+
+For desktop deployment requirements, use the [PowerPoint IT guide](/powerpoint-add-in/it/deployment-and-installation). For object updates and synchronization, see [Connected workflows](/grunt-one/connected-workflows#choose-how-changes-move-between-outputs).
