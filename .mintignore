@@ -11,3 +11,6 @@ AGENTS.md
 policies/
 scripts/
 package.json
+
+# Grunt ONE customer information package: GitHub review only, not website content
+grunt-one/customer-information-package/
